@@ -119,6 +119,9 @@
           }
         }
       }
-    }},
-  "defaultProject": "geo-war"
+    }
+  },
+  "defaultProject": "geo-war",
+  "cli": {
+    "analytics": false
 }
