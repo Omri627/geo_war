@@ -10,6 +10,7 @@ class Settings:
         self.host = settings['host']
         self.user = settings['user']
         self.password = settings['password']
+        self.database = settings['database']
 
     def _get_settings_from_file(self) -> dict:
         with open(self.SETTINGS_FILE) as f:
