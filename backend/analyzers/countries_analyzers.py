@@ -2,6 +2,7 @@ from collections import defaultdict
 from typing import List
 
 from analyzers.dict_analyzer import DictAnalyzer
+from db.db_handler import DbHandler
 
 
 def _convert_to_full_number(number: float, multi: str) -> int:
@@ -34,6 +35,9 @@ def _extract_filed_might_be_in_dict(data: any, filed: str):
 
 class CountriesDictAnalyzer(DictAnalyzer):
 
+    def __init__(self, db_handler: DbHandler):
+        super().__init__(db_handler)
+
     def analyze_dict(self, raw_data: dict) -> None:
         try:
             data = dict()
@@ -57,6 +61,10 @@ class CountriesDictAnalyzer(DictAnalyzer):
             try:
                 data['cellular_subscriptions'] = _extract_phone_subscribes(
                     raw_data['communications']['telephones_mobile_cellular']['total_subscriptions'])
+            except Exception as e:
+                print(f"country code: {data['code']}, Error: {e}")
+            try:
+                data['internet_users'] = int(raw_data['communications']['internet_users']['total'].replace(",", ''))
             except Exception as e:
                 print(f"country code: {data['code']}, Error: {e}")
             try:
@@ -93,9 +101,12 @@ class CountriesDictAnalyzer(DictAnalyzer):
                 data['imports'] = _convert_to_full_number(float(imports[1:]), multi)
                 imports, multi = list(raw_data['economy']['exports'].values())[0].split()
                 data['exports'] = _convert_to_full_number(float(imports[1:]), multi)
+                data['unemployment_rate'] = float(list(raw_data['economy']['unemployment_rate'].values())[0][:-1])
             except Exception as e:
                 print(f"country code: {data['code']}, Error: {e}")
-            print(data)
+
+            self.db_handler.insert_to_countries_table(data)
+
         except Exception as e:
             print(f"Failed to load, country code: {raw_data['code']}")
             print(e)
