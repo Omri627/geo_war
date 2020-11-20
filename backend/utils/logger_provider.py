@@ -2,8 +2,6 @@ import logging
 import sys
 
 
-
-
 class LoggerProvider(object):
 
     @staticmethod

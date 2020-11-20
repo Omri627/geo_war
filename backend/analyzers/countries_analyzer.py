@@ -1,4 +1,3 @@
-from collections import defaultdict
 from typing import List
 
 from analyzers.dict_analyzer import DictAnalyzer
