@@ -3,6 +3,7 @@ from typing import List
 
 from analyzers.dict_analyzer import DictAnalyzer
 from db.db_handler import DbHandler
+from utils.logger_provider import LoggerProvider
 
 
 def _convert_to_full_number(number: float, multi: str) -> int:
@@ -37,6 +38,7 @@ class CountriesDictAnalyzer(DictAnalyzer):
 
     def __init__(self, db_handler: DbHandler):
         super().__init__(db_handler)
+        self.logger = LoggerProvider.get_logger(__name__)
 
     def analyze_dict(self, raw_data: dict) -> None:
         try:
@@ -48,33 +50,33 @@ class CountriesDictAnalyzer(DictAnalyzer):
             try:
                 data['population'] = int(raw_data['people_and_society']['population'].split()[0].replace(',', ''))
             except Exception as e:
-                print(f"country code: {data['code']}, Error: {e}")
+                self.logger.error(f"country code: {data['code']}, Error: {e}")
             try:
                 data['nationality'] = raw_data['people_and_society']['nationality']['adjective'].split(",")[0]
             except Exception as e:
-                print(f"country code: {data['code']}, Error: {e}")
+                self.logger.error(f"country code: {data['code']}, Error: {e}")
             try:
                 data['birth_rate'] = float(raw_data['people_and_society']['birth_rate'].split()[0])
                 data['death_rate'] = float(raw_data['people_and_society']['death_rate'].split()[0])
             except Exception as e:
-                print(f"country code: {data['code']}, Error: {e}")
+                self.logger.error(f"country code: {data['code']}, Error: {e}")
             try:
                 data['cellular_subscriptions'] = _extract_phone_subscribes(
                     raw_data['communications']['telephones_mobile_cellular']['total_subscriptions'])
             except Exception as e:
-                print(f"country code: {data['code']}, Error: {e}")
+                self.logger.error(f"country code: {data['code']}, Error: {e}")
             try:
                 data['internet_users'] = int(raw_data['communications']['internet_users']['total'].replace(",", ''))
             except Exception as e:
-                print(f"country code: {data['code']}, Error: {e}")
+                self.logger.error(f"country code: {data['code']}, Error: {e}")
             try:
-                data['0-14_years'] = float(
+                data['0_14_years'] = float(
                     raw_data['people_and_society']['age_structure']['0_14_years'].split()[0][:-1])
-                data['15-24_years'] = float(
+                data['15_24_years'] = float(
                     raw_data['people_and_society']['age_structure']['15_24_years'].split()[0][:-1])
-                data['25-54_years'] = float(
+                data['25_54_years'] = float(
                     raw_data['people_and_society']['age_structure']['25_54_years'].split()[0][:-1])
-                data['55-64_years'] = float(
+                data['55_64_years'] = float(
                     raw_data['people_and_society']['age_structure']['55_64_years'].split()[0][:-1])
                 data['65_over'] = float(
                     raw_data['people_and_society']['age_structure']['65_years_and_over'].split()[0][:-1])
@@ -89,7 +91,7 @@ class CountriesDictAnalyzer(DictAnalyzer):
                 data['female_expectancy'] = float(
                     raw_data['people_and_society']['life_expectancy_at_birth']['female'].split()[0])
             except Exception as e:
-                print(f"country code: {data['code']}, Error: {e}")
+                self.logger.error(f"country code: {data['code']}, Error: {e}")
             try:
                 gdp_raw, multi = list(raw_data['economy']['gdp_purchasing_power_parity'].values())[0].split()
                 data['gdp'] = _convert_to_full_number(float(gdp_raw[1:]), multi)
@@ -103,10 +105,10 @@ class CountriesDictAnalyzer(DictAnalyzer):
                 data['exports'] = _convert_to_full_number(float(imports[1:]), multi)
                 data['unemployment_rate'] = float(list(raw_data['economy']['unemployment_rate'].values())[0][:-1])
             except Exception as e:
-                print(f"country code: {data['code']}, Error: {e}")
+                self.logger.error(f"country code: {data['code']}, Error: {e}")
 
             self.db_handler.insert_to_countries_table(data)
 
         except Exception as e:
-            print(f"Failed to load, country code: {raw_data['code']}")
-            print(e)
+            self.logger.error(f"Failed to load, country code: {raw_data['code']}")
+            self.logger.error(e)
