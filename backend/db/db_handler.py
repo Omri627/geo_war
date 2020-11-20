@@ -13,7 +13,7 @@ class DbHandler:
         self.logger = LoggerProvider.get_logger(__name__)
 
     def insert_to_countries_table(self, data: dict) -> None:
-        data_tuple = tuple(data.get(filed, None) for filed in CountriesQueries.COUNTRIES_FILED)
+        data_tuple = tuple(data.get(filed, None) for filed in CountriesQueries.COUNTRIES_FIELDS)
         self.countries_values_list.append(data_tuple)
         if len(self.countries_values_list) == self.BULK_SIZE:
             cursor = self.helper.db.cursor()
