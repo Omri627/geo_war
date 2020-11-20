@@ -17,4 +17,5 @@ analyzer = EthnicsDictAnalyzer(db_handler)
 for file in json_files:
     analyzer.analyze_dict(json_reader.read_file(file))
 
-db_handler.flush_to_db(Tables.COUNTRIES_TABLE)
+# db_handler.flush_to_db(Tables.COUNTRIES_TABLE)
+db_handler.flush_to_db(Tables.ETHNICS_TABLE)
