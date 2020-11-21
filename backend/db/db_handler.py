@@ -2,6 +2,7 @@ from db.dal_quries.countries_queries import CountriesQueries
 from db.dal_quries.ethnics_queries import EthnicsQueries
 from db.dal_quries.languages_queries import LanguagesQueries
 from db.dal_quries.religions_queries import ReligionsQueries
+from db.dal_quries.soccer import SoccerQueries
 from db.dal_quries.tables import Tables
 from db.db_helper import DbHelper
 from utils.logger_provider import LoggerProvider
@@ -16,6 +17,7 @@ class DbHandler:
         self.ethnics_values_list = list()
         self.languages_values_list = list()
         self.religions_values_list = list()
+        self.soccer_values_list = list()
         self.logger = LoggerProvider.get_logger(__name__)
 
     def insert_to_countries_table(self, data: dict) -> None:
@@ -73,6 +75,18 @@ class DbHandler:
             # reset value list
             self.religions_values_list = list()
 
+    def insert_to_soccer_table(self, data: dict) -> None:
+        data_tuple = tuple(data.get(filed, None) for filed in SoccerQueries.SOCCER_FIELDS)
+        self.soccer_values_list.append(data_tuple)
+
+        if len(self.soccer_values_list) == self.BULK_SIZE:
+            cursor = self.helper.db.cursor()
+            try:
+                self._execute_many(cursor, SoccerQueries.INSERT_QUERY, self.soccer_values_list)
+            except Exception as e:
+                print(e)
+            self.soccer_values_list = list()
+
     def flush_to_db(self, table: Tables):
         cursor = self.helper.db.cursor()
 
@@ -100,6 +114,12 @@ class DbHandler:
             except Exception as e:
                 self.logger.error(e)
             self.religions_values_list = list()
+        elif table.name == Tables.SOCCER_TABLE.name:
+            try:
+                self._execute_many(cursor, SoccerQueries.INSERT_QUERY, self.soccer_values_list)
+            except Exception as e:
+                self.logger.error(e)
+            self.soccer_values_list = list()
 
     def _execute_many(self, cursor, insert_query: str, values: list):
         cursor.executemany(insert_query, values)
