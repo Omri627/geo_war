@@ -9,7 +9,7 @@ from utils.logger_provider import LoggerProvider
 
 
 class DbHandler:
-    BULK_SIZE = 100
+    BULK_SIZE = 10
 
     def __init__(self):
         self.helper = DbHelper.get_instance()
@@ -114,6 +114,12 @@ class DbHandler:
             except Exception as e:
                 self.logger.error(e)
             self.religions_values_list = list()
+        elif table.name == Tables.SOCCER_TABLE.name:
+            try:
+                self._execute_many(cursor, SoccerQueries.INSERT_QUERY, self.soccer_values_list)
+            except Exception as e:
+                self.logger.error(e)
+            self.soccer_values_list = list()
 
     def _execute_many(self, cursor, insert_query: str, values: list):
         cursor.executemany(insert_query, values)
