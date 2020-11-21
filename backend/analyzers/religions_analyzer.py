@@ -4,7 +4,7 @@ from utils.logger_provider import LoggerProvider
 from utils.str_util import split_field_percentage_line
 
 
-class EthnicsDictAnalyzer(DictAnalyzer):
+class ReligionsDictAnalyzer(DictAnalyzer):
 
     def __init__(self, db_handler: DbHandler):
         super().__init__(db_handler)
@@ -14,8 +14,8 @@ class EthnicsDictAnalyzer(DictAnalyzer):
         data = dict()
         data['country_code'] = raw_data['code']
         try:
-            ethnics = raw_data['people_and_society']['ethnic_groups']
-            data['name'] = split_field_percentage_line(ethnics)
-            self.db_handler.insert_to_ethnics_table(data)
+            languages = raw_data['people_and_society']['religions']
+            data['religions'] = split_field_percentage_line(languages)
+            self.db_handler.insert_to_religions_table(data)
         except Exception as e:
             self.logger.warn(e)
