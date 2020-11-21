@@ -1,5 +1,6 @@
 import os
 
+from analyzers.countries_analyzer import CountriesDictAnalyzer
 from analyzers.ethincs_analyzer import EthnicsDictAnalyzer
 from analyzers.language_analyzer import LanguageDictAnalyzer
 from analyzers.religions_analyzer import ReligionsDictAnalyzer
@@ -13,15 +14,14 @@ json_files = [os.path.join(path_to_json, pos_json) for pos_json in os.listdir(pa
 
 db_handler = DbHandler()
 json_reader = JsonReader()
-# analyzer = CountriesDictAnalyzer(db_handler)
-# analyzer = EthnicsDictAnalyzer(db_handler)
-# analyzer = LanguageDictAnalyzer(db_handler)
-analyzer = ReligionsDictAnalyzer(db_handler)
+analyzers = [CountriesDictAnalyzer(db_handler),EthnicsDictAnalyzer(db_handler), LanguageDictAnalyzer(db_handler), ReligionsDictAnalyzer(db_handler)]
 
 for file in json_files:
-    analyzer.analyze_dict(json_reader.read_file(file))
+    raw_data = json_reader.read_file(file)
+    for analyzer in analyzers:
+        analyzer.analyze_dict(raw_data)
 
-# db_handler.flush_to_db(Tables.COUNTRIES_TABLE)
-# db_handler.flush_to_db(Tables.ETHNICS_TABLE)
-# db_handler.flush_to_db(Tables.LANGUAGES_TABLE)
+db_handler.flush_to_db(Tables.COUNTRIES_TABLE)
+db_handler.flush_to_db(Tables.ETHNICS_TABLE)
+db_handler.flush_to_db(Tables.LANGUAGES_TABLE)
 db_handler.flush_to_db(Tables.RELIGION_TABLE)
