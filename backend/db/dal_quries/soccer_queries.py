@@ -1,5 +1,8 @@
-class SoccerQueries:
-    SOCCER_FIELDS = (
+from db.dal_quries.table_queries import TableQueries
+
+
+class SoccerQueries(TableQueries):
+    FIELDS = (
         'country_code', 'player_name', 'team', 'position')
 
     INSERT_QUERY = '''

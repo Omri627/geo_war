@@ -7,3 +7,5 @@ class Tables(Enum):
     LANGUAGES_TABLE = 'languages'
     RELIGION_TABLE = 'religions'
     SOCCER_TABLE = 'soccer'
+    CITY_TABLE = 'city'
+    CAPITAL_TABLE = 'capital'

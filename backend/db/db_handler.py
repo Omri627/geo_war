@@ -1,8 +1,10 @@
+from db.dal_quries.capitals_queires import CapitalQueries
+from db.dal_quries.city_queries import CitesQueries
 from db.dal_quries.countries_queries import CountriesQueries
 from db.dal_quries.ethnics_queries import EthnicsQueries
 from db.dal_quries.languages_queries import LanguagesQueries
 from db.dal_quries.religions_queries import ReligionsQueries
-from db.dal_quries.soccer import SoccerQueries
+from db.dal_quries.soccer_queries import SoccerQueries
 from db.dal_quries.tables import Tables
 from db.db_helper import DbHelper
 from utils.logger_provider import LoggerProvider
@@ -18,10 +20,12 @@ class DbHandler:
         self.languages_values_list = list()
         self.religions_values_list = list()
         self.soccer_values_list = list()
+        self.city_values_list = list()
+        self.capital_values_list = list()
         self.logger = LoggerProvider.get_logger(__name__)
 
     def insert_to_countries_table(self, data: dict) -> None:
-        data_tuple = tuple(data.get(filed, None) for filed in CountriesQueries.COUNTRIES_FIELDS)
+        data_tuple = tuple(data.get(filed, None) for filed in CountriesQueries.FIELDS)
         self.countries_values_list.append(data_tuple)
         if len(self.countries_values_list) == self.BULK_SIZE:
             cursor = self.helper.db.cursor()
@@ -76,7 +80,7 @@ class DbHandler:
             self.religions_values_list = list()
 
     def insert_to_soccer_table(self, data: dict) -> None:
-        data_tuple = tuple(data.get(filed, None) for filed in SoccerQueries.SOCCER_FIELDS)
+        data_tuple = tuple(data.get(filed, None) for filed in SoccerQueries.FIELDS)
         self.soccer_values_list.append(data_tuple)
 
         if len(self.soccer_values_list) == self.BULK_SIZE:
@@ -86,6 +90,22 @@ class DbHandler:
             except Exception as e:
                 print(e)
             self.soccer_values_list = list()
+
+    def insert_to_city_table(self, data: dict) -> None:
+        data_tuple = tuple(data.get(filed, None) for filed in CitesQueries.FIELDS)
+        self.city_values_list.append(data_tuple)
+
+        if len(self.city_values_list) == self.BULK_SIZE:
+            self._insert_to_table(CitesQueries.INSERT_QUERY, self.city_values_list)
+            self.city_values_list = list()
+
+    def insert_to_capital_table(self, data: dict) -> None:
+        data_tuple = tuple(data.get(filed, None) for filed in CapitalQueries.FIELDS)
+        self.capital_values_list.append(data_tuple)
+
+        if len(self.capital_values_list) == self.BULK_SIZE:
+            self._insert_to_table(CapitalQueries.INSERT_QUERY, self.capital_values_list)
+            self.capital_values_list = list()
 
     def flush_to_db(self, table: Tables):
         cursor = self.helper.db.cursor()
@@ -120,8 +140,27 @@ class DbHandler:
             except Exception as e:
                 self.logger.error(e)
             self.soccer_values_list = list()
+        elif table.name == Tables.CITY_TABLE.name:
+            try:
+                self._execute_many(cursor, CitesQueries.INSERT_QUERY, self.city_values_list)
+            except Exception as e:
+                self.logger.error(e)
+            self.city_values_list = list()
+        elif table.name == Tables.CAPITAL_TABLE.name:
+            try:
+                self._execute_many(cursor, CapitalQueries.INSERT_QUERY, self.capital_values_list)
+            except Exception as e:
+                self.logger.error(e)
+            self.capital_values_list = list()
 
     def _execute_many(self, cursor, insert_query: str, values: list):
         cursor.executemany(insert_query, values)
         self.helper.db.commit()
         self.logger.info(f"Inserted {len(values)} to table")
+
+    def _insert_to_table(self, insert_query: str, values: list):
+        cursor = self.helper.db.cursor()
+        try:
+            self._execute_many(cursor, insert_query, values)
+        except Exception as e:
+            print(e)
