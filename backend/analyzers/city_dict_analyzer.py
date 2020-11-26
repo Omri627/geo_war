@@ -12,8 +12,8 @@ class CityDictAnalyzer(DictAnalyzer):
     def analyze_dict(self, raw_data: dict) -> None:
         data = dict()
         try:
-            data['code'] = self.country_name_to_code.get(raw_data['country']['name'], None)
-            if data['code'] is None:
+            data['country_code'] = self.country_name_to_code.get(raw_data['country']['name'], None)
+            if data['country_code'] is None:
                 return
             data['name'] = raw_data['name']
             data['population'] = raw_data['population']

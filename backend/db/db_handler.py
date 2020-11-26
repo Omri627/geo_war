@@ -11,7 +11,7 @@ from utils.logger_provider import LoggerProvider
 
 
 class DbHandler:
-    BULK_SIZE = 10
+    BULK_SIZE = 1
 
     def __init__(self):
         self.helper = DbHelper.get_instance()
@@ -22,17 +22,14 @@ class DbHandler:
         self.soccer_values_list = list()
         self.city_values_list = list()
         self.capital_values_list = list()
+        self.all_capitals_values_list = list()
         self.logger = LoggerProvider.get_logger(__name__)
 
     def insert_to_countries_table(self, data: dict) -> None:
         data_tuple = tuple(data.get(filed, None) for filed in CountriesQueries.FIELDS)
         self.countries_values_list.append(data_tuple)
         if len(self.countries_values_list) == self.BULK_SIZE:
-            cursor = self.helper.db.cursor()
-            try:
-                self._execute_many(cursor, CountriesQueries.INSERT_QUERY, self.countries_values_list)
-            except Exception as e:
-                print(e)
+            self._insert_to_table(CountriesQueries.INSERT_QUERY, self.countries_values_list)
             # reset value list
             self.countries_values_list = list()
 
@@ -42,12 +39,7 @@ class DbHandler:
                 self.ethnics_values_list.append((data['country_code'], name, percent))
 
         if len(self.ethnics_values_list) >= self.BULK_SIZE:
-            cursor = self.helper.db.cursor()
-            try:
-                self._execute_many(cursor, EthnicsQueries.INSERT_QUERY, self.ethnics_values_list)
-            except Exception as e:
-                print(e)
-            # reset value list
+            self._insert_to_table(EthnicsQueries.INSERT_QUERY, self.ethnics_values_list)
             self.ethnics_values_list = list()
 
     def insert_to_languages_table(self, data: dict) -> None:
@@ -56,12 +48,7 @@ class DbHandler:
                 self.languages_values_list.append((data['country_code'], name, percent))
 
         if len(self.languages_values_list) >= self.BULK_SIZE:
-            cursor = self.helper.db.cursor()
-            try:
-                self._execute_many(cursor, LanguagesQueries.INSERT_QUERY, self.languages_values_list)
-            except Exception as e:
-                print(e)
-            # reset value list
+            self._insert_to_table(LanguagesQueries.INSERT_QUERY, self.languages_values_list)
             self.languages_values_list = list()
 
     def insert_to_religions_table(self, data: dict) -> None:
@@ -71,12 +58,7 @@ class DbHandler:
                     self.religions_values_list.append((data['country_code'], name, percent))
 
         if len(self.religions_values_list) >= self.BULK_SIZE:
-            cursor = self.helper.db.cursor()
-            try:
-                self._execute_many(cursor, ReligionsQueries.INSERT_QUERY, self.religions_values_list)
-            except Exception as e:
-                print(e)
-            # reset value list
+            self._insert_to_table(ReligionsQueries.INSERT_QUERY, self.religions_values_list)
             self.religions_values_list = list()
 
     def insert_to_soccer_table(self, data: dict) -> None:
@@ -84,11 +66,7 @@ class DbHandler:
         self.soccer_values_list.append(data_tuple)
 
         if len(self.soccer_values_list) == self.BULK_SIZE:
-            cursor = self.helper.db.cursor()
-            try:
-                self._execute_many(cursor, SoccerQueries.INSERT_QUERY, self.soccer_values_list)
-            except Exception as e:
-                print(e)
+            self._insert_to_table(SoccerQueries.INSERT_QUERY, self.soccer_values_list)
             self.soccer_values_list = list()
 
     def insert_to_city_table(self, data: dict) -> None:
@@ -101,7 +79,9 @@ class DbHandler:
 
     def insert_to_capital_table(self, data: dict) -> None:
         data_tuple = tuple(data.get(filed, None) for filed in CapitalQueries.FIELDS)
-        self.capital_values_list.append(data_tuple)
+        if data_tuple not in self.all_capitals_values_list and data_tuple not in self.capital_values_list:
+            self.capital_values_list.append(data_tuple)
+            self.all_capitals_values_list.append(data_tuple)
 
         if len(self.capital_values_list) == self.BULK_SIZE:
             self._insert_to_table(CapitalQueries.INSERT_QUERY, self.capital_values_list)
