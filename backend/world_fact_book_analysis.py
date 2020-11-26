@@ -14,7 +14,8 @@ json_files = [os.path.join(path_to_json, pos_json) for pos_json in os.listdir(pa
 
 db_handler = DbHandler()
 json_reader = JsonReader()
-analyzers = [CountriesDictAnalyzer(db_handler),EthnicsDictAnalyzer(db_handler), LanguageDictAnalyzer(db_handler), ReligionsDictAnalyzer(db_handler)]
+analyzers = [CountriesDictAnalyzer(db_handler), EthnicsDictAnalyzer(db_handler), LanguageDictAnalyzer(db_handler),
+             ReligionsDictAnalyzer(db_handler)]
 
 for file in json_files:
     raw_data = json_reader.read_file(file)
