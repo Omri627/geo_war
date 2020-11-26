@@ -1,5 +1,8 @@
-class EthnicsQueries:
-    ETHNICS_FIELDS = (
+from db.dal_quries.table_queries import TableQueries
+
+
+class EthnicsQueries(TableQueries):
+    FIELDS = (
         'country_code', 'name', 'percentage')
 
     INSERT_QUERY = '''

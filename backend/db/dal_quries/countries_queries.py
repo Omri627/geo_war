@@ -1,5 +1,8 @@
-class CountriesQueries:
-    COUNTRIES_FIELDS = (
+from db.dal_quries.table_queries import TableQueries
+
+
+class CountriesQueries(TableQueries):
+    FIELDS = (
         'code', 'name', 'area', 'population', 'nationality', 'birth_rate', 'death_rate', 'cellular_subscriptions',
         'internet_users', 'crime_index', 'health_care', 'quality_of_life', 'lat', 'lon',
         '0_14_years', '15_24_years', '25_54_years', '55_64_years', '65_over', 'total_median_age', 'female_median_age',
