@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from db.dal_quries.capitals_queires import CapitalQueries
 from db.dal_quries.city_queries import CitesQueries
 from db.dal_quries.countries_queries import CountriesQueries
@@ -12,7 +14,7 @@ from utils.logger_provider import LoggerProvider
 
 
 class DbHandler:
-    BULK_SIZE = 1
+    BULK_SIZE = 10
 
     def __init__(self):
         self.helper = DbHelper.get_instance()
@@ -88,9 +90,13 @@ class DbHandler:
             self._insert_many_to_table(CapitalQueries.INSERT_QUERY, self.capital_values_list)
             self.capital_values_list = list()
 
-    def insert_user_to_table(self, data: dict):
-        data_tuple = tuple(data.get(filed, None) for filed in UserQueries.FIELDS)
-        self._insert_one_to_table(UserQueries.INSERT_QUERY, data_tuple)
+    # def insert_users_to_table(self, data: dict):
+    #     data_tuple = tuple(data.get(filed, None) for filed in UserQueries.FIELDS)
+    #     self._insert_one_to_table(UserQueries.INSERT_QUERY, data_tuple)
+    #
+    # def insert_scores_to_table(self, data: dict):
+    #     data_tuple = tuple(data.get(filed, None) for filed in UserQueries.FIELDS)
+    #     self._insert_one_to_table(UserQueries.INSERT_QUERY, data_tuple)
 
     def flush_to_db(self, table: Tables):
         cursor = self.helper.db.cursor()
@@ -131,7 +137,15 @@ class DbHandler:
         except Exception as e:
             print(e)
 
-    def _insert_one_to_table(self, insert_query, values):
+    def insert_one_to_table(self, fields: Tuple[str], insert_query: str, data: dict):
+        """
+
+        :param fields: fields in the table
+        :param insert_query: full insertion query
+        :param data: dict of fields and
+        :return:
+        """
+        data_tuple = tuple(data.get(filed, None) for filed in fields)
         cursor = self.helper.db.cursor()
-        cursor.execute(insert_query, values)
+        cursor.execute(insert_query, data_tuple)
         self.helper.db.commit()
