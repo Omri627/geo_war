@@ -1,7 +1,7 @@
 from db.dal_quries.table_queries import TableQueries
 
 
-class LanguagesQueries(TableQueries):
+class UserQueries(TableQueries):
     FIELDS = (
         'user_name', 'password')
 

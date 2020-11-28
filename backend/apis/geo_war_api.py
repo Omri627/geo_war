@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 
 from apis.user import User
 
@@ -10,6 +10,6 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.post("/users/{user}")
+@app.post("/users/}", status_code=status.HTTP_201_CREATED)
 def create_user(user: User):
-    return {"user_name": user.user_name, "user_pass": user.password}
+    user.create_user()
