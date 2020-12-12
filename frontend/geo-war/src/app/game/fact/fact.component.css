@@ -1,0 +1,98 @@
+#fact-section {
+    position: fixed;
+    top: -40px;
+    left: 10%;
+    height: 150px;
+    width: 80%;
+}
+#sub-section {
+    background-color: #14c8ff;
+    position: fixed;
+    top: -100px;
+    left: 35%;
+    height: 50px;
+    width: 300px;
+    width: 30%;
+}
+.modal-button {
+    font-family: "Agency FB";
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 10px;
+    color: white;
+    padding-left: 225px;
+    padding-right: 225px;
+    border: none;
+    height: 40px;
+}
+.btn-true {
+    background: #2193b0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    position: absolute;
+    top: 320px;
+    left: 52%;
+    animation-name: pop-up;
+    animation-duration: 4s;
+}
+.btn-true:hover {
+    background: #00c6ff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #00c6ff,  #0072ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #00c6ff , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */   
+}
+.btn-false {
+    background: #FF416C;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FF4B2B, #FF416C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    position: absolute;
+    top: 320px;
+    left: 11%;
+    animation-name: pop-up;
+    animation-duration: 5s;
+}
+.btn-false:hover {
+    background: #FF416C;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FF416C, #FF4B2B);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FF416C, #FF4B2B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.btn-imply {
+    background: #DA22FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    padding-left: 125px;
+    padding-right: 125px;
+}
+.btn-imply:hover {
+    background: #DA22FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #DA22FF ,#9733EE);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #DA22FF, #9733EE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+}
+#factChange {
+    position: absolute;
+    top: 20px;
+    left: 11%;
+}
+#revealAnswer {
+    position: absolute;
+    top: 20px;
+    left: 39%;
+}
+#hint {
+    position: absolute;
+    top: 20px;
+    left: 68%;
+}
+.fact-text {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+}
+.sub-text {
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    position: relative;
+    bottom: 10px;
+    text-align: center;
+}
+.text-bold {
+    font-weight: bold;
+}

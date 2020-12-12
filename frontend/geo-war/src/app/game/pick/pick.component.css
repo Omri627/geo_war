@@ -1,0 +1,52 @@
+.pick {
+    position: relative;
+    top: 150px;
+}
+.pick-title {
+    text-align: center;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+.pick-subtitle {
+    margin-bottom: 60px;
+    text-align: center;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+.single-option {
+    text-align: center;
+    border-radius: 10px;
+    background-color: #292945;
+    color:white;
+    box-shadow: 0px 2px 2px 0px rgba(212, 150, 255, 0.2);
+    height: 30px;
+    position: relative;
+    bottom: 20px;
+    margin-top: 20px;
+}
+.single-option:hover {
+    cursor: pointer;
+    border: 2px double #ff03f2;
+}
+.single-option-yellow {
+    border: 2px double #fbfd75;
+}
+.single-option-green {
+    border: 2px double #03ffc8;
+}
+.single-option-blue {
+    border: 2px double #03afff;
+}
+.single-option-red {
+    border: 2px double #e93d62;
+}
+.game-data {
+    margin: 70px;
+    animation-name: movement;
+    animation-duration: 4s;
+    position: relative;
+}
+@keyframes movement {
+    0%   { top: 150px; margin-left: 0px; }
+    100%   { top: 0px; margin-left: 70px; }
+}

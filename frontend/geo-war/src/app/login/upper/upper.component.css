@@ -1,0 +1,121 @@
+#upper {
+    background-image: url(../../../assets/images/slider-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    top:-10px;
+    height:600px;
+    width:100%;
+    padding-right: 100px;
+}
+#header-upper {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 40px;
+    z-index: 99;
+    padding: 15px 15px 0;
+}
+#upper-content {
+    background-color: #222222;
+    margin: 0 auto;
+    width: 82%;
+    height: 70px;
+    max-width: 1050px;
+    min-height: 80px;
+    margin: 0 auto;
+    border-radius: 4px;
+    position: absolute;
+    top: 20px;
+    left: 8%;
+    overflow: hidden;
+    -webkit-box-shadow: 1px 1px 1px 1px #4F94CD;
+    -moz-box-shadow: 1px 1px 1px 1px #4F94CD;
+    box-shadow: 1px 1px 1px 1px #4F94CD;
+    z-index: 5;
+}
+#upper-content:hover {
+    -webkit-box-shadow: -1px -1px -1px -1px blue;
+    -moz-box-shadow: -1px -1px -1px -1px blue;
+    box-shadow: -1px -1px -1px -1px blue;
+}
+#login-menu {
+    position: absolute;
+    top: 22px;
+    left: 90%;
+    font-family: "Agency FB";
+    font-size: 17px;
+    color: #fdfd96;
+    cursor: pointer;
+    border-radius: 50px;
+    background: transparent;
+    border: 1px dashed #fdfd96;
+}
+#login-menu:hover {
+    background: transparent;
+    color: black;
+    background: #f7ff00;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #db36a4, #f7ff00);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #db36a4, #f7ff00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    border: 1px groove yellow;
+}
+#upper-menu {
+    position: absolute;
+    top: 30px;
+    left: 20%;
+    font-family: "Agency FB";
+    font-size: 17px;
+    font-weight: 520;
+    color: #0ebfe9;
+    cursor: pointer;
+    list-style-type: square;
+    margin: 0;
+    padding: 0;
+}
+#upper-menu li {
+    display: inline;
+    padding: 20px;
+}
+#upper-menu a:hover {
+    color: #ff91af;
+}
+#main-text {
+    position: relative;
+    top: 50px;
+    animation-name: fade-in;
+    animation-duration: 3s;
+}
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
+}
+#site-name {
+    font-size: 85px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1;
+    position: relative;
+    text-align: center;
+    top: 185px;
+    left: -30px;
+    font-family: "sloganFont",Arial, sans-serif;
+    z-index: 10;
+}
+#site-desc {
+    text-align: center;
+    position: relative;
+    color: #fff;
+    top: 175px;
+    left: -30px;
+    font-size: 22px;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-bottom: 70px;
+    padding-right: 300px;
+    padding-left: 300px;
+    z-index: 10;
+}

@@ -1,0 +1,338 @@
+.game-map {
+    background-image: url(../../../assets/images/map.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 550px;
+    width: 1150px;
+    position: relative;
+    left: 70px;
+    box-shadow: inset 0px 0px 2px 2px black;
+    animation-name: pop-up;
+    animation-duration: 5.1s;
+}
+@keyframes move-up {
+    0%   { top: 300px;  }
+    100%   { top: 10px; }
+}
+
+.country {
+    color: white;
+    transition: 1.5s background-color;
+    animation-delay: 5s;
+}
+#country-1:hover, #country-2:hover, #country-3:hover, #country-4:hover, #country-5:hover,
+#country-6:hover, #country-7:hover, #country-8:hover, #country-9:hover, #country-10:hover,
+#country-11:hover, #country-12:hover, #country-13:hover, #country-14:hover, #country-15:hover {
+    background-color:#118cff;
+    cursor: pointer;
+}
+#country-1 {
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    background-color: #ff1111;
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    width: 190px;
+    height: 180px;
+    box-shadow: 10px 10px 10px 10px #1129ff;
+    animation-name: pop-up;
+    animation-duration: 1s;
+}
+#country-n1 {
+    position: absolute;
+    top: 80px;
+    left: 55px;
+    transition: 2s top;
+}
+#country-1:hover > #country-n1 {
+    top: 40px;
+}
+#country-2 {
+    clip-path: polygon(100% 0, 80% 45%, 80% 80%, 80% 80%, 87% 90%, 30% 50%, 0 0, 0 0);
+    background-color: #fd9c00;
+    position: absolute;
+    left: 143px;
+    top: 28px;
+    width: 200px;
+    height: 230px;
+    animation-name: pop-up;
+    animation-duration: 1.5s;
+}
+#country-n2 {
+    position: absolute;
+    top: 50px;
+    left: 85px;
+    transition: 2s top;
+}
+#country-2:hover > #country-n2 {
+    top: 20px;
+}
+#country-3 {
+    clip-path: polygon(13% 5%, 58% 0, 93% 85%, 22% 78%);
+    background-color: #118cff;
+    position: absolute;
+    left: 830px;
+    top: 40px;
+    width: 250px;
+    height: 230px;
+    animation-name: pop-up;
+    animation-duration: 3s;
+}
+#country-n3 {
+    position: absolute;
+    top: 90px;
+    left: 85px;
+    transition: 2s top;
+}
+#country-3:hover > #country-n3 {
+    top: 40px;
+}
+#country-4 {
+    clip-path: polygon(100% 0, 42% 0, 100% 100%);
+    background-color: #11e3ff;
+    position: absolute;
+    left: 903px;
+    top: 37px;
+    width: 165px;
+    height: 250px;
+    animation-name: pop-up;
+    animation-duration: 3.5s;
+}
+#country-n4 {
+    position: absolute;
+    top: 80px;
+    left: 110px;
+    transition: 2s top;
+}
+#country-4:hover > #country-n4 {
+    top: 45px;
+}
+#country-5 {
+    clip-path: polygon(35% 0%, 85% 5%, 100% 40%, 89% 100%, 42% 71%, 0 71%);
+    background-color:#427b7e;
+    position: absolute;
+    left: 873px;
+    top: 215px;
+    width: 200px;
+    height: 200px;
+    animation-name: pop-up;
+    animation-duration: 4s;
+}
+#country-n5 {
+    position: absolute;
+    top: 80px;
+    left: 75px;
+    transition: 2s top;
+}
+#country-5:hover > #country-n5 {
+    top: 40px;
+}
+#country-6 {
+    clip-path: polygon(30% 9%, 65% 0%, 100% 3%, 71% 100%, 44% 78%, 16% 55%);
+    background-color: #8400ff;
+    position: absolute;
+    left: 708px;
+    top: 210px;
+    width: 240px;
+    height: 150px;
+    animation-name: pop-up;
+    animation-duration: 4.5s;
+}
+#country-n6 {
+    position: absolute;
+    top: 50px;
+    left: 105px;
+    transition: 2s top;
+}
+#country-6:hover > #country-n6 {
+    top: 30px;
+}
+#country-7 {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 30% 75%);
+    background-color: #e78e8b;
+    position: absolute;
+    left: 90px;
+    top: 135px;
+    width: 240px;
+    height: 185px;
+    animation-name: pop-up;
+    animation-duration: 2s;
+}
+#country-n7 {
+    position: absolute;
+    top: 80px;
+    left: 125px;
+    transition: 2s top;
+}
+#country-7:hover > #country-n7 {
+    top: 55px;
+}
+#country-8 {
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 89% 32%, 100% 64%, 66% 80%, 15% 90%, 0 28%);
+    position: absolute;
+    background-color: #a53733;
+    left: 51px;
+    top: 200px;
+    width: 170px;
+    height: 180px;
+    animation-name: pop-up;
+    animation-duration: 2.5s;
+}
+#country-n8 {
+    position: absolute;
+    top: 63px;
+    left: 55px;
+    transition: 2s top;
+}
+#country-8:hover > #country-n8 {
+    top: 33px;
+}
+#country-9 {
+    clip-path: polygon(0 14%, 91% 23%, 95% 68%, 75% 100%, 4% 97%);
+    background-color: #13e240;
+    position: absolute;
+    left: 180px;
+    top: 410px;
+    width: 370px;
+    height: 120px;
+    animation-name: pop-up;
+    animation-duration: 5s;
+}
+#country-n9 {
+    position: absolute;
+    top:25px;
+    left: 145px;
+    transition: 2s left;
+}
+#country-9:hover > #country-n9 {
+    left: 170px;
+}
+#country-10 {
+    clip-path: polygon(19% 0%, 93% 0%, 84% 100%, 0 90%, 10% 50%);
+    background-color: #3cff94;
+    position: relative;
+    left: 180px;
+    top: 377px;
+    width: 396px;
+    height: 60px;
+    animation-name: pop-up;
+    animation-duration: 5.5s;
+}
+#country-n10 {
+    position: absolute;
+    top: 15px;
+    left: 145px;
+    transition: 2s left;
+}
+#country-10:hover > #country-n10 {
+    left: 170px;
+}
+#country-11 {
+    clip-path: polygon(19% 0, 93% 0%, 84% 100%, 20% 90%, 10% 50%);
+    background-color: #f754e9;
+    position: absolute;
+    left: 693px;
+    top: 460px;
+    width: 362px;
+    height: 70px;
+    animation-name: pop-up;
+    animation-duration: 7s;
+}
+#country-n11 {
+    position: absolute;
+    top: 20px;
+    left: 150px;
+    transition: 2s left;
+}
+#country-11:hover > #country-n11 {
+    left: 175px;
+}
+#country-12 {
+    clip-path: polygon(14% 0, 95% 0%, 94% 100%, 0% 100%);
+    background-color: #c815ff;
+    position: absolute;
+    left: 753px;
+    top: 420px;
+    width: 293px;
+    height: 50px;
+    animation-name: pop-up;
+    animation-duration: 7.5s;
+}
+#country-n12 {
+    position: absolute;
+    top: 12px;
+    left: 95px;
+    transition: 2s left;
+}
+#country-12:hover > #country-n12 {
+    left: 120px;
+}
+#country-13 {
+    clip-path: polygon(88% 10%, 95% 75%, 13% 28%);
+    background-color: #052bd6;
+    position: absolute;
+    left: 716px;
+    top: 43px;
+    width: 212px;
+    height: 180px;
+    transform: rotate(90deg);
+    animation-name: pop-up;
+    animation-duration: 3.7s;
+}
+#country-n13 {
+    position: absolute;
+    top: 50px;
+    left: 100px;
+    transition: 2s top;
+}
+#country-13:hover > #country-n13 {
+    top: 40px;
+}
+#country-14 {
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 24% 50%);
+    background-color: #1fa853;
+    position: absolute;
+    left: 100px;
+    top: 470px;
+    width: 373px;
+    height: 62px;
+    animation-name: pop-up;
+    animation-duration: 6s;
+}
+#country-n14 {
+    position: absolute;
+    top: 10px;
+    left: 175px;
+    transition: 2s left;
+}
+#country-14:hover > #country-n14 {
+    left: 195px;
+}
+#country-15 {
+    clip-path: polygon(35% 1%, 100% 50%, 20% 96%, 0% 48%);
+    background-color: #fcff3a;
+    position: absolute;
+    left: 506px;
+    top: 375px;
+    width: 118px;
+    height: 130px;
+    animation-name: pop-up;
+    animation-duration: 6.5s;
+}
+#country-n15 {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    transition: 2s top;
+}
+#country-15:hover > #country-n15 {
+    top: 30px;
+}
+.country-name {
+    background-color: black;
+    color: white;
+    border-radius: 60px;
+    padding: 7px;
+    font-family: "Poppins", sans-serif;
+}

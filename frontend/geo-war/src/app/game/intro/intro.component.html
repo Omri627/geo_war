@@ -1,0 +1,44 @@
+<div class="intro-div container">					
+    <div class="row">
+        <div class="col-lg-8 col-md-8">
+            <div class="data-section">
+                <div class="details">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8">
+                                <div class="intro-title">
+                                    Hi Ran!
+                                </div>
+                                <div *ngIf="!isStarted" class="intro-content">
+                                    Start a new game and test your knowledge about the world.
+                                    At the beginning of the game, you should pick a country.
+                                    dystopic map displayed on the screen and your main goal is to conquer the world.
+                                    In order to achieve your aim, your should wage a war against each country displayed on the map. 
+                                    In each stage, you are allowed to choose a country to battle against by clicking on it's area. <br/>
+                                    the battle conducted as follows: <br/>
+                                    On your screen displayed numorous facts about your rival country or riveting comparison points presenting similarities or distinction between the countries. <br/>
+                                    your goal is to evaluate whether these facts are true or false.
+                                </div>
+                                <div *ngIf="isStarted && !isCountryPicked" class="intro-content">
+                                    Pick your favorite country from the list below,
+                                    Your goal is to help your selected country to conquer the world using your rich knowledge about
+                                    around the globe topics.
+                                </div>
+                                <div *ngIf="isCountryPicked" class="intro-content">
+                                    You need to select a country to battle against. You can choose a country by clicking on its area on the map displayed on your screen. <br/>
+                                    Your selected country has faith in you, use your rich knowledge to lead them to victory by subdue each country in the map
+                                    and take control of its land.
+                                </div>
+                                <button *ngIf="!isStarted" type="button" class="btn btn-primary btn-intro"
+                                    (click)="startGame()">Start Game</button>
+                              </div>
+                            <div class="col">
+                              <img class="game-info-img"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>	
+    </div>
+</div>

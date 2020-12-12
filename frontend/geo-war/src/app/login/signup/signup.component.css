@@ -1,0 +1,13 @@
+#sign-up-block {
+    float: left;
+    position: relative;
+    width: 50%;
+    height: 100%;
+    top: 4px;
+    text-align: center;
+}
+#signup-title {
+    position: relative;
+    color: #0BB5FF;
+    font-size: 20pt;
+}

@@ -1,0 +1,21 @@
+#footer {
+    position: relative;
+}
+#social-network {
+    background-color: #21d192;
+}
+#footer-details {
+    background-color: #E8E8E8;
+    font-family: "Agency FB";
+    color:gray;
+}
+.footer-titles {
+    font-weight: bold;
+    color:black;
+}
+#copyright {
+    background-color: #42526C;
+    font-family: "Agency FB";
+    text-align: center;
+    color: white;
+}

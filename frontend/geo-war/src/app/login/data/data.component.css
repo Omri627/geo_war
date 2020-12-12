@@ -1,0 +1,11 @@
+.data-title {
+    position: relative;
+    left: 20px;
+}
+.area-title-seperator {
+    width: 40px;
+}
+.seperator {
+    position: relative;
+    right: 10px;
+}

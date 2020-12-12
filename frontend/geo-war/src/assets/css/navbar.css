@@ -1,0 +1,271 @@
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+.header-top {
+  font-size: 12px;
+  padding: 8px;
+}
+
+.header-top a {
+  color: #fff;
+}
+
+.header-top ul li {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.header-top .header-top-left i {
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.header-top .header-top-left a:hover {
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.header-top .header-top-left a:hover i {
+  color: #8a90ff;
+}
+
+.header-top .header-top-right {
+  text-align: right;
+}
+
+.header-top .header-top-right a {
+  margin-right: 10px;
+}
+
+.header-top .lnr {
+  display: none;
+}
+
+@media (max-width: 588px) {
+  .header-top .lnr {
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+  }
+  .header-top .text {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .header-top {
+    display: none;
+  }
+}
+
+.top-head-btn {
+  background: #8a90ff;
+  padding: 9px 26px;
+}
+
+.main-menu {
+  padding-top: 20px;
+}
+
+#header {
+  padding: 0px 0px 20px 0px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  transition: all 0.5s;
+  z-index: 1000;
+  background: transparent;
+}
+
+#header.header-scrolled {
+  background:   #006cfa;  /* fallback for old browsers */
+  transition: all 0.5s;
+  color: black;
+  /* #006cfa  #e93030 */
+}
+
+@media (max-width: 673px) {
+  #logo {
+    margin-left: 20px;
+  }
+}
+
+#header #logo h1 {
+  font-size: 34px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+#header #logo h1 a, #header #logo h1 a:hover {
+  color: #fff;
+  padding-left: 10px;
+  border-left: 4px solid #8a90ff;
+}
+
+#header #logo img {
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  #header #logo h1 {
+    font-size: 28px;
+  }
+  #header #logo img {
+    max-height: 40px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/* Nav Menu Essentials */
+.nav-menu, .nav-menu * {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-menu ul {
+  position: absolute;
+  display: none;
+  top: 100%;
+  right: 10px;
+  z-index: 99;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.nav-menu li {
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav-menu > li {
+  float: left;
+}
+
+.nav-menu li:hover > ul,
+.nav-menu li.sfHover > ul {
+  display: block;
+}
+
+.nav-menu ul ul {
+  top: 0;
+  left: 100%;
+}
+
+.nav-menu ul li {
+  min-width: 180px;
+  text-align: left;
+}
+
+/* Nav Menu Arrows */
+.sf-arrows .sf-with-ul {
+  padding-right: 30px;
+}
+
+.sf-arrows .sf-with-ul:after {
+  content: "\f107";
+  position: absolute;
+  right: 15px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.sf-arrows ul .sf-with-ul:after {
+  content: "\f105";
+}
+
+/* Nav Meu Container */
+#nav-menu-container {
+  margin: 0;
+}
+
+/* Nav Meu Styling */
+.nav-menu a {
+  padding: 0 8px 0px 8px;
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.nav-menu > li {
+  margin-left: 10px;
+}
+
+.nav-menu ul {
+  margin: 22px 0 0 0;
+  padding: 10px;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  background: #fff;
+}
+
+.nav-menu ul li {
+  transition: 0.3s;
+}
+
+.nav-menu ul li a {
+  padding: 10px;
+  color: #333;
+  transition: 0.3s;
+  display: block;
+  font-size: 12px;
+  text-transform: none;
+}
+
+.nav-menu ul li:hover > a {
+  color: #8a90ff;
+}
+
+.nav-menu ul ul {
+  margin: 0;
+}
+
+/* Mobile Nav Toggle */
+#mobile-nav-toggle {
+  position: fixed;
+  right: 15px;
+  z-index: 999;
+  top: 22px;
+  border: 0;
+  background: none;
+  font-size: 24px;
+  display: none;
+  transition: all 0.4s;
+  outline: none;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  #mobile-nav-toggle {
+    top: 22px;
+  }
+}
+
+#mobile-nav-toggle i {
+  color: #fff;
+  font-weight: 900;
+}
+
+@media (max-width: 960px) {
+  #mobile-nav-toggle {
+    display: inline;
+  }
+  #nav-menu-container {
+    display: none;
+  }
+}
