@@ -1,0 +1,17 @@
+<div class="game">
+    <navbar></navbar>
+    <banner></banner>
+    <section id="options-area" class="data-area">
+        <options></options>
+    </section>
+    <section class="data-area">
+        <intro></intro>
+    </section>
+    <section class="game-area">	
+        <country-pick *ngIf="isStarted && !isCountryPicked"></country-pick>
+        <game-state *ngIf="isStarted && isCountryPicked"></game-state>
+        <game-map *ngIf="isStarted && isCountryPicked"></game-map>
+    </section>
+    <game-fact *ngIf="inBattle"></game-fact>
+    <bottom></bottom>
+</div>

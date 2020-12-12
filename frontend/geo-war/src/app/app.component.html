@@ -1,5 +1,5 @@
-<h1>
-  {{ title }}
-</h1>
-
+<app-game *ngIf="isLogged; else ShowLogin"></app-game>
+<ng-template #ShowLogin>
+    <login></login>
+</ng-template>
 <router-outlet></router-outlet>

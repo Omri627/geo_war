@@ -1,0 +1,51 @@
+.intro-div {
+    position: relative;
+    left: 14%;
+    border-radius: 4px;
+    top: 30px;
+}
+.intro-content {
+  text-align: left;
+  animation-name: fade-in;
+  animation-duration: 3s;
+}
+.intro-title {
+  color: #38a4ff;
+  font-size: 20px;
+  text-align: left;
+  margin-bottom: 15px;
+}
+.game-info-img {
+  background-image: url(../../../assets/images/player.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 2px;
+  float: right;
+  padding-bottom: 40px;
+  transition: 1s filter;
+}
+.game-info-img:hover {
+  filter: hue-rotate(-0.6turn);
+}
+
+/* Button new game */
+.btn-intro {
+    background: #00C9FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #a17fed, #00C9FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #a17fed, #00C9FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    text-align: left;
+    float: left;
+    color: white;
+    font-size: 15px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+  }
+  .btn-intro:hover {
+    background: #00C9FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right,#00C9FF, #a17fed);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #00C9FF, #a17fed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    cursor: pointer;
+}

@@ -1,0 +1,75 @@
+.topic-text, .topic-item-title {
+    font-family: "Agency FB";
+    text-align: center;
+}
+.icon-container {
+    position: relative;
+    left: 40%;
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+}
+.icon {
+    text-align: center;
+    font-size: 30pt;
+    font-family: "computer_icons";
+}
+#green-icon:hover, #blue-icon:hover, #purple-icon:hover,
+#pink-icon:hover, #red-icon:hover, #yellow-icon:hover {
+    color: white;
+}
+#green-topic-title, #green-icon {
+    color: #2ECC71;
+}
+#green-icon {
+    border: 2px groove #2ECC71;
+}
+#green-icon:hover {
+    background-color: #2ECC71;
+}
+#blue-topic-title, #blue-icon {
+    color: #10C1F7;
+}
+#blue-icon {
+    border: 2px groove #10C1F7;
+}
+#blue-icon:hover {
+    background-color: #10C1F7;
+}
+#purple-topic-title, #purple-icon {
+    color: #A569BD;
+}
+#purple-icon {
+    border: 2px groove #A569BD;
+}
+#purple-icon:hover {
+    background-color: #A569BD;
+}
+#pink-topic-title, #pink-icon {
+    color: #EC51DE;
+}
+#pink-icon {
+border: 2px groove #EC51DE;
+}
+#pink-icon:hover {
+    background-color: #EC51DE;
+}
+#red-topic-title, #red-icon {
+    color: #E72637;
+}
+#red-icon {
+    border: 2px groove #E72637;
+    color: #E72637;
+}
+#red-icon:hover {
+    background-color: #E72637;
+}
+#yellow-topic-title, #yellow-icon {
+    color: #FFBE44;
+}
+#yellow-icon {
+    border: 2px groove #FFBE44;
+}
+#yellow-icon:hover {
+    background-color: #FFBE44;
+}
