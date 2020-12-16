@@ -1,10 +1,8 @@
 import datetime
-
 from fastapi import HTTPException
 from mysql.connector import DataError
 from pydantic import BaseModel
-
-from db.dal_quries.score_queries import ScoreQueries
+from db.dal_queries.score_queries import ScoreQueries
 from db.db_handler import DbHandler
 from utils.const import Const
 

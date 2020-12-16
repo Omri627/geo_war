@@ -16,6 +16,7 @@ export class SigninComponent implements OnInit {
   }
 
   login() {
+    window.scroll(0,0);
     this.state.login();
   }
 

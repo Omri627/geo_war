@@ -5,13 +5,18 @@
                 <div class="state-section">
                     Player
                     <div class="game-sep-aqua"></div>
-                    <div class="details">
+                    <div *ngIf="isStarted" class="details">
                         Name: Ran Raboh
+                    </div>
+                    <div *ngIf="!isStarted" class="details">
+                        Name: Ran Raboh <br/>
+                        Email: ranraboh@gmail.com <br/>
+                        Join Date: 16.12.2020
                     </div>
                 </div>
             </div>	
             <div class="col-lg-4 col-md-10">
-                <div class="state-section">
+                <div *ngIf="isStarted" class="state-section">
                     Game State
                     <div class="game-sep-blue"></div>
                     <div class="details">
@@ -20,14 +25,30 @@
                         Helpers: -
                     </div>
                 </div>
+                <div *ngIf="!isStarted" class="state-section">
+                    Latest Game
+                    <div class="game-sep-blue"></div>
+                    <div class="details">
+                        Date: 15.12.2020 <br/>
+                        Country: Israel <br/>
+                        Points: 0 <br/>
+                        Conquered: 0
+                    </div>
+                </div>
             </div>
             <div class="col-lg-4 col-md-10">
                 <div class="state-section">
                     Achievement
                     <div class="game-sep-purple"></div>
-                    <div class="details">
+                    <div *ngIf="isStarted" class="details">
                         Points: {{ points }} <br/>
                         Conquered: {{ conquered }}
+                    </div>
+                    <div *ngIf="!isStarted" class="details">
+                        Games Played: 0 <br/>
+                        Total Points: 0 <br/>
+                        Total Conquered: 0 <br/>
+                        Favorite Country: Israel
                     </div>
                 </div>
             </div>

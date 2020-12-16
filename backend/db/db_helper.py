@@ -22,7 +22,7 @@ class DbHelper:
                 host=self.settings.host,
                 user=self.settings.user,
                 password=self.settings.password,
-                database=self.settings.database
+                database=self.settings.database,
             )
             DbHelper.__instance = self
 

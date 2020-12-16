@@ -11,9 +11,11 @@ export class StateComponent implements OnInit {
   points: number;
   conquered: number;
   username: string;
+  isStarted: boolean;
   constructor(private status: StatusService) {
     this.country = this.username = '';
     this.points = this.conquered = 0;
+    this.isStarted = false;
   }
 
   ngOnInit(): void {
@@ -21,5 +23,6 @@ export class StateComponent implements OnInit {
     this.status.conqueredMoified.subscribe(conquered => this.conquered = conquered);
     this.status.usernameModified.subscribe(username => this.username = username);
     this.status.pointsModified.subscribe(points => this.points = points);
+    this.status.isStarted.subscribe(isStarted => this.isStarted = isStarted);
   }
 }
