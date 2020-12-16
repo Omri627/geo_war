@@ -1,14 +1,14 @@
 from typing import Tuple
 
-from db.dal_quries.capitals_queires import CapitalQueries
-from db.dal_quries.city_queries import CitesQueries
-from db.dal_quries.countries_queries import CountriesQueries
-from db.dal_quries.ethnics_queries import EthnicsQueries
-from db.dal_quries.languages_queries import LanguagesQueries
-from db.dal_quries.religions_queries import ReligionsQueries
-from db.dal_quries.soccer_queries import SoccerQueries
-from db.dal_quries.tables import Tables
-from db.dal_quries.user_queries import UserQueries
+from db.dal_queries.capitals_queries import CapitalQueries
+from db.dal_queries.city_queries import CitiesQueries
+from db.dal_queries.countries_queries import CountriesQueries
+from db.dal_queries.ethnics_queries import EthnicsQueries
+from db.dal_queries.languages_queries import LanguagesQueries
+from db.dal_queries.religions_queries import ReligionsQueries
+from db.dal_queries.soccer_queries import SoccerQueries
+from db.dal_queries.tables import Tables
+from db.dal_queries.user_queries import UserQueries
 from db.db_helper import DbHelper
 from utils.logger_provider import LoggerProvider
 
@@ -90,14 +90,6 @@ class DbHandler:
             self._insert_many_to_table(CapitalQueries.INSERT_QUERY, self.capital_values_list)
             self.capital_values_list = list()
 
-    # def insert_users_to_table(self, data: dict):
-    #     data_tuple = tuple(data.get(filed, None) for filed in UserQueries.FIELDS)
-    #     self._insert_one_to_table(UserQueries.INSERT_QUERY, data_tuple)
-    #
-    # def insert_scores_to_table(self, data: dict):
-    #     data_tuple = tuple(data.get(filed, None) for filed in UserQueries.FIELDS)
-    #     self._insert_one_to_table(UserQueries.INSERT_QUERY, data_tuple)
-
     def flush_to_db(self, table: Tables):
         cursor = self.helper.db.cursor()
         try:
@@ -139,7 +131,6 @@ class DbHandler:
 
     def insert_one_to_table(self, fields: Tuple[str], insert_query: str, data: dict):
         """
-
         :param fields: fields in the table
         :param insert_query: full insertion query
         :param data: dict of fields and
@@ -149,3 +140,15 @@ class DbHandler:
         cursor = self.helper.db.cursor()
         cursor.execute(insert_query, data_tuple)
         self.helper.db.commit()
+    
+    def receive_data(self, query: str, values: tuple):
+        cursor = self.helper.db.cursor()
+        cursor.execute(query % values)
+        result = cursor.fetchall()
+        return result
+
+    def get_count(self, query: str, values: tuple):
+        cursor = self.helper.db.cursor()
+        cursor.execute(query % values)
+        result = cursor.fetchone()
+        return int(result[0])

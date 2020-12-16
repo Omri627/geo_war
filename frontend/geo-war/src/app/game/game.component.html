@@ -9,7 +9,7 @@
     </section>
     <section class="game-area">	
         <country-pick *ngIf="isStarted && !isCountryPicked"></country-pick>
-        <game-state *ngIf="isStarted && isCountryPicked"></game-state>
+        <game-state *ngIf="!isStarted || isCountryPicked"></game-state>
         <game-map *ngIf="isStarted && isCountryPicked"></game-map>
     </section>
     <game-fact *ngIf="inBattle"></game-fact>

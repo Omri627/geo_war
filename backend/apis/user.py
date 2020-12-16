@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from mysql.connector import IntegrityError, DataError
 from pydantic import BaseModel
 
-from db.dal_quries.user_queries import UserQueries
+from db.dal_queries.user_queries import UserQueries
 from db.db_handler import DbHandler
 
 
