@@ -21,6 +21,13 @@ class CountriesQueries(TableQueries):
         %s, %s, %s, %s, %s, %s, %s, %s)
     '''
 
+    # update country with it continent
+    UPDATE_COUNTRY_CONTINENT = '''
+        UPDATE countries
+        SET continent= '%s'
+        WHERE code='%s'
+    '''
+
     # Query: Get a detailed information about a praticular country from table
     COUNTRY_DATA = '''
         SELECT * FROM countries

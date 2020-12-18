@@ -8,13 +8,12 @@ from db.dal_queries.languages_queries import LanguagesQueries
 from db.dal_queries.religions_queries import ReligionsQueries
 from db.dal_queries.soccer_queries import SoccerQueries
 from db.dal_queries.tables import Tables
-from db.dal_queries.user_queries import UserQueries
 from db.db_helper import DbHelper
 from utils.logger_provider import LoggerProvider
 
 
 class DbHandler:
-    BULK_SIZE = 10
+    BULK_SIZE = 1
 
     def __init__(self):
         self.helper = DbHelper.get_instance()
@@ -73,11 +72,11 @@ class DbHandler:
             self.soccer_values_list = list()
 
     def insert_to_city_table(self, data: dict) -> None:
-        data_tuple = tuple(data.get(filed, None) for filed in CitesQueries.FIELDS)
+        data_tuple = tuple(data.get(filed, None) for filed in CitiesQueries.FIELDS)
         self.city_values_list.append(data_tuple)
 
         if len(self.city_values_list) == self.BULK_SIZE:
-            self._insert_many_to_table(CitesQueries.INSERT_QUERY, self.city_values_list)
+            self._insert_many_to_table(CitiesQueries.INSERT_QUERY, self.city_values_list)
             self.city_values_list = list()
 
     def insert_to_capital_table(self, data: dict) -> None:
@@ -109,7 +108,7 @@ class DbHandler:
                 self._execute_many(cursor, SoccerQueries.INSERT_QUERY, self.soccer_values_list)
                 self.soccer_values_list = list()
             elif table.name == Tables.CITY_TABLE.name:
-                self._execute_many(cursor, CitesQueries.INSERT_QUERY, self.city_values_list)
+                self._execute_many(cursor, CitiesQueries.INSERT_QUERY, self.city_values_list)
                 self.city_values_list = list()
             elif table.name == Tables.CAPITAL_TABLE.name:
                 self._execute_many(cursor, CapitalQueries.INSERT_QUERY, self.capital_values_list)
@@ -140,7 +139,7 @@ class DbHandler:
         cursor = self.helper.db.cursor()
         cursor.execute(insert_query, data_tuple)
         self.helper.db.commit()
-    
+
     def receive_data(self, query: str, values: tuple):
         cursor = self.helper.db.cursor()
         cursor.execute(query % values)
@@ -152,3 +151,13 @@ class DbHandler:
         cursor.execute(query % values)
         result = cursor.fetchone()
         return int(result[0])
+
+    def execute(self, query: str, values: tuple):
+        """
+        execute insert or update one row
+        """
+        final_query = query % values
+        cursor = self.helper.db.cursor()
+        cursor.execute(final_query)
+        self.helper.db.commit()
+
