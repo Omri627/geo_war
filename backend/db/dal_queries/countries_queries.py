@@ -1,6 +1,5 @@
 from db.dal_queries.table_queries import TableQueries
 
-
 class CountriesQueries(TableQueries):
     # List of field of Countries data table
     FIELDS = (
@@ -88,4 +87,27 @@ class CountriesQueries(TableQueries):
         FROM countries
         ORDER BY rand() * countries.internet_users DESC
         LIMIT 15
+    '''
+
+    # update country with it continent
+    UPDATE_COUNTRY_CONTINENT = '''
+        UPDATE countries
+        SET continent= '%s'
+        WHERE code='%s'
+    '''
+
+    # Query: Get population density of given country
+    # format: [0] name of the country
+    POPULATION_DENSITY  = '''
+        SELECT countries.population / countries.area as population_density  
+        FROM geo_data.countries
+        WHERE countries.name = 'Israel'
+    '''
+
+    # Query: Get the rank of given country in terms of given field.
+    # format: [0, 1] field name [2] name of the country
+    RANK_COUNTRY_BY_FIELD = '''
+        SELECT COUNT(*) + 1 quantity
+        FROM countries
+        WHERE countries.%s > (SELECT countries.%s FROM geo_data.countries WHERE countries.name = '%s')
     '''

@@ -4,7 +4,7 @@ from analyzers.countries_analyzer import CountriesDictAnalyzer
 from analyzers.ethincs_analyzer import EthnicsDictAnalyzer
 from analyzers.language_analyzer import LanguageDictAnalyzer
 from analyzers.religions_analyzer import ReligionsDictAnalyzer
-from db.dal_quries.tables import Tables
+from db.dal_queries.tables import Tables
 from db.db_handler import DbHandler
 from readers.json_reader import JsonReader
 

@@ -5,7 +5,7 @@ import requests
 
 from analyzers.capital_dict_analyzer import CapitalDictAnalyzer
 from analyzers.city_dict_analyzer import CityDictAnalyzer
-from db.dal_quries.tables import Tables
+from db.dal_queries.tables import Tables
 from db.db_handler import DbHandler
 from readers.json_reader import JsonReader
 

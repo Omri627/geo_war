@@ -3,6 +3,8 @@ from db.dal_queries.table_queries import TableQueries
 '''
     CitiesQueries class gathered a list of queries performed on data table Cities.
 '''
+
+
 class CitiesQueries(TableQueries):
     # List of fields of city table
     FIELDS = (
@@ -57,7 +59,7 @@ class CitiesQueries(TableQueries):
         WHERE countries.code = city.country_code AND countries.name = '%s'
             AND city.population > (other.population / 2)
     '''
-    
+
     # Query: Get the top countries which has the highest population per city
     # format: [0] size of the list
     POPULATION_PER_CITY = '''
@@ -79,8 +81,6 @@ class CitiesQueries(TableQueries):
         TOP %d
     '''
 
-
-    
     """
     queries examples:
     
