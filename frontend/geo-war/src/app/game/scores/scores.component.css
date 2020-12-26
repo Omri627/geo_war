@@ -1,0 +1,97 @@
+.table-row:hover {
+    color: #22d8f8;
+    border: 1px solid #22d8f8;
+    font-weight: bold;
+}
+
+
+
+/* */
+
+#state-area {
+    position: relative;
+    top: 50px;
+    padding: 0px 0px;
+    margin: 0px 0px;
+    margin-bottom: 160px;
+    animation-name: move-up;
+    animation-duration: 5s;
+}
+.state-section {
+    text-align: center;
+    border-radius: 10px;
+    background-color: #292945;
+    color:white;
+    border: 1px double black;
+    box-shadow: 0px 2px 2px 0px rgba(212, 150, 255, 0.2);
+    height: 200px;
+    position: relative;
+    top: 80px;
+    margin-top: 50px;
+
+}
+.game-data {
+    position: relative;
+    left: 0px;
+    border-radius: 4px;
+}
+.state-section .details {
+    padding: 20px;
+    background-color: #292945;
+    color: white;
+    animation-name: fade-in;
+    animation-duration: 3s;
+}
+.game-sep-aqua {
+    background-color: #3dd0d8;
+    height: 50px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    animation-name: fade-in;
+    animation-duration: 5s;
+}
+.game-sep-blue {
+    background-color: #5c9ddd;
+    height: 50px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    animation-name: fade-in;
+    animation-duration: 5s;
+}
+.game-sep-purple {
+    background-color: #7d69e4;
+    height: 50px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    animation-name: fade-in;
+    animation-duration: 5s;
+}
+@keyframes move-up {
+    0%   { top: 300px;  }
+    100%   { top: 50px; }
+}
+.game-sep-red {
+    background-color: #ff6161;
+    height: 50px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    animation-name: fade-in;
+    animation-duration: 5s;
+}
+.buttons-header {
+    position: relative;
+    right: 20px;
+}
+.row {
+    width: 90%;
+    position: relative;
+    left: 65px;
+}
+.btn-menu {
+    margin-top: 5px;
+    margin-right: 10px;
+}
+.title-section {
+    position: relative;
+    right: 20px;
+}

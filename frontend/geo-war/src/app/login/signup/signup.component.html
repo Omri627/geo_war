@@ -2,7 +2,42 @@
     <h1 id="sign-title">Sign Up</h1>
     <br/>
     <p class="intro-login">
-        Sign up, play the game and enrich your knowledge about the world.
+        Sign up, play the game and enrich your knowledge about the world. <br/>
     </p>
-    <button id='login_button' type="button" class="btn btn-info send-button">Register</button>
+    <p>
+        <label id="username-text">Username:</label>
+        <input #InputUsername id="username-input" type="text" class="form-textbox form-login-normal" 
+            placeholder="Enter a valid username" [(ngModel)]="username" (focusout)="verify_username()"  />
+    </p>
+    <div class="error-message">
+        {{ username_error }}
+    </div>
+    <p>
+        <label id="verification-text">Email:</label>
+        <input #InputEmail id="email-input" type="text" class="form-textbox form-login-normal" 
+            placeholder="Enter a valid email" [(ngModel)]="email" (focusout)="verify_email()" />
+    </p>
+    <div class="error-message">
+        {{ email_error }}
+    </div>
+    <p>
+        <label id="password-text">Password:</label>
+        <input #InputPassword type="password" class="form-textbox form-login-normal" placeholder="Password" [(ngModel)]="password" (focusout)="verify_password()" />  
+        <input #InputVerification id="verification" type="password" class="form-textbox form-login-normal" placeholder="Verification" [(ngModel)]="password_validation" (focusout)="verify_password_confirmation()"/>
+    </p>
+    <div class="error-message">
+        {{ password_error }} 
+    </div>
+    <label id="text-terms" class="radio-container intro-login">By signing up, you agree to our terms
+        <input type="checkbox" name="terms" [checked]="termsChecked"  (change)="termsChanged()" />
+        <span class="checkmark"></span>
+    </label>
+    <button id="login_button" type="button" class="btn btn-info send-button" (click)="signUp()" >Register</button>
+    <p class="error-message">
+        {{ terms_confirmation_error }} <br/>
+        {{ server_error }}
+    </p>
+    <p class="success-message">
+        {{ success_message }}
+    </p>
 </div>

@@ -11,3 +11,115 @@
     color: #0BB5FF;
     font-size: 20pt;
 }
+#username-text, #password-text, #verification-text {
+    font-weight: bold;
+    color: white;
+}
+#text-terms {
+    position: relative;
+    left: 35px;
+    bottom: 10px;
+}
+#login_button {
+    position: relative;
+    bottom: 12px;
+}
+#verification {
+    position: relative;
+    left: 20px;
+}
+#username-input {
+    width: 365px;
+}
+#email-input {
+    position: relative;
+    width: 365px;
+    left: 30px;
+}
+.error-message {
+  position: relative;
+  bottom: 15px;
+}
+.error-input {
+  border: 1px solid #ff0000;
+}
+.success-input {
+  border: 1px solid #00eba4;
+}
+.success-message {
+  position: relative;
+  bottom: 40px;
+}
+
+/************************************************************
+Checkbox Terms
+*************************************************************/
+  
+  .radio-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .radio-container input:checked ~ .checkmark {
+    background-color: #e5e5e5;
+  }
+  
+  .radio-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .radio-container .checkmark:after {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: #57b846;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #e5e5e5;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  

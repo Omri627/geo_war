@@ -1,28 +1,59 @@
 <div id="myModal" class="modal">
     <div id="sub-section" class="modal-section">
         <h4 class="sub-text">
-            Israel Vs Portugal
+            {{ user_country }} Vs {{ rival_country.name }}
         </h4>
     </div>
     <div id="fact-section" class="modal-section">
         <h4 class="fact-text">
-            <span class="text-bold">1 / 3</span><br/>
-            The country Israel has more then 70 cities in total 
+            <span class="text-bold">Topic: {{ facts[fact_number].topic }} </span><br/>
+            {{ facts[fact_number].fact }}
         </h4>
     </div>
-    <button id="btntrue" type="button" class="btn btn-outline-primary modal-button btn-true">
+    <button id="btntrue" type="button" class="btn btn-outline-primary modal-button btn-true" (click)="assignAnswer(true)" >
         True
     </button>
-    <button id="btnfalse" type="button" class="btn btn-outline-primary modal-button btn-false">
+    <button id="btnfalse" type="button" class="btn btn-outline-primary modal-button btn-false" (click)="assignAnswer(false)" >
         False
     </button>
-    <button id="factChange" type="button" class="btn btn-outline-primary modal-button btn-imply">
+    <button id="factChange" type="button" class="btn btn-outline-primary modal-button btn-imply" [ngClass]="(changeFactEnable)?'':'text-hidden'" (click)="changeFactAction()" >
         Change Fact
     </button>
-    <button id="revealAnswer" type="button" class="btn btn-outline-primary modal-button btn-imply">
+    <button id="revealAnswer" type="button" class="btn btn-outline-primary modal-button btn-imply" [ngClass]="(revealAnswerEnable)?'':'text-hidden'" (click)="revealAnswerAction()" >
         Reveal Answer
     </button>
-    <button id="hint" type="button" class="btn btn-outline-primary modal-button btn-imply">
+    <button id="hint" type="button" class="btn btn-outline-primary modal-button btn-imply" (click)="hintAction()" [ngClass]="(hintEnable)?'':'text-hidden'" >
         Hint
     </button>
+    <div id="battle-summary-section" class="modal-section">
+        <div class="container"> 
+            <div class="row">
+                <div class="col">
+                    <h4 class="summary-text">
+                        <span [ngClass]="(aboutWinOrLose)?'text-blue':'text-red'">
+                            {{ battle_over_message }}
+                        </span>
+                        <span class="blue-hover" [ngClass]="(battle_over_message == '')?'':'hidden-text'"><img class="summary-icon" src="../../../assets/images/fact-icon.png"> Fact: {{ fact_number + 1 }} / {{ facts_total }} </span> <br/>
+                        <span class="green-hover" [ngClass]="(battle_over_message == '')?'':'hidden-text'"><img class="summary-icon" src="../../../assets/images/correct.png"> Correct: {{ correct }} </span> <br/>
+                        <span class="red-hover" [ngClass]="(battle_over_message == '')?'':'hidden-text'"><img class="summary-icon" src="../../../assets/images/incorrect.png"> Wrong: {{ fact_number - correct }}</span>
+                    </h4>
+                </div>
+                <div class="col">
+                    <h4 class="correct-text" [ngClass]="(show_answer && right_or_wrong)?'':'hidden-text'" #Correct>
+                        {{ correct_answer_messages[current_correct_message] }}
+                    </h4>
+                    <h4 class="incorrect-text" [ngClass]="(show_answer && !right_or_wrong)?'':'hidden-text'" #Incorrect>
+                        {{ wrong_answer_messages[current_wrong_message] }}
+                    </h4>
+                    <h4 class="summary-text" [ngClass]="(show_answer || revealAsnwer)?'':'hidden-text'" #FullDetailedAsnwer >
+                        {{ facts[fact_number].detail }}
+                    </h4>
+                    <h4 class="summary-text" [ngClass]="(hint && !show_answer && !revealAsnwer)?'':'hidden-text'" #FullDetailedAsnwer >
+                        <span class="text-blue">Hint: </span><br/>
+                        {{ facts[fact_number].hint }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

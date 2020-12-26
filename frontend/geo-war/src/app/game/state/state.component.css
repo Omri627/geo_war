@@ -60,3 +60,68 @@
     0%   { top: 300px;  }
     100%   { top: 50px; }
 }
+
+.heart-lives {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    animation-name: lives-move;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    margin: 4px;
+}
+.star-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin: 4px;
+    bottom: 5px;
+    animation-name: star-move;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+.points-text {
+    color: #006ed4;
+}
+.achievement-content  {
+    position: relative;
+    top: 19px;
+}
+.player-color {
+    width: 20px;
+    height: 15px;
+    background-color: #118cff;
+    border: 2px solid black;
+    position: relative;
+    margin: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-left: 50px;
+}
+@keyframes lives-move {
+    0%   { top: 0px;  }
+    25%   { top: 2px; }
+    50%  { top: 0px; }
+    75% { top: -2px; }
+    100% { top: 0px; }
+}
+@keyframes star-move {
+    0%   { left: 0px;  }
+    25%   { left: 3px; }
+    50%  { left: 0px; }
+    75% { left: -3px; }
+    100% { left: 0px; }
+}
+
+/* Button new game */
+.btn-helper {
+    color: white;
+    font-size: 10px;
+    margin-right: 4px;
+    height: 18px;
+    padding: 3px;
+    width: 70px;
+}
+.btn-helper:hover {
+    cursor: not-allowed;
+}

@@ -1,7 +1,7 @@
 from db.dal_queries.countries_queries import CountriesQueries
+from pydantic import BaseModel
 
-
-class Country():
+class Country(BaseModel):
     code: str
     name: str
     area: int
@@ -18,8 +18,8 @@ class Country():
     _65_over: int
     total_median_age: float
     female_median_age: float
-    male_median_age: float
-    male_expectancy: float
+    male_median_age:float
+    male_expectancy:float
     female_expectancy: float
     total_expectancy: float
     unemployment_rate: float
@@ -28,7 +28,6 @@ class Country():
     imports: int
     exports: int
     continent: str
-
     def __init__(self, record: tuple):
         # initialize country data
         self.code = record[0]

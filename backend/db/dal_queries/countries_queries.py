@@ -1,6 +1,5 @@
 from db.dal_queries.table_queries import TableQueries
 
-
 class CountriesQueries(TableQueries):
     # List of field of Countries data table
     FIELDS = (
@@ -21,13 +20,6 @@ class CountriesQueries(TableQueries):
         %s, %s, %s, %s, %s, %s, %s, %s)
     '''
 
-    # update country with it continent
-    UPDATE_COUNTRY_CONTINENT = '''
-        UPDATE countries
-        SET continent= '%s'
-        WHERE code='%s'
-    '''
-
     # Query: Get a detailed information about a praticular country from table
     COUNTRY_DATA = '''
         SELECT * FROM countries
@@ -39,7 +31,7 @@ class CountriesQueries(TableQueries):
     POPULATION_DENSITY  = '''
         SELECT countries.population / countries.area as population_density  
         FROM geo_data.countries
-        WHERE countries.name = 'Israel'
+        WHERE countries.name = '%s'
     '''
 
     # Query: Get the names of the countries which gains the largest values of given field
@@ -79,6 +71,37 @@ class CountriesQueries(TableQueries):
         HAVING population_density > 0
         ORDER BY population_density ASC
         LIMIT %d 
+    '''
+
+    # Query: Get the rank of given country in terms of given field.
+    # format: [0, 1] field name [2] name of the country
+    RANK_COUNTRY_BY_FIELD = '''
+        SELECT COUNT(*) + 1 quantity
+        FROM countries
+        WHERE countries.%s > (SELECT countries.%s FROM geo_data.countries WHERE countries.name = '%s')
+    '''
+
+    # Query: Get fifteen random countries to compete in the game
+    COUNTRIES_GAME = '''
+        SELECT countries.name
+        FROM countries
+        ORDER BY rand() * countries.internet_users DESC
+        LIMIT 15
+    '''
+
+    # update country with it continent
+    UPDATE_COUNTRY_CONTINENT = '''
+        UPDATE countries
+        SET continent= '%s'
+        WHERE code='%s'
+    '''
+
+    # Query: Get population density of given country
+    # format: [0] name of the country
+    POPULATION_DENSITY  = '''
+        SELECT countries.population / countries.area as population_density  
+        FROM geo_data.countries
+        WHERE countries.name = 'Israel'
     '''
 
     # Query: Get the rank of given country in terms of given field.

@@ -2,3 +2,10 @@
     font-weight: bold;
     color: white;
 }
+input {
+    width: 320px;
+}
+.error_message {
+    position: relative;
+    left: 15px;
+}

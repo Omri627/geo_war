@@ -33,7 +33,7 @@
     top: 320px;
     left: 52%;
     animation-name: pop-up;
-    animation-duration: 4s;
+    animation-duration: 3.5s;
 }
 .btn-true:hover {
     background: #00c6ff;  /* fallback for old browsers */
@@ -48,7 +48,7 @@
     top: 320px;
     left: 11%;
     animation-name: pop-up;
-    animation-duration: 5s;
+    animation-duration: 4s;
 }
 .btn-false:hover {
     background: #FF416C;  /* fallback for old browsers */
@@ -95,4 +95,72 @@
 }
 .text-bold {
     font-weight: bold;
+}
+.answer-detail {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    color: white;
+    font-family: "Agency FB";
+    font-size: 25px;
+}
+#battle-summary-section {
+    position: fixed;
+    top: 180px;
+    left: 10%;
+    height: 145px;
+    width: 80%;
+    background-color: black;
+}
+.summary-text {
+    font-family: "Poppins", sans-serif;
+    color: white;
+    position: relative;
+    top: 1px;
+    font-size: 18px;
+    animation-name: fade-in;
+    animation-duration: 2s;
+}
+.incorrect-text {
+    font-family: "Poppins", sans-serif;
+    color: rgb(255, 0, 0);
+    position: relative;
+    top: 1px;
+    font-size: 18px;
+    animation-name: fade-in;
+    animation-duration: 2s;
+}
+.correct-text {
+    font-family: "Poppins", sans-serif;
+    color: rgb(0, 140, 255);
+    position: relative;
+    top: 1px;
+    font-size: 18px;
+    animation-name: fade-in;
+    animation-duration: 2s;
+}
+.text-hidden {
+    display: none;
+}
+.summary-icon {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    margin: 4px;
+    bottom: 5px;
+}
+.blue-hover:hover {
+    color: #14c8ff;
+}
+.green-hover:hover {
+    color: #08ec13;
+}
+.red-hover:hover {
+    color: #FF416C;
+}
+.text-blue {
+    color: #14c8ff;
+}
+.text-red {
+    color: #FF416C;
 }

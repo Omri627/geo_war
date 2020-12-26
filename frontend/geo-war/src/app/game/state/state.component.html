@@ -5,34 +5,26 @@
                 <div class="state-section">
                     Player
                     <div class="game-sep-aqua"></div>
-                    <div *ngIf="isStarted" class="details">
-                        Name: Ran Raboh
-                    </div>
-                    <div *ngIf="!isStarted" class="details">
+                    <div class="details">
                         Name: Ran Raboh <br/>
-                        Email: ranraboh@gmail.com <br/>
-                        Join Date: 16.12.2020
+                        Country: {{ country }} <br/>
+                        Color: <span class="player-color"></span>
                     </div>
                 </div>
             </div>	
             <div class="col-lg-4 col-md-10">
-                <div *ngIf="isStarted" class="state-section">
+                <div class="state-section">
                     Game State
                     <div class="game-sep-blue"></div>
                     <div class="details">
-                        Country: {{ country }} <br/>
-                        Color: Blue <br/>
-                        Helpers: -
-                    </div>
-                </div>
-                <div *ngIf="!isStarted" class="state-section">
-                    Latest Game
-                    <div class="game-sep-blue"></div>
-                    <div class="details">
-                        Date: 15.12.2020 <br/>
-                        Country: Israel <br/>
-                        Points: 0 <br/>
-                        Conquered: 0
+                        Helpers: <span *ngIf="!hint && !changeFact && !revealAnswer">-</span>
+                        <span *ngIf="hint" type="button" class="btn btn-danger btn-helper">Hint</span>
+                        <button *ngIf="changeFact" type="button" class="btn btn-danger btn-helper">Change Fact</button>
+                        <button *ngIf="revealAnswer" type="button" class="btn btn-danger btn-helper">Reveal Answer</button>
+                        
+                        <br/>
+                        Lives: <img *ngIf="lives > 0" class="heart-lives" src="../../../assets/images/heart.png">
+                         <img *ngIf="lives > 1" class="heart-lives" src="../../../assets/images/heart.png"> <br/>
                     </div>
                 </div>
             </div>
@@ -40,15 +32,11 @@
                 <div class="state-section">
                     Achievement
                     <div class="game-sep-purple"></div>
-                    <div *ngIf="isStarted" class="details">
-                        Points: {{ points }} <br/>
-                        Conquered: {{ conquered }}
-                    </div>
-                    <div *ngIf="!isStarted" class="details">
-                        Games Played: 0 <br/>
-                        Total Points: 0 <br/>
-                        Total Conquered: 0 <br/>
-                        Favorite Country: Israel
+                    <div class="achievement-content">
+                        Points: {{ points }}  <br/>
+                        Areas Own: {{ conquered }} <br/>
+                        Max Owned: {{ max_conquered }} <br/>
+                        <img class="star-icon" src="../../../assets/images/star.png"> <img class="star-icon" src="../../../assets/images/star-2.png"> <img class="star-icon" src="../../../assets/images/star-3.png"> <br/>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,48 @@
+<div class="state-section">
+    <div class="game-sep-red">
+        <div class="buttons-header">
+            <button type="button" class="btn btn-danger btn-menu" (click)="game_summary_click()">Games Summary</button>
+            <button type="button" class="btn btn-danger btn-menu" (click)="countries_summary_click()">Countries Summary</button>
+        </div>
+    </div>
+    <div *ngIf="game_summary_section" class="details">
+        <h3 class="title-section">Latest Games Summary</h3>
+        <table class="table table-dark">
+            <thead>
+              <tr class="bg-primary">
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Country</th>
+                <th scope="col">Points</th>
+                <th scope="col">Conquered</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-dark" *ngFor="let score of scores">
+                <td class="table-row">{{ score.date.substring(0, 10) }}</td>
+                <td class="table-row">{{ score.date.substring(11) }}</td>
+                <td class="table-row">{{ score.country }}</td>
+                <th class="table-row">{{ score.points }}</th>
+                <td class="table-row">{{ score.conquered }} </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div *ngIf="countries_summary_section" class="details">
+        <h3 class="title-section">Countries Summary</h3>
+        <table class="table table-dark">
+            <thead>
+              <tr class="bg-info">
+                <th scope="col">Country</th>
+                <th scope="col">Games Played</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-dark" *ngFor="let cs of countries_summary">
+                <th class="table-row">{{ cs.country }}</th>
+                <td class="table-row">{{ cs.games_played }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

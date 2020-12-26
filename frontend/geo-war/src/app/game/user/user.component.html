@@ -1,0 +1,45 @@
+<section id="state-area" class="game-area">	
+    <div class="game-data container">					
+        <div class="row">
+            <div class="col-lg-4 col-md-10">
+                <div class="state-section">
+                    User Credentials
+                    <div class="game-sep-aqua"></div>
+                    <div class="details">
+                        Name: {{ username }} <br/>
+                        Email: {{ email }} <br/>
+                    </div>
+                </div>
+            </div>	
+            <div class="col-lg-4 col-md-10">
+                <div class="state-section">
+                    Latest Game
+                    <div class="game-sep-blue"></div>
+                    <div class="details">
+                        Date: {{ date_latest }} <br/>
+                        Country: {{ country_latest }} <br/>
+                        Points: {{ points_latest }} <br/>
+                        Conquered: {{ conquered_latest }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-10">
+                <div class="state-section">
+                    Achievements
+                    <div class="game-sep-purple"></div>
+                    <div class="details">
+                        Games Played: {{ games_played }} <br/>
+                        Total Points: {{ total_points }} <br/>
+                        Total Conquered: {{ total_conquered }} <br/>
+                        Favorite Country: {{ top_country }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-10">
+                <user-scores></user-scores>
+            </div>
+        </div>
+    </div>
+</section>

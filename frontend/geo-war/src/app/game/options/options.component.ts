@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StatusService } from '../status.service';
+import { GameStatusService } from '../status.service';
 
 @Component({
   selector: 'options',
@@ -8,7 +8,7 @@ import { StatusService } from '../status.service';
 })
 export class OptionsComponent implements OnInit {
 
-  constructor(private status : StatusService) { }
+  constructor(private status : GameStatusService) { }
 
   ngOnInit(): void {
   }

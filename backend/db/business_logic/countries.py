@@ -6,6 +6,14 @@ class CountriesData:
     def __init__(self):
         self.db_handler = DbHandler()
     
+    # returns fifteen random countries to compete in the game
+    def game_countries(self):
+        countries = []
+        records = self.db_handler.receive_data(CountriesQueries.COUNTRIES_GAME, ())
+        for i, record in enumerate(records):
+            countries.append(record[0])
+        return countries
+
     # returns detailed information about a country
     def country_data(self, country: str):
         record = self.db_handler.receive_data(CountriesQueries.COUNTRY_DATA, country)
@@ -24,15 +32,17 @@ class CountriesData:
         return records[0]
 
     # returns the most populated countries
-    def top_populated_cities(self, country: str, limit: int):
-        return self.db_handler.receive_data(CountriesQueries.MOST_FIELD, ('population', limit))
+    def top_populated_cities(self, limit: int):
+        countries = []
+        records = self.db_handler.receive_data(CountriesQueries.MOST_FIELD, ('population', limit))
+        for i, record in enumerate(records):
+            if i not in [ 15, 23, 51 ]:
+                countries.append(record[0])
+        return countries
 
-    # returns the largest size countries
-    def largest_area_size(self, country: str, limit: int):
-        return self.db_handler.receive_data(CountriesQueries.MOST_FIELD, ('area', limit))
-
-    # returns the largest size countries
-    def largest_area_size(self, country: str, limit: int):
+    # receives a integer limit value indicating the number of records/countries
+    # returns a list largest size countries 
+    def largest_area_size(self, limit: int):
         return self.db_handler.receive_data(CountriesQueries.MOST_FIELD, ('area', limit))
     
     # returns the countries that has the highest population density

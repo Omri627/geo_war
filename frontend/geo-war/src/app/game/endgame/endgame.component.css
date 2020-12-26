@@ -1,0 +1,56 @@
+#win-game, #lose-game {
+    position: relative;
+    left: 0%;
+    top: 150px;
+}
+.win-title {
+    position: relative;
+    right: 10px;
+    color: rgba(0, 255, 200, 0.925);
+    font-size: 30px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+}
+.lose-title {
+    position: relative;
+    right: 10px;
+    color: rgba(255, 21, 21, 0.925);
+    font-size: 30px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+}
+.text-hidden {
+    display: none;
+}
+.content {
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+/* Button options */
+.btn-endgame-options {
+    position: relative;
+    left: 35%;
+    top: 145px;
+    background: #00C9FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #a17fed, #00C9FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #a17fed, #00C9FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    text-align: left;
+    float: left;
+    color: white;
+    font-size: 15px;
+    padding: 10px 10px 10px 10px;
+    margin: 5px;
+    margin-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    animation-name: fade-in;
+    animation-duration: 2s;
+  }
+.btn-endgame-options:hover {
+    background: #00C9FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right,#00C9FF, #a17fed);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #00C9FF, #a17fed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    cursor: pointer;
+}
