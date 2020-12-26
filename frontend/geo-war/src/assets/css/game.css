@@ -5,6 +5,9 @@ body {
 .text-white {
     color: #fff;
 }
+.hidden-text {
+    display: none;
+}
 .data-section {
     text-align: center;
     border-radius: 10px;
@@ -114,6 +117,17 @@ body {
     }
     100% {
         opacity: 1;
+    }
+}
+@keyframes display-limited {
+    0% {
+        opacity: 1;
+    }
+    99% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 @keyframes color-alternate {

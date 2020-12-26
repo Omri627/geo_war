@@ -39,6 +39,18 @@
     -moz-box-shadow: -1px -1px -1px -1px blue;
     box-shadow: -1px -1px -1px -1px blue;
 }
+#register-menu {
+    position: absolute;
+    top: 22px;
+    left: 81%;
+    font-family: "Agency FB";
+    font-size: 17px;
+    color: #8fdcff;
+    cursor: pointer;
+    border-radius: 50px;
+    background: transparent;
+    border: 1px dashed #8ffbff;
+}
 #login-menu {
     position: absolute;
     top: 22px;
@@ -50,6 +62,14 @@
     border-radius: 50px;
     background: transparent;
     border: 1px dashed #fdfd96;
+}
+#register-menu:hover {
+    background: transparent;
+    color: black;
+    background: #8fdcff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #db36a4,#8fdcff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #db36a4, #8fdcff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    border: 1px groove #8fdcff;
 }
 #login-menu:hover {
     background: transparent;

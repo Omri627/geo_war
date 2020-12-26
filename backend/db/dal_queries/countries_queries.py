@@ -32,7 +32,7 @@ class CountriesQueries(TableQueries):
     POPULATION_DENSITY  = '''
         SELECT countries.population / countries.area as population_density  
         FROM geo_data.countries
-        WHERE countries.name = 'Israel'
+        WHERE countries.name = '%s'
     '''
 
     # Query: Get the names of the countries which gains the largest values of given field
@@ -80,4 +80,12 @@ class CountriesQueries(TableQueries):
         SELECT COUNT(*) + 1 quantity
         FROM countries
         WHERE countries.%s > (SELECT countries.%s FROM geo_data.countries WHERE countries.name = '%s')
+    '''
+
+    # Query: Get fifteen random countries to compete in the game
+    COUNTRIES_GAME = '''
+        SELECT countries.name
+        FROM countries
+        ORDER BY rand() * countries.internet_users DESC
+        LIMIT 15
     '''

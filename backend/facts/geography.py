@@ -50,6 +50,7 @@ def is_capital(country: str, real_or_fake: bool):
     if real_or_fake:
         big_city = capital
     else: 
+        print (country)
         big_city = cities_data.random_big_city(country=country)
     return {
         'topic': 'Geography', 
@@ -67,7 +68,7 @@ def is_capital(country: str, real_or_fake: bool):
 # the player should determine whether it is true or false
 def most_populated(country: str, real_or_fake: bool):
     cities_data = CitiesData()
-    cities = cities_data.top_populated_cities(country, 10)
+    cities = cities_data.most_populated(country, 10)
     biggest_city = cities[0][0]
     if real_or_fake:
         selected_city = cities[0][0]

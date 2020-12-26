@@ -1,6 +1,7 @@
 from db.dal_queries.countries_queries import CountriesQueries
+from pydantic import BaseModel
 
-class Country():
+class Country(BaseModel):
     code: str
     name: str
     area: int

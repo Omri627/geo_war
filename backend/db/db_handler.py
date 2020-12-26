@@ -1,4 +1,5 @@
 from typing import Tuple
+import time
 
 from db.dal_queries.capitals_queries import CapitalQueries
 from db.dal_queries.city_queries import CitiesQueries
@@ -11,6 +12,7 @@ from db.dal_queries.tables import Tables
 from db.dal_queries.user_queries import UserQueries
 from db.db_helper import DbHelper
 from utils.logger_provider import LoggerProvider
+from fastapi import HTTPException
 
 
 class DbHandler:
@@ -142,12 +144,16 @@ class DbHandler:
         self.helper.db.commit()
     
     def receive_data(self, query: str, values: tuple):
-        cursor = self.helper.db.cursor()
-        cursor.execute(query % values)
-        result = cursor.fetchall()
-        return result
+        try: 
+            cursor = self.helper.db.cursor()
+            cursor.execute(query % values)
+            result = cursor.fetchall()
+            return result
+        except Exception as e:
+            print(e)
+            raise HTTPException(status_code=404, detail={ 'error' : str(e) })
 
-    def get_count(self, query: str, values: tuple):
+    def get_count(self, query: str, values: tuple) -> int:
         cursor = self.helper.db.cursor()
         cursor.execute(query % values)
         result = cursor.fetchone()

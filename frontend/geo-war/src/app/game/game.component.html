@@ -7,9 +7,13 @@
     <section class="data-area">
         <intro></intro>
     </section>
-    <section class="game-area">	
+    <section *ngIf="gameEnded" class="game-area">	
+        <endgame></endgame>    
+    </section>
+    <section *ngIf="!gameEnded" class="game-area">	
+        <user-credentials *ngIf="!isStarted"></user-credentials>
         <country-pick *ngIf="isStarted && !isCountryPicked"></country-pick>
-        <game-state *ngIf="!isStarted || isCountryPicked"></game-state>
+        <game-state *ngIf="isStarted && isCountryPicked"></game-state>
         <game-map *ngIf="isStarted && isCountryPicked"></game-map>
     </section>
     <game-fact *ngIf="inBattle"></game-fact>

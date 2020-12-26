@@ -14,7 +14,6 @@ import { TopicComponent } from './login/topic/topic.component';
 import { GallaryComponent } from './login/gallary/gallary.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { GameComponent } from './game/game.component';
-import { StateService } from './state.service';
 import { NavbarComponent } from './game/navbar/navbar.component';
 import { OptionsComponent } from './game/options/options.component';
 import { StateComponent } from './game/state/state.component';
@@ -22,9 +21,16 @@ import { MapComponent } from './game/map/map.component';
 import { IntroComponent } from './game/intro/intro.component';
 import { BannerComponent } from './game/banner/banner.component';
 import { BottomComponent } from './game/bottom/bottom.component';
-import { StatusService } from './game/status.service';
+import { GameStatusService } from './game/status.service';
 import { PickComponent } from './game/pick/pick.component';
 import { FactComponent } from './game/fact/fact.component';
+import { SelectService } from './game/pick/select.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { UserService } from './user.service';
+import { UserComponent } from './game/user/user.component';
+import { ScoresComponent } from './game/scores/scores.component';
+import { EndgameComponent } from './game/endgame/endgame.component';
 
 @NgModule({
   declarations: [
@@ -49,14 +55,20 @@ import { FactComponent } from './game/fact/fact.component';
     BottomComponent,
     PickComponent,
     FactComponent,
+    UserComponent,
+    ScoresComponent,
+    EndgameComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
-    StateService,
-    StatusService
+    UserService,
+    GameStatusService,
+    SelectService,
   ],
   bootstrap: [AppComponent]
 })

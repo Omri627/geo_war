@@ -6,12 +6,15 @@
     </p>
     <p>
         <label id="username-text">Username:</label>
-        <input type="text" class="form-textbox" />
+        <input type="text" class="form-textbox form-login-normal" [(ngModel)]="username" />
     </p>
     <p>
         <label id="password-text">Password:</label>
-        <input type="password" class="form-textbox"/>
+        <input type="password" class="form-textbox form-login-normal" [(ngModel)]="password" />
     </p>
     <button id='login_button' type="button" class="btn btn-primary send-button"
         (click)="login()">Send</button>
+    <div class="error-message">
+        {{ error_message }} 
+    </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StatusService } from '../status.service';
+import { UserService } from 'src/app/user.service';
+import { GameStatusService } from '../status.service';
 
 @Component({
   selector: 'intro',
@@ -9,7 +10,8 @@ import { StatusService } from '../status.service';
 export class IntroComponent implements OnInit {
   isCountryPicked: boolean;
   isStarted: boolean;
-  constructor(private status : StatusService) {
+  username: string;
+  constructor(private status : GameStatusService, private userService: UserService) {
     this.isCountryPicked = false;
     this.isStarted = false; 
   }
@@ -17,6 +19,7 @@ export class IntroComponent implements OnInit {
   ngOnInit(): void {
     this.status.countryPicked.subscribe(isCountryPicked => this.isCountryPicked = isCountryPicked);
     this.status.isStarted.subscribe(isStarted => this.isStarted = isStarted);
+    this.userService.usernameModified.subscribe(username => this.username = username);
   }
 
   startGame() {

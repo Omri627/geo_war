@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StateService } from './state.service';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +7,9 @@ import { StateService } from './state.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  state : StateService;
   isLogged : boolean;
 
-  constructor(state : StateService) {
-    this.state = state;
+  constructor(private state : UserService) {
     this.isLogged = true;
   }
 

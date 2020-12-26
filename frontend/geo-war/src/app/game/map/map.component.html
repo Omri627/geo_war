@@ -1,49 +1,19 @@
+<div id="game-introductory" #Intro>
+</div>
 <div id="canvas" class="game-map" #canvas>
-    <div id="country-1" class="country" (click)="battleCountry()">
-        <h6 id="country-n1" class="country-name">{{ countries[0] }}</h6>
+    <div *ngIf="hover_id != -1" class="battle-text">
+        Click to battle against {{ countries[hover_id].name }} <br/>
+        <div id="cheats-text">
+            Press 'W' to automatically for automatic win<br/>
+            Press 'L' to automatically for automatic lose  
+        </div>
     </div>
-    <div id="country-2" class="country" (click)="battleCountry()">
-        <h6 id="country-n2" class="country-name">{{ countries[1] }} </h6>
+    <div *ngFor="let country of countries; let i = index" [id]="get_country_id(i + 1)" class="country" [class]="get_country_color_id(i + 1)"  (click)="battleCountry(country)" [ngClass]="(country.isConquered)?'no-hover':''" (mouseenter)="notify_hover(i)" (mouseleave)="disable_hover()" >
+        <div *ngIf="country.isConquered" [id]="get_crown_position_id(i + 1)">
+            <img class="crown-icon" src="../../../assets/images/crown-2.png"> <br/>        
+        </div>
+        <h6 [id]="get_country_text_id(i + 1)" class="country-name" [ngClass]="(!country.isConquered)?'rival-country-name':'my-country-name'">
+            {{ display(country.name) }}
+        </h6>
     </div>
-    <div id="country-3" class="country" (click)="battleCountry()">
-        <h6 id="country-n3" class="country-name">{{ countries[2] }} </h6>
-    </div>
-    <div id="country-4" class="country" (click)="battleCountry()">
-        <h6 id="country-n4" class="country-name">{{ countries[3] }} </h6>
-    </div>
-    <div id="country-5" class="country" (click)="battleCountry()">
-        <h6 id="country-n5" class="country-name">{{ countries[4] }} </h6>
-    </div>
-    <div id="country-6" class="country" (click)="battleCountry()">
-        <h6 id="country-n6" class="country-name">{{ countries[5] }} </h6>
-    </div>
-    <div id="country-7" class="country" (click)="battleCountry()">
-        <h6 id="country-n7" class="country-name">{{ countries[6] }} </h6>
-    </div>
-    <div id="country-8" class="country" (click)="battleCountry()">
-        <h6 id="country-n8" class="country-name">{{ countries[7] }} </h6>
-    </div>
-    <div id="country-9" class="country" (click)="battleCountry()">
-        <h6 id="country-n9" class="country-name">{{ countries[8] }} </h6>
-    </div>
-    <div id="country-10" class="country" (click)="battleCountry()">
-        <h6 id="country-n10" class="country-name">{{ countries[9] }} </h6>
-    </div>
-    <div id="country-11" class="country" (click)="battleCountry()">
-        <h6 id="country-n11" class="country-name">{{ countries[10] }} </h6>
-    </div>
-    <div id="country-12" class="country" (click)="battleCountry()">
-        <h6 id="country-n12" class="country-name">{{ countries[11] }} </h6>
-    </div>
-    <div id="country-13" class="country" (click)="battleCountry()">
-        <h6 id="country-n13" class="country-name">{{ countries[12] }} </h6>
-    </div>
-    <div id="country-14" class="country" (click)="battleCountry()">
-        <h6 id="country-n14" class="country-name">{{ countries[13] }} </h6>
-    </div>
-    <div id="country-15" class="country" (click)="battleCountry()">
-        <h6 id="country-n15" class="country-name">{{ countries[14] }} </h6>
-    </div>
-
-
 </div> 

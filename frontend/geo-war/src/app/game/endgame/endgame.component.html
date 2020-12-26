@@ -1,0 +1,21 @@
+<div id="win-game" [ngClass]="(winOrLose)?'':'text-hidden'" >
+    <h3 class="win-title">
+        World Domination !
+    </h3>
+    <h5 class="content">
+        Congratulations, thanks to your knowledge about around the globe topics the country {{ country }} manage to conquer the world. <br/>
+        You have received {{ points }} points in total. <br/>
+    </h5>
+</div>
+<div id="lose-game" [ngClass]="(winOrLose)?'text-hidden':''">
+    <h3 class="lose-title">
+        Game Over
+    </h3>
+    <h5 class="content">
+        You have lost the game, your country were occupied by another country. <br/>
+        You have accumulated {{ points }} points in total. <br/>
+        The maximum number of areas owned at some point in the game is {{ max_conquered }}
+    </h5>
+</div>
+<button type="button" class="btn btn-primary btn-endgame-options" (click)="new_game()" >New Game</button>
+<button type="button" class="btn btn-primary btn-endgame-options" (click)="main_menu_click()" >Main Menu</button>

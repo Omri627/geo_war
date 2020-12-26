@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StatusService } from '../status.service';
+import { GameStatusService } from '../status.service';
+import { SelectService } from './select.service';
 
 @Component({
   selector: 'country-pick',
@@ -7,21 +8,24 @@ import { StatusService } from '../status.service';
   styleUrls: ['./pick.component.css']
 })
 export class PickComponent implements OnInit {
-  countries = [
-      'Israel', 'Italy', 'Spain', 'Usa', 'Canada', 'France', 'Germany', 'Japan', 'Egypt',
-      'Portugal', 'Brazil', 'Argentina', 'Scotland', 'Marocco', 'England', 'Russia'
-  ]
-  color = [
-    'single-option-green', 'single-option-blue', 'single-option-red', 'single-option-yellow'
-  ]
+  countries: any;
+  color: any;
 
-  constructor(private service: StatusService) { }
-
-  ngOnInit(): void {
+  constructor(private service: GameStatusService, private select: SelectService) { 
+      this.color = [
+        'single-option-green', 'single-option-blue', 'single-option-red', 'single-option-yellow'
+      ]
+      this.countries = []
   }
 
+  ngOnInit(): void {
+      this.select.fill_countries_options();
+      this.select.countries.subscribe(countries_list => this.countries = countries_list);
+  }
+
+  /* Event triggered when the user selected a country */
   selectCountry(country: string) {
-    this.service.selectCountry(country);
+      this.service.selectCountry(country);
   }
 
 }
