@@ -38,6 +38,3 @@ class LanguagesQueries(TableQueries):
         WHERE l1.country_code = c1.code AND l2.country_code = c2.code AND c1.name = 'Chile' AND c2.name = 'Cyprus'
 	        AND l1.language = l2.language
     '''
-
-    
-

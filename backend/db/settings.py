@@ -11,6 +11,7 @@ class Settings:
         self.user = settings['user']
         self.password = settings['password']
         self.database = settings['database']
+        self.pool_size = settings['pool_size'];
 
     def _get_settings_from_file(self) -> dict:
         with open(self.SETTINGS_FILE) as f:

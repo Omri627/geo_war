@@ -31,4 +31,10 @@ class ReligionsQueries(TableQueries):
         LIMIT 1
     '''
 
+    COMMON_COUNTRIES_RELIGIONS = '''
+        SELECT r1.religion, r1.percentage, r2.percentage 
+        FROM religions as r1, countries as c1, religions as r2, countries as c2
+        WHERE c1.code = r1.country_code AND c1.name = '%s' AND c2.code = r2.country_code AND c2.name = '%s' AND r1.religion = r2.religion
+    '''
+
 

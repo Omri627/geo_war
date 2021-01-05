@@ -18,6 +18,7 @@ class EthnicsQueries(TableQueries):
         SELECT countries.name, ethnics.name, ethnics.percentage
         FROM ethnics, countries
         WHERE countries.code = ethnics.country_code AND countries.name = '%s'
+        ORDER BY percentage DESC 
     '''
 
     # Query: Get the main ethnic group in given country
@@ -36,5 +37,5 @@ class EthnicsQueries(TableQueries):
         SELECT e1.name, e1.percentage, e2.percentage
         FROM ethnics as e1, countries as c1, ethnics as e2, countries as c2
         WHERE c1.code = e1.country_code AND c1.name = '%s' AND c2.code = e2.country_code AND c2.name = '%s' AND e1.name = e2.name
+            AND e1.percentage < 50 AND e2.percentage < 50
     '''
-

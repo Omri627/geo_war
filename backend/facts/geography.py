@@ -1,7 +1,7 @@
 from db.business_logic.countries import CountriesData
 from db.business_logic.cities import CitiesData
-from random import seed
-from random import randint
+from random import randint, choice
+from db.business_logic.utils import rank_top_fact
 
 ############## facts: quantity of cities ##########################
 
@@ -15,9 +15,10 @@ def compare_cities_quantity(first: str, second: str):
     return {
         'topic': 'Geography', 
         'fact': 'the number of cities in the countries ' + first + ' is larger then in the country ' + second,
-        'hint': 'the differnce between the number of cities in this two countries is: ' + str(abs(first_quantity - second_quantity)),
+        'hint': 'the difference between the number of cities in this two countries is: ' + str(abs(first_quantity - second_quantity)),
         'answer': first_quantity > second_quantity,
-        'detail': 'the number of cities in the country ' + first + ' is ' + str(first_quantity) + ' whlist the amount of cities in the country ' + second + ' is ' + str(second_quantity) 
+        'detail': 'the number of cities in the country ' + first + ' is ' + str(first_quantity) +
+                  ' whlist the amount of cities in the country ' + second + ' is ' + str(second_quantity)
     }
 
 # has_more_then
@@ -47,17 +48,27 @@ def has_more_then(country: str, cmp_quantity: int):
 def is_capital(country: str, real_or_fake: bool):
     cities_data = CitiesData()
     capital = cities_data.capital_city(country=country)
+    cities = cities_data.most_populated(country=country, quantity=10)
+    if capital is None or cities is None or len(cities) < 3:
+        return None
+
+    upper_bound = min(5, len(cities) - 1)
     if real_or_fake:
-        big_city = capital
+        random_big_city = capital
     else: 
-        print (country)
-        big_city = cities_data.random_big_city(country=country)
+        random_big_city = cities[randint(1, upper_bound)].name
+
+    # select cities for hints
+    hints = [cities[0].name, cities[1].name, cities[2].name]
+    if random_big_city not in hints:
+        hints.insert(0, random_big_city)
+
     return {
         'topic': 'Geography', 
-        'fact': 'the capital city of the ' + country + " is " + big_city,
-        'hint': '',
-        'answer': big_city == capital,
-        'detail': 'the capital city of the ' + country + " is " + capital
+        'fact': 'The capital city of the ' + country + ' is ' + random_big_city,
+        'hint': 'The capital city of the country is one of the following: ' + hints[0] + ', ' + hints[1] + ', ' + hints[2],
+        'answer': random_big_city == capital,
+        'detail': 'The capital city of the ' + country + " is " + capital
     }
 
 ############## facts: population ##########################
@@ -68,66 +79,57 @@ def is_capital(country: str, real_or_fake: bool):
 # the player should determine whether it is true or false
 def most_populated(country: str, real_or_fake: bool):
     cities_data = CitiesData()
-    cities = cities_data.most_populated(country, 10)
-    biggest_city = cities[0][0]
+    cities = cities_data.most_populated(country=country, quantity=10)
+    if cities is None or len(cities) < 3:
+        return None
+
+    # select a random city
+    upper_bound = min(5, len(cities) - 1)
+    largest_city = cities[0]
     if real_or_fake:
-        selected_city = cities[0][0]
+        selected_index = 0
     else:
-        selected_city = cities[randint(1, 10)][0]
+        selected_index = randint(1, upper_bound)
+    selected_city = cities[selected_index]
+
+    # store viable possibilities for the hint
+    hints = [0, 1, 3]
+    if selected_index not in hints:
+        hints.insert(0, selected_index)
+
+    # return the fact content
     return {
         'topic': 'Geography', 
-        'fact': 'The city with largest population in the country ' + country + " is " + selected_city,
-        'hint': '',
-        'answer': biggest_city == selected_city,
-        'detail': 'The city with largest population in the country ' + country + " is " + biggest_city
+        'fact': 'The city which contains the largest population in the country ' + country + " is " + selected_city.name,
+        'hint': 'The city with the largest population size is one of the following: ' + cities[hints[0]].name
+                + ', ' + cities[hints[1]].name + ", " + cities[hints[2]].name,
+        'answer': largest_city.name == selected_city.name,
+        'detail': 'The city with largest population in the country ' + country + " is " + largest_city.name
     }
 
 # cities_larger_country
 # the method receives name of two countries denoted as first and second and
-# construct a fact that compare the population size of big cities of first country and the population size of the entire country.
+# construct a fact that compare the population size of big cities of first country
+# and the population size of the entire country.
 def cities_larger_country(first: str, second: str):
+    # interact with business logic functionality
     cities_data = CitiesData()
+    countries_data = CountriesData()
+
+    # receives essential data from the repository
     cities = cities_data.cities_larger_country(first, second)
-    second_country = cities_data.country_data(second)
-    if cities == None or len(cities) == 0:
+    first_country = countries_data.country_data(first)
+    if cities is None or len(cities) == 0:
         return None
-    selected_city = cities[randint(0, len(cities))]
+    selected_city = choice(cities)
+
     return {
         'topic': 'Geography', 
-        'fact': 'The city ' + selected_city[0] + ' itself has a larger population than the entire state of ' + second,
-        'hint': 'The population size of the city ' + selected_city[0] + ' is ' + selected_city[1],
-        'answer': selected_city[2],
-        'detail': 'The population size of the city ' + selected_city[0] + ' is ' + selected_city[1] + ' whereas the population size of the state ' + second + ' is ' + str(second_country.population), 
-    }
-
-
-
-############## facts: ranks ##########################
-
-# rank_field
-# the method receives a name of country, boolean variable indicate whether to build a true fact of fake and a field name
-# and construct a fact claiming the country is ranked in top X in the entire world in terms of this field. 
-# the player should determine whether it is true or false
-def rank_field(country: str, field: str):
-    cities_data = CitiesData()
-    position = cities_data.rank_field(country, field)
-    country_object = cities_data.country_data(country)
-    if position == 1:
-        fact = 'The country that has the highest ' + field + ' in the world is ' + country
-        detail = fact + ' with value of ' + getattr(country_object, field)
-    else:
-        if real_or_fake:
-            top_position = position - (position % 10) + 10
-        else:
-            top_position = position - (position % 10)
-        fact = 'The country ' + country + ' is in the top ' + str(top_position) + ' in ' + field + ' of the entire world'
-        detail = 'The country ' + country + ' is ranked ' + str(position) + ' in ' + field + ' of the entire world'
-    return {
-        'topic': 'Geography', 
-        'fact': fact,
-        'hint':  'the country ' + first + ' has an ' + field + ' of ' + str(getattr(country_object, field)),
-        'answer': real_or_fake,
-        'detail': detail
+        'fact': 'The city ' + selected_city['name'] + ' itself has a larger population than the entire state of ' + first,
+        'hint': 'The population size of the city ' + selected_city['name'] + ' is ' + str(selected_city['population']),
+        'answer': selected_city['is_bigger'],
+        'detail': 'The population size of the city ' + selected_city['name'] + ' is ' + str(selected_city['population'])
+                + ' whereas the population size of the state ' + first + ' is ' + str(first_country.population),
     }
 
 # rank_populated_city
@@ -136,22 +138,26 @@ def rank_field(country: str, field: str):
 # the player should determine whether it is true or false
 def rank_populated_city(country: str, real_or_fake: bool):
     cities_data = CitiesData()
-    position = cities_data.position_populated_city(country, 10)
-    most_populated = cities_data.most_populated(country)
+    position = cities_data.position_populated_city(country)
+    most_populated = cities_data.most_populated(country=country, quantity=1)
+    if most_populated is None or len(most_populated) == 0:
+        return None
+    most_populated = most_populated[0]
     if position == 1:
-        fact = 'The most populated city in the country ' + country + ' is the most populated in the entire world'
-        detail = fact + ' with population of ' + most_populated[1]
+        fact = 'The most populated city in the country ' + country + ' ' + most_populated.name + ' is the most populated in the entire world'
+        detail = fact + ' with population of ' + str(most_populated.population)
+        real_or_fake = True
     else:
-        if real_or_fake:
-            top_position = position - (position % 10) + 10
-        else:
-            top_position = position - (position % 10)
-        fact = 'The most populated city in the country ' + country + ' is in the top ' + str(top_position) + ' in population size of the entire world'
-        detail = 'The most populated city in the country ' + country + ' is in the position ' + str(position) + ' in population size of the entire world'
+        top_position = rank_top_fact(position, real_or_fake)
+
+        fact = 'The most populated city in the country ' + country + ' ' + most_populated.name + \
+               ' is in the top ' + str(top_position) + ' cities in population size of the entire world'
+        detail = 'The most populated city in the country ' + country + ' is ' + most_populated.name + ' placed in the position ' \
+                 + str(position) + ' in population size of the entire world'
     return {
         'topic': 'Geography', 
         'fact': fact,
-        'hint': 'The most populated city in the country ' + country + ' is ' + most_populated,
+        'hint': 'The population size of the city ' + most_populated.name + ' is ' + str(most_populated.population),
         'answer': real_or_fake,
         'detail': detail
     }
@@ -165,13 +171,16 @@ def is_same_continent(first: str, second: str):
     countries_data = CountriesData()
     first_country = countries_data.country_data(country=first)
     second_country = countries_data.country_data(country=second)
-    answer = first_country.continent == second_country.continent
+    if first_country is None or second_country is None:
+        return None
+    real_or_fake = first_country.continent == second_country.continent
     return {
         'topic': 'Geography', 
-        'fact': 'The countries ' + first + ', ' + second + ' located in the same continent',
-        'hint': '',
-        'answer': answer,
-        'detail': 'Both countries ' + first + ', ' + second + ' located in the continent ' + first_country[0][CONTINENT_COLUMN] if answer else 
-            'The country ' + first + ' located in continent ' + first_country[0][CONTINENT_COLUMN] + ' whereas the country ' + second + ' located in continent ' + second_country[0][CONTINENT_COLUMN]
+        'fact': 'The countries ' + first + ' and ' + second + ' located in the same continent',
+        'hint': 'The country ' + first + ' located in the continent ' + first_country.continent,
+        'answer': real_or_fake,
+        'detail': 'Both countries ' + first + ', ' + second + ' located in the continent ' + first_country.continent if real_or_fake else
+            'The country ' + first + ' located in continent ' + first_country.continent +
+            ' whereas the country ' + second + ' located in continent ' + second_country.continent
     }
 

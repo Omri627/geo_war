@@ -5,7 +5,15 @@ from db.db_handler import DbHandler
 class CountriesData:
     def __init__(self):
         self.db_handler = DbHandler()
-    
+
+    # given countries records extracted from the ser
+    @staticmethod
+    def records_to_objects(records):
+        objects = []
+        for record in records:
+            objects.append(Country(record))
+        return objects
+
     # returns fifteen random countries to compete in the game
     def game_countries(self):
         countries = []
@@ -16,54 +24,59 @@ class CountriesData:
 
     # returns detailed information about a country
     def country_data(self, country: str):
-        record = self.db_handler.receive_data(CountriesQueries.COUNTRY_DATA, country)
+        record = self.db_handler.receive_data(CountriesQueries.COUNTRY_DATA, (country,))
+        if record is None or len(record) == 0:
+            return None
         return Country(record[0])
     
     # returns the names of the countries which has the largest values of given field
-    def most_field(self, country: str, field: str, limit: int):
-        return self.db_handler.receive_data(CountriesQueries.MOST_FIELD, (field, limit))
+    def most_field(self, field: str, limit: int):
+        countries = []
+        records = self.db_handler.receive_data(CountriesQueries.MOST_FIELD, (field, field, limit))
+        for record in records:
+            countries.append({
+                'name': record[0],
+                'field_value': record[1]
+            })
+        return countries
     
     # returns the names of the countries which has the smallest values of given field
-    def least_field(self, country: str, field: str, limit: int):
-        return self.db_handler.receive_data(CountriesData.LEAST_FIELD, (field, limit))
-    
-    def most_populated(self, country: str):
-        records = self.db_handler.receive_data(CountriesQueries.MOST_FIELD, ('population', limit))
-        return records[0]
+    def least_field(self, field: str, limit: int):
+        countries = []
+        records = self.db_handler.receive_data(CountriesQueries.LEAST_FIELD, (field, field, limit))
+        for record in records:
+            countries.append({
+                'name': record[0],
+                'field_value': record[1]
+            })
+        return countries
+
+    # receives name of a country and a field
+    # returns the rank of the country in terms of given field among the countries in the world
+    def rank_field(self, country: str, field: str):
+        record = self.db_handler.receive_data(CountriesQueries.RANK_COUNTRY_BY_FIELD, (field, field, country))
+        return int(record[0][0]) + 1
 
     # returns the most populated countries
-    def top_populated_cities(self, limit: int):
+    def top_populated_countries(self, limit: int):
+        field_name = 'population'
         countries = []
-        records = self.db_handler.receive_data(CountriesQueries.MOST_FIELD, ('population', limit))
+        records = self.db_handler.receive_data(CountriesQueries.MOST_FIELD, (field_name, field_name, limit))
         for i, record in enumerate(records):
-            if i not in [ 15, 23, 51 ]:
+            if i not in [15, 23, 51]:
                 countries.append(record[0])
         return countries
 
     # receives a integer limit value indicating the number of records/countries
     # returns a list largest size countries 
     def largest_area_size(self, limit: int):
-        return self.db_handler.receive_data(CountriesQueries.MOST_FIELD, ('area', limit))
+        field_name = 'area'
+        return self.db_handler.receive_data(CountriesQueries.MOST_FIELD, (field_name, field_name, limit))
     
     # returns the countries that has the highest population density
     def top_population_density(self, limit: int):
-        return self.db.handler.receive_data(CountriesData.TOP_POPULATION_DENSITY, limit)
+        return self.db_handler.receive_data(CountriesQueries.TOP_POPULATION_DENSITY, (limit,))
     
     # returns the countries that has the least population density
     def least_population_density(self, limit: int):
-        return self.db.handler.receive_data(CountriesData.LEAST_POPULATION_DENSITY, limit)
-    
-    # receives name of a country and
-    # returns the position of the most populated city in given country among all the cities in the world
-    def position_populated_city(self, country: str):
-        return self.db.handler.receive_data(CountriesData.POSITION_POPULATED_CITY, country)
-    
-    # receives name of a country and a field
-    # returns the rank of the country in terms of given field among the countries in the world
-    def rank_field(self, country: str, field: str):
-        return self.db.handler.receive_data(CountriesData.RANK_COUNTRY_BY_FIELD, (field, field, country))
-
-    # receives names of two countries denoted as first and second
-    # returns the names of the cities in given first country which has more (or close) population to the population size of entire second given country 
-    def cities_larger_country(self, first: str, second: str):
-        return self.db.handler.receive_data(CountriesData.CITIES_LARGER_COUNTRY, (first, second))
+        return self.db_handler.receive_data(CountriesQueries.LEAST_POPULATION_DENSITY, (limit,))

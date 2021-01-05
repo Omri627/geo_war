@@ -1,8 +1,8 @@
 from pydantic import BaseModel
 
 class UserInput(BaseModel):
-    username: str;
-    password: str;
+    username: str
+    password: str
 
 class Score(BaseModel):
     user_name: str

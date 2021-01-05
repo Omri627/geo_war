@@ -33,7 +33,7 @@ class CitiesQueries(TableQueries):
     # Query: get a list of most populated cities of particular country
     # Format: [0] name of the country, [1] limitation on the number of cities.
     BIGGEST_CITIES = '''
-        SELECT city.name
+        SELECT city.*
         FROM countries, city
         WHERE countries.code = city.country_code AND countries.name = '%s'
         ORDER BY city.population DESC
@@ -62,7 +62,7 @@ class CitiesQueries(TableQueries):
 
     # Query: Get the top countries which has the highest population per city
     # format: [0] size of the list
-    POPULATION_PER_CITY = '''
+    POPULATION_PER_CITY: str = '''
         SELECT c1.population / (SELECT COUNT(*) As quantity
                         FROM geo_data.city, geo_data.countries as c2
                         WHERE city.country_code = c2.code and c1.name = c2.name) as population_per_city
@@ -80,28 +80,3 @@ class CitiesQueries(TableQueries):
         ORDER BY population_per_city DESC
         TOP %d
     '''
-
-    """
-    queries examples:
-    
-    1) count number of cites in each country
-    SELECT country_code, COUNT(*)
-    FROM city
-    GROUP BY country_code;
-    
-    2) same as 1 but with name instead of codes
-    SELECT countries.name, COUNT(*)
-    FROM city INNER JOIN countries ON city.country_code = countries.code
-    GROUP BY city.country_code;
-    
-    3) calculate avg population on cities
-    SELECT countries.name, AVG(city.population) as avg_city_pop
-    FROM city INNER JOIN countries ON city.country_code = countries.code
-    GROUP BY city.country_code;
-    
-    4) calculate avg population on cities where country population is bigger then 100M order by avg_cit DESC
-    SELECT countries.name, countries.population as country_pop, AVG(city.population) as avg_city_pop
-    FROM city INNER JOIN countries ON city.country_code = countries.code
-    GROUP BY city.country_code
-    HAVING countries.population > 100000000 ORDER BY avg_city_pop DESC;
-    """
