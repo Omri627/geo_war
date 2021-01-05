@@ -2,5 +2,6 @@
   "host": "localhost",
   "user": "root",
   "password": "%H9W$4U0Dfp1KM",
-  "database": "geo_data"
+  "database": "geo_data",
+  "pool_size": 12
 }

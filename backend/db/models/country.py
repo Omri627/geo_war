@@ -1,7 +1,6 @@
 from db.dal_queries.countries_queries import CountriesQueries
-from pydantic import BaseModel
 
-class Country(BaseModel):
+class Country():
     code: str
     name: str
     area: int
@@ -28,6 +27,7 @@ class Country(BaseModel):
     imports: int
     exports: int
     continent: str
+
     def __init__(self, record: tuple):
         # initialize country data
         self.code = record[0]
@@ -39,20 +39,20 @@ class Country(BaseModel):
         self.death_rate = record[6]
         self.cellular_subscriptions = int(record[7])
         self.internet_users = int(record[8])
-        self._0_14_years = record[14]
-        self._15_24_years = record[15]
-        self._25_54_years = record[16]
-        self._55_64_years = record[17]
-        self._65_over = record[18]
-        self.total_median_age = record[19]
-        self.female_median_age = record[20]
-        self.male_median_age = record[21]
-        self.male_expectancy = record[22]
-        self.female_expectancy = record[23]
-        self.total_expectancy = record[24]
-        self.unemployment_rate = record[26]
-        self.revenues = record[27]
-        self.expenditures = record[28]
-        self.imports = record[29]
-        self.exports = record[30]
-        self.continent = record[32]
+        self._0_14_years = record[12]
+        self._15_24_years = record[13]
+        self._25_54_years = record[14]
+        self._55_64_years = record[15]
+        self._65_over = record[16]
+        self.total_median_age = record[17]
+        self.female_median_age = record[18]
+        self.male_median_age = record[19]
+        self.male_expectancy = record[20]
+        self.female_expectancy = float(record[21])
+        self.total_expectancy = float(record[22])
+        self.unemployment_rate = float(record[24])
+        self.revenues = record[25]
+        self.expenditures = record[26]
+        self.imports = record[27]
+        self.exports = record[28]
+        self.continent = record[30]

@@ -16,8 +16,15 @@ class SoccerQueries(TableQueries):
     # format: [0] name of the country league
     COUTNRY_TEAMS = '''
         SELECT teams.team
-        FROM geo_data.teams, geo_data.countries
+        FROM teams, countries
         WHERE teams.country_code = countries.code AND countries.name = '%s'
+    '''
+
+    # Query: get the number of players of given nationality in fifa soccer game
+    COUNTRY_PLAYERS_QUANTITY = '''
+        SELECT COUNT(*) quantity
+        FROM soccer, countries
+        WHERE soccer.country_code = countries.code AND countries.name = '%s'
     '''
 
     # Query: the countries which has the most players in fifa
@@ -52,6 +59,7 @@ class SoccerQueries(TableQueries):
 		         WHERE soccer.country_code = countries.code AND countries.name = '%s') as sport, teams, countries
         WHERE sport.team = teams.team AND teams.country_code = countries.code
         GROUP BY countries.name
+        ORDER BY quantity DESC
     '''
 
     # Query: List of player names from given country who played in given league 

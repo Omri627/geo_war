@@ -37,7 +37,7 @@ class CountriesQueries(TableQueries):
     # Query: Get the names of the countries which gains the largest values of given field
     # format: [0] field name  [1] number of countries in the list
     MOST_FIELD = '''
-        SELECT countries.name
+        SELECT countries.name, countries.%s
         FROM countries
         ORDER BY %s DESC
         LIMIT %d

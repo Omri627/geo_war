@@ -23,6 +23,7 @@ class DbHelper:
                 user=self.settings.user,
                 password=self.settings.password,
                 database=self.settings.database,
+                pool_size=self.settings.pool_size
             )
             DbHelper.__instance = self
 
