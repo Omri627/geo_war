@@ -5,4 +5,5 @@ export interface UserStatics {
     games_played: number;
     total_points: number;
     total_conquered: number;
+    wins_quantity: number;
 }

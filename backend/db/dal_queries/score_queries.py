@@ -4,12 +4,12 @@ from db.dal_queries.table_queries import TableQueries
 class ScoreQueries(TableQueries):
     # List of field of games table
     FIELDS = (
-        'user_name', 'country_code', 'points', 'date')
+        'user_name', 'country_code', 'points', 'conquered', 'date')
 
     # Insert a new record into games table
     INSERT_QUERY = '''
-        INSERT INTO games (user_name, country_code, points, date)
-            VALUES (%s, %s, %s, %s)
+        INSERT INTO games (user_name, country_code, points, conquered, date)
+            VALUES (%s, %s, %s, %s, %s)
     '''
 
     # Query: Get all scores/summary of game results of given user
@@ -65,7 +65,7 @@ class ScoreQueries(TableQueries):
         ORDER BY quantity DESC
     ''' 
 
-    # Query: Get the latest game of praticular user
+    # Query: Get the latest game of particular user
     # format: [0] username
     LATEST_GAME = '''
         SELECT games.id, games.user_name, games.date, countries.name, games.points, games.conquered
@@ -73,4 +73,29 @@ class ScoreQueries(TableQueries):
         WHERE games.country_code = countries.code and games.user_name = '%s'
         ORDER BY date DESC
         LIMIT 1
+    '''
+
+    # Query: top X users with largest number of points.
+    # format [0] number of users (X)
+    TOP_USERS = '''
+        SELECT g1.user_name, SUM(g1.points) as total_points, (SELECT COUNT(g2.conquered) as wins FROM games as g2 WHERE g2.conquered = 15 AND g1.user_name = g2.user_name) as wins
+        FROM games as g1 
+        GROUP BY g1.user_name
+        ORDER BY total_points DESC
+        LIMIT %d
+    '''
+
+    # Query: number of wins of specific user
+    # format: [0] user name
+    WINS_QUANTITY = '''
+        SELECT COUNT(games.conquered) 
+        FROM games 
+        WHERE games.conquered = 15 AND games.user_name = '%s'
+    '''
+
+    # Query: delete score record
+    # format: [0] id of the game record
+    DELETE_GAME_SCORE = '''
+        DELETE FROM games
+        WHERE games.id = %d
     '''

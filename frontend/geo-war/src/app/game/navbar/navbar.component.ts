@@ -1,4 +1,6 @@
 import { HostListener, Component, OnInit } from '@angular/core';
+import {UserService} from "../../user.service";
+import {GameStatusService} from "../status.service";
 
 @Component({
   selector: 'navbar',
@@ -6,11 +8,11 @@ import { HostListener, Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  isStarted: boolean;
+  constructor(private user_service: UserService, private status: GameStatusService) {}
 
   ngOnInit(): void {
-
+      this.status.startedModified.subscribe(isStarted => this.isStarted = isStarted);
   }
 
   @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
@@ -21,4 +23,25 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  logout() {
+      this.user_service.notify_logout();
+      window.scroll(0, 0);
+  }
+
+  startGame() {
+    this.status.startGame();
+  }
+
+  instructions() {
+    this.user_service.display_instructions();
+  }
+
+  top_ranks() {
+      this.user_service.display_user_ranks();
+  }
+
+  can_show() {
+    if (this.isStarted)
+      alert("cannot be displayed in middle of game");
+  }
 }

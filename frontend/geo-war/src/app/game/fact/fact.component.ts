@@ -29,7 +29,7 @@ export class FactComponent implements OnInit {
   /* indicate wether to show the answer or not in the moment */
   show_answer: boolean;
   right_or_wrong: boolean;
-  
+
   /* user messages */
   battle_over_message: string;
   current_correct_message: number;
@@ -39,6 +39,8 @@ export class FactComponent implements OnInit {
   @ViewChild("Correct") element_correct: ElementRef;
   @ViewChild("Incorrect") element_incorrect: ElementRef;
   @ViewChild("FullDetailedAsnwer") element_detailed_asnwer: ElementRef;
+  @ViewChild("TrueButton") true_button: ElementRef;
+  @ViewChild("FalseButton") false_button: ElementRef;
 
 
   constructor(private battleService : BattleService, private status: GameStatusService) {
@@ -71,13 +73,13 @@ export class FactComponent implements OnInit {
       this.current_wrong_message = this.getRandomInt(0, this.wrong_answer_messages.length);
   }
 
-  assignAnswer(answer: boolean): void {  
+  assignAnswer(answer: boolean): void {
       let awaiting_time = SHOW_ANSWER_WAIT_TIME;
       this.random_feedback_messages();
       this.show_answer = true;
-      if (answer == this.facts[this.fact_number].answer) 
+      if (answer == this.facts[this.fact_number].answer)
         this.right_or_wrong = true;
-      else 
+      else
         this.right_or_wrong = false;
       if (this.fact_number == FACTS_QUANTITY - 1) {
           awaiting_time = SHOW_BATTLE_SUMMARY_WAIT_TIME;
@@ -87,16 +89,20 @@ export class FactComponent implements OnInit {
             } else {
               this.aboutWinOrLose = false;
               if (this.status.is_live_descrease())
-                this.battle_over_message = "You lost the battle. The country " + this.rival_country.name + " counterattacked your nation. Luckly they didn't manage to subdue your state or occupied part of your territory, however their attack caused damage and left you with solely " + (this.lives - 1) + " lives in total. ";  
+                this.battle_over_message = "You lost the battle. The country " + this.rival_country.name + " counterattacked your nation. Luckly they didn't manage to subdue your state or occupied part of your territory, however their attack caused damage and left you with solely " + (this.lives - 1) + " lives in total. ";
               else
-                this.battle_over_message = "You lost the battle. The country " + this.rival_country.name + " counterattacked your nation and occupied part of your territory. The changes will take effect in the game world map.";  
+                this.battle_over_message = "You lost the battle. The country " + this.rival_country.name + " counterattacked your nation and occupied part of your territory. The changes will take effect in the game world map.";
           }
       }
+      this.true_button.nativeElement.hidden = true;
+      this.false_button.nativeElement.hidden = true;
       setTimeout(() => {
           this.show_answer = false;
           this.battleService.assignAnswer(answer);
           this.battle_over_message = "";
           this.hint = this.revealAsnwer = false;
+          this.true_button.nativeElement.hidden = false;
+          this.false_button.nativeElement.hidden = false;
       }, awaiting_time);
   }
 

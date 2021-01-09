@@ -3,7 +3,7 @@
     background-size: cover;
     top: 0px;
     height: 700px;
-    width: 100%;    
+    width: 100%;
     z-index: 0;
 }
 .banner-area .primary-btn {
@@ -13,7 +13,7 @@
 .banner-content {
     position: relative;
     right: 270px;
-    top: 180px;
+    top: 240px;
     animation-name: fade-in;
     animation-duration: 3s;
 }
@@ -25,7 +25,7 @@
   text-align: left;
 }
 .banner-title {
-    font-family: "Poppins", sans-serif;
+    font-family: laser;
     color: #222222;
     line-height: 1.2em !important;
     margin-bottom: 0;

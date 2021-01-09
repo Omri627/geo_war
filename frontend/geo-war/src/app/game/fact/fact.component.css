@@ -33,22 +33,22 @@
     top: 320px;
     left: 52%;
     animation-name: pop-up;
-    animation-duration: 3.5s;
+    animation-duration: 1.5s;
 }
 .btn-true:hover {
     background: #00c6ff;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #00c6ff,  #0072ff);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #00c6ff , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */   
+    background: linear-gradient(to right, #00c6ff , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .btn-false {
     background: #FF416C;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FF4B2B, #FF416C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    background: linear-gradient(to right, #FF4B2B, #FF416C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     position: absolute;
     top: 320px;
     left: 11%;
     animation-name: pop-up;
-    animation-duration: 4s;
+    animation-duration: 2s;
 }
 .btn-false:hover {
     background: #FF416C;  /* fallback for old browsers */
@@ -58,14 +58,14 @@
 .btn-imply {
     background: #DA22FF;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     padding-left: 125px;
     padding-right: 125px;
 }
 .btn-imply:hover {
     background: #DA22FF;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #DA22FF ,#9733EE);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #DA22FF, #9733EE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    background: linear-gradient(to right, #DA22FF, #9733EE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 #factChange {
     position: absolute;

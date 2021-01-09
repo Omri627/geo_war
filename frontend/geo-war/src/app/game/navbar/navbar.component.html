@@ -7,18 +7,18 @@
           <nav id="nav-menu-container">
             <ul class="nav-menu">
               <li class="menu-active"><a href="index.html">Home</a></li>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="instructions.html">Instructions</a></li>
-              <li><a href="options.html">Options</a></li>					          
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="#pick" (click)="startGame()">New game</a></li>
+              <li><a href="#" (click)="instructions()">Instructions</a></li>
+              <li><a href="#" (click)="top_ranks()">Top ranks</a></li>
               <li class="menu-has-children"><a href="">Profile</a>
                 <ul>
-                  <li><a href="details.html">Personal Details</a></li>	
-                  <li><a href="logout.html">Log Out</a></li>
+                  <li><a href="#user-area" (click)="can_show()">Personal Details</a></li>
+                  <li><a href="#games-summary" (click)="can_show()">Games Summary</a></li>
+                  <li><a href="#" (click)="logout()">Log Out</a></li>
                 </ul>
-              </li>				              
+              </li>
             </ul>
-          </nav>	    		
+          </nav>
         </div>
     </div>
 </header>

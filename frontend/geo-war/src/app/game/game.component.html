@@ -4,13 +4,14 @@
     <section id="options-area" class="data-area">
         <options></options>
     </section>
+    <game-info></game-info>
     <section class="data-area">
         <intro></intro>
     </section>
-    <section *ngIf="gameEnded" class="game-area">	
-        <endgame></endgame>    
+    <section *ngIf="gameEnded" class="game-area">
+        <endgame></endgame>
     </section>
-    <section *ngIf="!gameEnded" class="game-area">	
+    <section *ngIf="!gameEnded" class="game-area">
         <user-credentials *ngIf="!isStarted"></user-credentials>
         <country-pick *ngIf="isStarted && !isCountryPicked"></country-pick>
         <game-state *ngIf="isStarted && isCountryPicked"></game-state>

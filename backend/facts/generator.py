@@ -20,8 +20,8 @@ class FactsGenerator:
             CountryFactCreator(creator=rank_area, country=rival_country, real_or_fake=random.choice([True, False])),
         ]
 
-        # gerography facts
-        self.gerography = [
+        # geography facts
+        self.geography = [
             CountryFactCreator(creator=is_capital, country=rival_country, real_or_fake=random.choice([True, False])),
             CountryFactCreator(creator=most_populated, country=rival_country, real_or_fake=random.choice([True, False])),
             ComparisonFactCreator(creator=cities_larger_country, user_country=user_country, rival_country=rival_country),
@@ -29,6 +29,8 @@ class FactsGenerator:
             ComparisonFactCreator(creator=is_same_continent, user_country=user_country, rival_country=rival_country),
             ComparisonFactCreator(creator=compare_area, user_country=user_country, rival_country=rival_country),
             CountryFactCreator(creator=rank_area, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=has_more_cities_then, country=rival_country, real_or_fake=random.choice([True, False])),
+            ComparisonFactCreator(creator=compare_cities_quantity, user_country=user_country, rival_country=rival_country),
         ]
 
         # religions facts
@@ -91,7 +93,7 @@ class FactsGenerator:
 
         # facts groups
         self.facts_groups = [
-            self.priority * 5, self.gerography * 4, self.society * 4, self.sport * 3, self.religion * 2,
+            self.priority * 5, self.geography * 4, self.society * 4, self.sport * 3, self.religion * 2,
             self.ethnic_groups * 2, self.economy
         ]
 

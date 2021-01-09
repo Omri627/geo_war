@@ -17,14 +17,15 @@ export class UserComponent implements OnInit {
   total_points: number;
   total_conquered: number;
   top_country: string;
+  wins_quantity: number;
 
   /* latest game summary data */
   date_latest: string;
   country_latest: string;
   points_latest: number;
   conquered_latest: number;
-
-  constructor(private userService: UserService) { 
+  latest_acquired: boolean;
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -37,15 +38,17 @@ export class UserComponent implements OnInit {
         this.total_points = statics.total_points;
         this.top_country = statics.top_country;
         this.total_conquered = statics.total_conquered;
-    })
+        this.wins_quantity = statics.wins_quantity;
+    });
     this.userService.latestModified.subscribe(latest => {
         if (latest == null)
           return;
+        this.latest_acquired = true;
         this.date_latest = latest.date.substring(0, 10);
         this.country_latest = latest.country;
         this.conquered_latest = latest.conquered;
         this.points_latest = latest.points;
-    })
+    });
 
   }
 

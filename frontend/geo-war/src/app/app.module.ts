@@ -31,6 +31,7 @@ import { UserService } from './user.service';
 import { UserComponent } from './game/user/user.component';
 import { ScoresComponent } from './game/scores/scores.component';
 import { EndgameComponent } from './game/endgame/endgame.component';
+import { InfoComponent } from './game/info/info.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { EndgameComponent } from './game/endgame/endgame.component';
     UserComponent,
     ScoresComponent,
     EndgameComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

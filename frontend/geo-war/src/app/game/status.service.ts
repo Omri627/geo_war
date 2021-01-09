@@ -4,14 +4,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CountryGame } from '../models/country_game';
 import { GAME_COUNTRIES_QUANTITY, LIVES_QUANTITY, POINTS_LOSE_BATTLE, POINTS_WIN_BATTLE, POINTS_WORLD_DOMINATION } from '../services/rules';
+import {UserService} from "../user.service";
+import {ActionStatus} from "../models/action_status";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameStatusService {
   readonly ROOT_URL = 'http://localhost:8000'
-  
+
   conquered_order = [];
+  mapper_country_id = {}
   country = new BehaviorSubject<string>('');
   username = new BehaviorSubject<string>('');
   points = new BehaviorSubject<number>(0);
@@ -28,8 +31,6 @@ export class GameStatusService {
   revealAnswer = new BehaviorSubject<boolean>(true);
   hint = new BehaviorSubject<boolean>(true);
 
-
-
   countryModified = this.country.asObservable();
   usernameModified = this.username.asObservable();
   pointsModified = this.points.asObservable();
@@ -45,8 +46,8 @@ export class GameStatusService {
   revealModified = this.revealAnswer.asObservable();
   changeFactModified = this.changeFact.asObservable();
   countriesModified: any;
-  
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient, private user_service: UserService) {
   }
 
   /* Start new game */
@@ -79,13 +80,6 @@ export class GameStatusService {
     this.isCountryPicked.next(false);
   }
 
-  /* Inform the user defeated a country and take control over his area */
-  defeatCountry(points: number) {
-    this.points.next(this.points.getValue() + points);
-    this.conquered.next(this.conquered.getValue() + 1);
-    this.inBattle.next(false);
-  }
-
   /* Inform the user is in state of battle against certain country */
   battleState() {
     this.inBattle.next(true);
@@ -106,7 +100,8 @@ export class GameStatusService {
   useRevealAnswer() {
     this.revealAnswer.next(false);
   }
-  
+
+  /* Inform the user defeated a country and take control over his area */
   wonBattle(rival_country: CountryGame) {
       /* update status and map */
       this.inBattle.next(false);
@@ -116,7 +111,7 @@ export class GameStatusService {
       this.countries.next(countries);
       this.conquered_order.push(rival_country);
 
-      /* gain acheivements  */
+      /* gain achievements  */
       this.increase_points(POINTS_WIN_BATTLE);
       this.conquered.next(this.conquered.getValue() + 1);
       this.max_conquered.next(Math.max(this.max_conquered.getValue(), this.conquered.getValue()));
@@ -129,9 +124,10 @@ export class GameStatusService {
   /* The user dominate the entire world and won the game */
   worldDomination() {
       this.increase_points(POINTS_WORLD_DOMINATION);
+      console.log(this.max_conquered.getValue());
+      this.user_service.addGameScore(this.country.getValue(), this.points.getValue(), this.max_conquered.getValue());
       this.gameEnded.next(true);
       this.winOrLose.next(true);
-      /* update scores data table */
   }
 
   is_live_descrease() {
@@ -156,8 +152,9 @@ export class GameStatusService {
       if (this.conquered.getValue() == 0)
           this.game_over();
     }
-  
+
   game_over() {
+      this.user_service.addGameScore(this.country.getValue(), this.points.getValue(), this.max_conquered.getValue());
       this.gameEnded.next(true);
       this.winOrLose.next(false);
   }
@@ -170,7 +167,7 @@ export class GameStatusService {
 
   /* Select randomly the countries that take part in the game and competing against the user */
   select_rival_countries(): Observable<String[]>  {
-    this.countriesModified = this.http.get<String[]>(this.ROOT_URL + '/countries/game');
+    this.countriesModified = this.http. get<String[]>(this.ROOT_URL + '/countries/game');
     this.countriesModified.subscribe(countries => {
         var countriesArray = [];
         if (countries == null)
@@ -179,12 +176,13 @@ export class GameStatusService {
             var cur_country = new CountryGame();
             cur_country.id = i;
             cur_country.name = (i == 2) ? this.country.getValue() : countries[i];
-            cur_country.isConquered = (i == 2) ? true : false;
+            cur_country.isConquered = (i == 2);
             countriesArray.push(cur_country);
+            this.mapper_country_id[cur_country.name] = cur_country.id;
         }
         this.conquered_order.push(countriesArray[2]);
         this.countries.next(countriesArray);
-    })
+    });
     return this.countriesModified;
   }
 

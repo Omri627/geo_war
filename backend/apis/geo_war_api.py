@@ -6,7 +6,7 @@ from db.business_logic.user import UserApi
 from starlette.middleware.cors import CORSMiddleware
 from apis.models import *
 from facts.generator import FactsGenerator
-from facts.geography import has_more_then
+from facts.geography import compare_cities_quantity, has_more_cities_then
 from apis.activator import Activator
 import random
 
@@ -30,7 +30,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return activator.activate(method=has_more_then, arguments=('Spain', True))
+    return activator.activate(method=has_more_cities_then, arguments=('Israel', True))
 
 
 @app.get("/countries/select")
@@ -124,9 +124,27 @@ def battle_facts(my_country: str, rival_country:str):
     return activator.activate(method=get_facts, arguments=None)
 
 
+@app.post("/score/save", status_code=status.HTTP_201_CREATED)
+def insert_score(score: ScoreInput):
+    user_api = UserApi()
+    insert_score_method = user_api.insert_score
+    arguments = (score,)
+    return activator.activate(method=insert_score_method, arguments=arguments)
 
-'''
-@app.post("/score/", status_code=status.HTTP_201_CREATED)
-def insert_score(score: Score):
-    score.insert_score()
-'''
+
+@app.get("/top/users/{limit}")
+def top_users(limit: int):
+    user_api = UserApi()
+    top_ranking = user_api.top_users
+    arguments = (limit,)
+    return activator.activate(method=top_ranking, arguments=arguments)
+
+
+@app.delete("/delete/game/{id}")
+def delete_game_score(id: int):
+    user_api = UserApi()
+    delete_game_score_method = user_api.delete_score_game
+    arguments = (id,)
+    return activator.activate(method=delete_game_score_method, arguments=arguments)
+
+

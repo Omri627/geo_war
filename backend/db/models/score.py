@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class Score():
     id: int
     user_name: str

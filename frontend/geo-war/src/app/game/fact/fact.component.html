@@ -10,10 +10,10 @@
             {{ facts[fact_number].fact }}
         </h4>
     </div>
-    <button id="btntrue" type="button" class="btn btn-outline-primary modal-button btn-true" (click)="assignAnswer(true)" >
+    <button id="btntrue" type="button" class="btn btn-outline-primary modal-button btn-true" (click)="assignAnswer(true)" #TrueButton >
         True
     </button>
-    <button id="btnfalse" type="button" class="btn btn-outline-primary modal-button btn-false" (click)="assignAnswer(false)" >
+    <button id="btnfalse" type="button" class="btn btn-outline-primary modal-button btn-false" (click)="assignAnswer(false)" #FalseButton >
         False
     </button>
     <button id="factChange" type="button" class="btn btn-outline-primary modal-button btn-imply" [ngClass]="(changeFactEnable)?'':'text-hidden'" (click)="changeFactAction()" >
@@ -26,7 +26,7 @@
         Hint
     </button>
     <div id="battle-summary-section" class="modal-section">
-        <div class="container"> 
+        <div class="container">
             <div class="row">
                 <div class="col">
                     <h4 class="summary-text">

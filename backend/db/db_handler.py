@@ -142,6 +142,11 @@ class DbHandler:
         cursor.execute(insert_query, data_tuple)
         self.helper.db.commit()
 
+    def delete_records(self, query, arguments):
+        cursor = self.helper.db.cursor()
+        cursor.execute(query % arguments)
+        self.helper.db.commit()
+
     def receive_data(self, query: str, values: tuple):
         try: 
             cursor = self.helper.db.cursor()

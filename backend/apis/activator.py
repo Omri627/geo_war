@@ -4,7 +4,6 @@ import threading
 
 class Activator:
     def __init__(self):
-        print('reach activator consturctor')
         # queue used to hold the tasks to activate.
         # the tasks filed in and the activator run them one after another
         self.tasks_queue = queue.Queue()
@@ -17,13 +16,11 @@ class Activator:
         # as long as the tasks queue is empty - the thread sleeps
         # whenever a new tasks comes along - the thread wakes up to execute the new tasks.
         self.thread_queue = threading.Thread(target=self.check_for_tasks)
+        self.thread_queue.daemon = True
         self.thread_queue.start()
 
 
     def check_for_tasks(self):
-        print('checks for tasks')
-
-        #
         while True:
             # execute each task in the queue in FIFO order
             while not self.tasks_queue.empty():
@@ -35,7 +32,6 @@ class Activator:
 
     # the method activate the new task by adding the task into activator queue
     def activate(self, method, arguments):
-        print('activating')
         # create task object
         task = Task(method=method, arguments=arguments)
 
@@ -44,6 +40,5 @@ class Activator:
         if not self.new_tasks_event.is_set():
             self.new_tasks_event.set()
 
-        print('waiting')
         # wait till the the task is completed
         return task.wait()

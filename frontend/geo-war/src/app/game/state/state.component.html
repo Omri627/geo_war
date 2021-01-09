@@ -1,17 +1,17 @@
-<section id="state-area" class="game-area">	
-    <div class="game-data container">					
+<section id="state-area" class="game-area">
+    <div class="game-data container">
         <div class="row">
             <div class="col-lg-4 col-md-10">
                 <div class="state-section">
                     Player
                     <div class="game-sep-aqua"></div>
                     <div class="details">
-                        Name: Ran Raboh <br/>
+                        Name: {{ username }} <br/>
                         Country: {{ country }} <br/>
                         Color: <span class="player-color"></span>
                     </div>
                 </div>
-            </div>	
+            </div>
             <div class="col-lg-4 col-md-10">
                 <div class="state-section">
                     Game State
@@ -21,7 +21,7 @@
                         <span *ngIf="hint" type="button" class="btn btn-danger btn-helper">Hint</span>
                         <button *ngIf="changeFact" type="button" class="btn btn-danger btn-helper">Change Fact</button>
                         <button *ngIf="revealAnswer" type="button" class="btn btn-danger btn-helper">Reveal Answer</button>
-                        
+
                         <br/>
                         Lives: <img *ngIf="lives > 0" class="heart-lives" src="../../../assets/images/heart.png">
                          <img *ngIf="lives > 1" class="heart-lives" src="../../../assets/images/heart.png"> <br/>

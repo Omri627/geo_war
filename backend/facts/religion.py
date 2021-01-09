@@ -61,8 +61,8 @@ def religion_above_percentage(country: str, real_or_fake: bool):
         fact_percentage = 10 if fact_percentage >= 5 else 5
     return {
         'topic': 'Religion',
-        'fact': 'The chance to run into a person of ' + religion.religion + ' religion is above '
-                + str(fact_percentage) + '%',
+        'fact': 'The chance to run into a person of ' + religion.religion + ' religion in the country ' + country +
+                ' is above ' + str(fact_percentage) + '%',
         'hint': 'The religion ' + religion.religion + ' is the ' + str(religion_position + 1)
                 + 'th common religion in the country ' + country,
         'answer': real_or_fake,
