@@ -1,19 +1,19 @@
 <div id="game-introductory" #Intro>
 </div>
 <div id="canvas" class="game-map" #canvas>
-    <div *ngIf="hover_id != -1" class="battle-text">
+    <div *ngIf="is_loaded && hover_id != -1" class="battle-text">
         Click to battle against {{ countries[hover_id].name }} <br/>
-        <div id="cheats-text">
+        <div *ngIf="username == 'admin'" id="cheats-text">
             Press 'W' to automatically for automatic win<br/>
-            Press 'L' to automatically for automatic lose  
+            Press 'L' to automatically for automatic lose
         </div>
     </div>
-    <div *ngFor="let country of countries; let i = index" [id]="get_country_id(i + 1)" class="country" [class]="get_country_color_id(i + 1)"  (click)="battleCountry(country)" [ngClass]="(country.isConquered)?'no-hover':''" (mouseenter)="notify_hover(i)" (mouseleave)="disable_hover()" >
+    <div *ngFor="let country of countries; let i = index" [id]="get_country_id(i + 1)" class="country" [class]="get_country_color_id(i + 1)" (click)="battleCountry(country)" [ngClass]="(country.isConquered)?'no-hover':''" (mouseenter)="notify_hover(i)" (mouseleave)="disable_hover()" >
         <div *ngIf="country.isConquered" [id]="get_crown_position_id(i + 1)">
-            <img class="crown-icon" src="../../../assets/images/crown-2.png"> <br/>        
+            <img class="crown-icon" src="../../../assets/images/crown-2.png"> <br/>
         </div>
         <h6 [id]="get_country_text_id(i + 1)" class="country-name" [ngClass]="(!country.isConquered)?'rival-country-name':'my-country-name'">
             {{ display(country.name) }}
         </h6>
     </div>
-</div> 
+</div>

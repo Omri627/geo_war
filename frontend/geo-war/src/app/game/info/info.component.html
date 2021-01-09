@@ -1,0 +1,54 @@
+<div *ngIf="instructions_section || user_ranks_section" id="game-info" class="modal">
+    <div *ngIf="user_ranks_section" id="user-ranks-section">
+      <div class="title-section">
+          <h1>Top Users Ranks</h1>
+      </div>
+      <button class="close-button" (click)="close_section()">X</button>
+      <div id="top-ranks-content" class="modal-section">
+          <h5>
+              Top 10 users which gained the largest number of points in the game.
+          </h5><br/>
+          <table class="table table-hover table-primary">
+              <thead>
+                <tr class="bg-primary">
+                  <th scope="col">#</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Total Points</th>
+                  <th scope="col">Wins</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user_rank of users_ranks; let i = index">
+                  <td class="table-row font-weight-bold">{{ i + 1 }}</td>
+                  <td class="table-row font-weight-bold">{{ user_rank.username }}</td>
+                  <td class="table-row">{{ user_rank.total_points }}</td>
+                  <td class="table-row">{{ user_rank.wins }}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+    <div *ngIf="instructions_section" id="instructions-section">
+      <div class="title-section">
+          <h1>Instructions</h1>
+      </div>
+      <button class="close-button" (click)="close_section()">X</button>
+      <div id="instructions-content" class="modal-section">
+          <h4>
+            Geowar is a fun online game application which test competitor's general knowledge about around the globe related topics including geography, sport, economy and more. <br/>
+            At the beginning of the game, the player picks a country.
+            dystopic map displayed on the screen and the player's main goal is to conquer the world.
+            To achieve his target, he should wage a war against each country displayed on the map. <br/>
+            In each stage, the player allowed to choose a country to battle against by clicking on it's area. <br/>
+            The battle conducted as follows:
+            The player is presented with a numerous facts about his rival country or riveting comparison points presenting similarity and distinction between the countries.
+            The player needs to evaluate whether these facts are true or false.
+            If the player evaluations were correct, that is he passed the threshold number of
+            correct answers then he conquered the country he battled against. <br/>
+            However, if not the rival country fought back and occupied a part of his territory.
+            The player is granted with helpers who assist him to achieve his aim
+            such as: change fact, hint and revealing the right answer.
+          </h4>
+      </div>
+    </div>
+</div>

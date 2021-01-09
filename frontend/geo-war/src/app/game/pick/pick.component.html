@@ -1,13 +1,13 @@
-<div class="pick">
+<div id="pick" class="pick">
     <h1 class="pick-title">Pick A Country</h1>
     <h6 class="pick-subtitle">choose your favorite country and use it to conquer the world.</h6>
-    <div class="game-data container">					
+    <div class="game-data container">
         <div class="row">
             <div *ngFor="let country of countries; let i = index" class="col-lg-3 col-md-10">
                 <div class="single-option" [class]="color[i % 4]" (click)="selectCountry(country)" >
                     {{ country }}
                 </div>
-            </div>	
+            </div>
         </div>
     </div>
 </div>

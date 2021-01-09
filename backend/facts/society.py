@@ -1,7 +1,7 @@
 from db.business_logic.countries import CountriesData
 from db.business_logic.languages import LanguageData
 from db.business_logic.ethnics import EthnicsData
-from db.business_logic.utils import rank_top_fact
+from db.business_logic.utils import rank_top_fact, float_display
 from random import randint
 
 ############## facts: languages ##########################
@@ -121,7 +121,7 @@ def compare_ethnics_proportion(country: str, real_or_fake: bool):
         'hint': 'The estimated proportion of the ethnic group ' + ethnic_groups[second_group].name
                 + ' in the country ' + country + ' is ' + str(ethnic_groups[second_group].percentage),
         'answer': real_or_fake,
-        'details': 'The estimated proportion of the ethnic group ' + ethnic_groups[first_group].name +
+        'detail': 'The estimated proportion of the ethnic group ' + ethnic_groups[first_group].name +
             ' in the country ' + country + ' is ' + str(ethnic_groups[first_group].percentage) +
             ' whereas the approximated proportion of the ethnic group ' + ethnic_groups[second_group].name +
             ' in the country ' + country + ' is ' + str(ethnic_groups[second_group].percentage),
@@ -154,7 +154,7 @@ def ethnic_above_percentage(country: str, real_or_fake: bool):
         'topic': 'Society',
         'fact': 'The chance to run into a person of the ethnic group ' + selected_group.name +
                 ' in the country ' + country + ' is above ' + str(statement_percentage) + '%',
-        'hint': 'The ethnic group ' + selected_group.name + ' is the ' + str(selected_group_idx) +
+        'hint': 'The ethnic group ' + selected_group.name + ' is the ' + str(selected_group_idx + 1) +
                 'th with the largest proportion of the population in the country ' + country,
         'answer': real_or_fake,
         'detail': 'The estimated proportion of the ethnic group ' + selected_group.name +
@@ -202,7 +202,7 @@ def compare_field(first: str, second: str, field: str, field_display: str):
     return {
         'topic': 'Society',
         'fact': 'the country ' + first + ' has a larger ' + field_display + ' then ' + second,
-        'hint': 'The difference of their ' + field_display + ' is ' + str(abs(first_field - second_field)),
+        'hint': 'The difference of their ' + field_display + ' is ' + float_display(abs(first_field - second_field)),
         'answer': first_field > second_field,
         'detail': 'the country ' + first + ' has an ' + field_display + ' of ' + str(first_field) +
                   ' whereas the country ' + second + ' has an ' + field_display + ' of ' + str(second_field),

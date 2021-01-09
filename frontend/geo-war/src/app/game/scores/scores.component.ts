@@ -16,7 +16,7 @@ export class ScoresComponent implements OnInit {
   game_summary_section: boolean;
   countries_summary_section: boolean;
 
-  constructor(private userService: UserService) { 
+  constructor(private userService: UserService) {
       this.game_summary_section = true;
       this.countries_summary_section = false;
   }
@@ -36,6 +36,10 @@ export class ScoresComponent implements OnInit {
   countries_summary_click() {
       this.countries_summary_section = true;
       this.game_summary_section = false;
-  } 
+  }
+
+  delete_game_score(id) {
+      this.userService.delete_game_score(id);
+  }
 
 }

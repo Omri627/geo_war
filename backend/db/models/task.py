@@ -11,7 +11,10 @@ class Task:
     def __init__(self, method: any, arguments: tuple):
         # initialize country data
         self.method = method
-        self.arguments = arguments
+        if arguments is None:
+            self.arguments = ()
+        else:
+            self.arguments = arguments
         self.return_value = None
         self.is_done = threading.Event()
         self.is_done.clear()

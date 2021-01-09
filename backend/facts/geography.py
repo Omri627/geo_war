@@ -14,29 +14,38 @@ def compare_cities_quantity(first: str, second: str):
     second_quantity = cities_data.cities_quantity(second)
     return {
         'topic': 'Geography', 
-        'fact': 'the number of cities in the countries ' + first + ' is larger then in the country ' + second,
-        'hint': 'the difference between the number of cities in this two countries is: ' + str(abs(first_quantity - second_quantity)),
+        'fact': 'the number of towns in the country ' + first + ' is larger then in the country ' + second,
+        'hint': 'the difference between the number of towns in this two countries is: ' + str(abs(first_quantity - second_quantity)),
         'answer': first_quantity > second_quantity,
-        'detail': 'the number of cities in the country ' + first + ' is ' + str(first_quantity) +
-                  ' whlist the amount of cities in the country ' + second + ' is ' + str(second_quantity)
+        'detail': 'the number of towns in the country ' + first + ' is ' + str(first_quantity) +
+                  ' whilst the amount of towns in the country ' + second + ' is ' + str(second_quantity)
     }
 
 # has_more_then
 # the method receives a country and
 # construct a fact compare the number of cities of the given country to a value close to it
-def has_more_then(country: str, cmp_quantity: int):
+def has_more_cities_then(country: str, real_or_fake: bool):
     cities_data = CitiesData()
     quantity = cities_data.cities_quantity(country)
-    if abs(quantity - cmp_quantity) > 100:
-        hint = 'the number of cities in the country ' + country + ' is sagnificantly more or less then ' + str(cmp_quantity)
+    options = [50, 100, 500, 1000, 5000, 100000, 50000, 100000, 500000, 1000000]
+    index = len(options)
+    for i in range(0, len(options)):
+        if options[i] > quantity:
+            index = i
+            break
+    index = min(index + 2, len(options))
+
+    cmp_quantity = options[randint(0, index)]
+    if abs(quantity - cmp_quantity) > 500:
+        hint = 'the number of towns in the country ' + country + ' is significantly more or less then ' + str(cmp_quantity)
     else:
-        hint = 'the number of cities in the country ' + country + ' is relatively close to ' + str(cmp_quantity)
+        hint = 'the number of towns in the country ' + country + ' is relatively close to ' + str(cmp_quantity)
     return {
         'topic': 'Geography', 
-        'fact': 'the number of cities in the country ' + country + " is larger then " + str(cmp_quantity),
+        'fact': 'the number of towns in the country ' + country + " is larger then " + str(cmp_quantity),
         'hint': hint,
         'answer': quantity > cmp_quantity,
-        'detail': 'the number of cities in the country ' + country + ' is ' + str(quantity)
+        'detail': 'the number of towns in the country ' + country + ' is ' + str(quantity)
     }
 
 ############## facts: capital city ##########################

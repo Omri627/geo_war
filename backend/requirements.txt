@@ -3,3 +3,4 @@ uvicorn
 fastapi
 requests
 mysql-connector-python==8.0.22
+

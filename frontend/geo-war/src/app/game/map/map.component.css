@@ -74,7 +74,7 @@
     position: absolute;
     top: 35px;
     left: 55px;
-} 
+}
 #country-1:hover > #country-n1 {
     top: 40px;
 }
@@ -135,9 +135,9 @@
 #country-4 {
     clip-path: polygon(100% 0, 42% 0, 100% 100%);
     position: absolute;
-    left: 883px;
-    top: 37px;
-    width: 195px;
+    left: 857px;
+    top: 41px;
+    width: 225px;
     height: 250px;
     animation-name: pop-up;
     animation-duration: 18.5s;
@@ -148,7 +148,7 @@
 #country-n4 {
     position: absolute;
     top: 80px;
-    left: 130px;
+    left: 155px;
     transition: 2s top;
 }
 #crown-icon-wrapper-4 {
@@ -189,9 +189,9 @@
 #country-6 {
     clip-path: polygon(30% 9%, 65% 0%, 100% 3%, 71% 100%, 44% 78%, 16% 55%);
     position: absolute;
-    left: 708px;
+    left: 703px;
     top: 210px;
-    width: 240px;
+    width: 245px;
     height: 150px;
     animation-name: pop-up;
     animation-duration: 20s;
@@ -378,10 +378,10 @@
 #country-13 {
     clip-path: polygon(88% 10%, 95% 75%, 13% 28%);
     position: absolute;
-    left: 716px;
-    top: 43px;
-    width: 212px;
-    height: 180px;
+    left: 712px;
+    top: 35px;
+    width: 217px;
+    height: 190px;
     transform: rotate(90deg);
     animation-name: pop-up;
     animation-duration: 19s;
@@ -436,7 +436,7 @@
     left: 506px;
     top: 375px;
     width: 118px;
-    height: 130px;
+    height: 125px;
     animation-name: pop-up;
     animation-duration: 22s;
 }
