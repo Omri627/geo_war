@@ -2,7 +2,7 @@
 uvicorn apis.geo_war_api:app
 
 # db_settings.json
-the file `db_settings.json` should reside in root folder in the path `dv/db_settings.json`
+the file `db_settings.json` should reside in root folder in the path `db/db_settings.json`
 example of format:
 `{
   "host": "127.0.0.1",
