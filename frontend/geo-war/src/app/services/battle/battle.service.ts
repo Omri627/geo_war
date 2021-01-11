@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Fact } from '../../models/fact';
 import { HttpClient } from '@angular/common/http';
-import { GameStatusService } from 'src/app/game/status.service';
+import { GameStatusService } from 'src/app/services/game_status/status.service';
 import { FACTS_QUANTITY, POINTS_CORRECT_ANSWER, POINTS_WIN_BATTLE } from '../rules';
 import { CountryGame } from 'src/app/models/country_game';
 
@@ -50,7 +50,7 @@ export class BattleService {
           this.status.increase_points(POINTS_CORRECT_ANSWER);
           this.corrent.next(this.corrent.getValue() + 1);
       }
-      this.nextFact();        
+      this.nextFact();
   }
 
   nextFact() {

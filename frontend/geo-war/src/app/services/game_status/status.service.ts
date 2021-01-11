@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CountryGame } from '../models/country_game';
-import { GAME_COUNTRIES_QUANTITY, LIVES_QUANTITY, POINTS_LOSE_BATTLE, POINTS_WIN_BATTLE, POINTS_WORLD_DOMINATION } from '../services/rules';
-import {UserService} from "../user.service";
-import {ActionStatus} from "../models/action_status";
+import { CountryGame } from '../../models/country_game';
+import { GAME_COUNTRIES_QUANTITY, LIVES_QUANTITY, POINTS_LOSE_BATTLE, POINTS_WIN_BATTLE, POINTS_WORLD_DOMINATION } from '../rules';
+import {UserService} from "../users/user.service";
+import {ActionStatus} from "../../models/action_status";
 
 @Injectable({
   providedIn: 'root'
@@ -124,8 +124,8 @@ export class GameStatusService {
   /* The user dominate the entire world and won the game */
   worldDomination() {
       this.increase_points(POINTS_WORLD_DOMINATION);
-      console.log(this.max_conquered.getValue());
       this.user_service.addGameScore(this.country.getValue(), this.points.getValue(), this.max_conquered.getValue());
+      this.user_service.reload_user_data();
       this.gameEnded.next(true);
       this.winOrLose.next(true);
   }
@@ -139,6 +139,7 @@ export class GameStatusService {
       this.inBattle.next(false);
       if (this.conquered.getValue() == 1 && this.lives.getValue() > 1) {
           this.lives.next(this.lives.getValue() - 1);
+          alert('You lost and left out with only ' + this.lives.getValue() + ' live(s)');
           return;
       }
       let latest_conquered = this.conquered_order.pop();
@@ -155,6 +156,7 @@ export class GameStatusService {
 
   game_over() {
       this.user_service.addGameScore(this.country.getValue(), this.points.getValue(), this.max_conquered.getValue());
+      this.user_service.reload_user_data();
       this.gameEnded.next(true);
       this.winOrLose.next(false);
   }
@@ -167,7 +169,7 @@ export class GameStatusService {
 
   /* Select randomly the countries that take part in the game and competing against the user */
   select_rival_countries(): Observable<String[]>  {
-    this.countriesModified = this.http. get<String[]>(this.ROOT_URL + '/countries/game');
+    this.countriesModified = this.http. get<String[]>(this.ROOT_URL + '/countries/game/' + this.country.getValue());
     this.countriesModified.subscribe(countries => {
         var countriesArray = [];
         if (countries == null)
@@ -175,7 +177,7 @@ export class GameStatusService {
         for (var i = 0; i < countries.length; i++) {
             var cur_country = new CountryGame();
             cur_country.id = i;
-            cur_country.name = (i == 2) ? this.country.getValue() : countries[i];
+            cur_country.name = countries[i];
             cur_country.isConquered = (i == 2);
             countriesArray.push(cur_country);
             this.mapper_country_id[cur_country.name] = cur_country.id;

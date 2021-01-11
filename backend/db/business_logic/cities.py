@@ -61,4 +61,9 @@ class CitiesData():
     # receives name of a country and
     # returns the position of the most populated city in given country among all the cities in the world
     def position_populated_city(self, country: str):
-        return self.db_handler.get_count(CitiesQueries.POSITION_POPULATED_CITY, (country,))
+        return self.db_handler.get_count(CitiesQueries.POSITION_POPULATED_CITY, (country,)) + 1
+
+    # receives name of a country and
+    # returns the position of the most populated city in given country among all the cities in the same continent
+    def position_populated_city_continent(self, country: str, city: str):
+        return self.db_handler.get_count(CitiesQueries.RANK_CITY_BY_POPULATION_CONTINENT, (country, country, city)) + 1

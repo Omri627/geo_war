@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActionStatus } from 'src/app/models/action_status';
-import { UserService } from 'src/app/user.service';
+import { UserService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'signup',
@@ -8,7 +8,7 @@ import { UserService } from 'src/app/user.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  /* sign up form content */ 
+  /* sign up form content */
   termsChecked: boolean;
   username: string;
   password: string;
@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit {
   verify_terms() {
     if (this.termsChecked)
       this.terms_confirmation_error = "";
-    else 
+    else
       this.terms_confirmation_error = 'You haven\'t confirmed the application terms';
   }
 
@@ -135,13 +135,13 @@ export class SignupComponent implements OnInit {
       this.verify_terms();
       if (this.username_error != '' || this.email_error != '' || this.password_error != '' || this.termsChecked == false)
         return;
-      
+
       var action_status = this.state.register(this.username, this.email, this.password);
       action_status.subscribe(action_status => {
           if (action_status.valid) {
             this.reset();
             this.success_message = action_status.error_message;
-          } else 
+          } else
             this.server_error = action_status.error_message;
       });
   }

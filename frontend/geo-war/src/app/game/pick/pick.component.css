@@ -41,12 +41,16 @@
     border: 2px double #e93d62;
 }
 .game-data {
-    margin: 70px;
+    margin-top: 70px;
+    margin-left: auto;
+    margin-right: auto;
     animation-name: movement;
     animation-duration: 4s;
     position: relative;
+    text-align: center;
+    display: block;
 }
 @keyframes movement {
-    0%   { top: 150px; margin-left: 0px; }
-    100%   { top: 0px; margin-left: 70px; }
+    0%   { top: 150px; right: 100px; }
+    100%   { top: 0px; right: 0px; }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameStatusService } from './status.service';
+import { GameStatusService } from '../services/game_status/status.service';
 
 @Component({
   selector: 'app-game',

@@ -80,3 +80,12 @@ class CitiesQueries(TableQueries):
         ORDER BY population_per_city DESC
         TOP %d
     '''
+
+    # Query: number of cities in the same continent has a higher population
+    # [0, 1] country name [2] city name
+    RANK_CITY_BY_POPULATION_CONTINENT = '''
+            SELECT COUNT(*) AS quantity
+            FROM countries, city
+            WHERE countries.code = city.country_code AND 
+    	        countries.continent =  (SELECT countries.continent FROM countries WHERE countries.name = '%s') AND city.population > (SELECT city.population FROM city, countries WHERE countries.code = city.country_code AND countries.name='%s' AND city.name = '%s')
+       '''

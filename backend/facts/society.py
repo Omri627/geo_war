@@ -1,11 +1,11 @@
 from db.business_logic.countries import CountriesData
 from db.business_logic.languages import LanguageData
 from db.business_logic.ethnics import EthnicsData
-from db.business_logic.utils import rank_top_fact, float_display
+from facts.general import compare_field, rank_field, rank_field_continent
 from random import randint
 
 ############## facts: languages ##########################
-'''
+
 # is_same_language
 # the method receives name of two countries and
 # construct a fact claims that the countries has the same official language
@@ -73,7 +73,7 @@ def above_percentage(country: str, real_or_fake: bool):
         'answer': real_or_fake,
         'details': 'The estimated percentage of people speaking in language ' + language.language + ' in the country ' + country + ' is ' + str(language.percentage) + '%',
     }
-'''
+
 ############## facts: ethnic groups ##########################
 
 # compare_main_groups
@@ -187,77 +187,68 @@ def compare_common_ethnic(first: str, second: str):
 
 ############## facts: compare countries fields ##########################
 
-# compare_field
-# the method receives two countries denoted as first and second and
-# construct a fact which compare between the two countries in terms of given field.
-def compare_field(first: str, second: str, field: str, field_display: str):
-    countries_data = CountriesData()
-    first_country = countries_data.country_data(country=first)
-    second_country = countries_data.country_data(country=second)
-    if first_country is None or second_country is None:
-        return None
-
-    first_field = getattr(first_country, field)
-    second_field = getattr(second_country, field)
-    return {
-        'topic': 'Society',
-        'fact': 'the country ' + first + ' has a larger ' + field_display + ' then ' + second,
-        'hint': 'The difference of their ' + field_display + ' is ' + float_display(abs(first_field - second_field)),
-        'answer': first_field > second_field,
-        'detail': 'the country ' + first + ' has an ' + field_display + ' of ' + str(first_field) +
-                  ' whereas the country ' + second + ' has an ' + field_display + ' of ' + str(second_field),
-    }
-
 # compare_unemployment_rate
 # the method receives two countries denoted as first and second and
 # construct a fact which compare between the two countries in the total revenues.
 def compare_unemployment_rate(first: str, second: str):
-    return compare_field(first=first, second=second, field='unemployment_rate', field_display='unemployment rate')
+    return compare_field(topic='Society', first=first, second=second, field='unemployment_rate', field_display='unemployment rate')
 
 # compare_area
 # the method receives two countries denoted as first and second and
 # construct a fact which compare between the two countries in terms of area size.
 def compare_area(first: str, second: str):
-    return compare_field(first=first, second=second, field='area', field_display='area size')
+    return compare_field(topic='Society', first=first, second=second, field='area', field_display='area size')
 
 # compare_population
 # the method receives two countries denoted as first and second and
 # construct a fact which compare between the two countries in terms of population size.
 def compare_population(first: str, second: str):
-    return compare_field(first=first, second=second, field='population', field_display='population')
+    return compare_field(topic='Society', first=first, second=second, field='population', field_display='population')
+
+# compare_internet_users
+# the method receives two countries denoted as first and second and
+# construct a fact which compare between the two countries in terms of internet users.
+def compare_internet_users(first: str, second: str):
+    return compare_field(topic='Society', first=first, second=second, field='internet_users', field_display='internet users')
+
+# compare_internet_users
+# the method receives two countries denoted as first and second and
+# construct a fact which compare between the two countries in terms of internet users.
+def compare_cellular_subscriptions(first: str, second: str):
+    return compare_field(topic='Society', first=first, second=second, field='cellular_subscriptions', field_display='cellular subscriptions')
 
 # compare_life_expectancy
 # the method receives two countries denoted as first and second and
 # construct a fact which compare between the two countries in the average life expectancy.
 def compare_life_expectancy(first: str, second: str):
-    return compare_field(first=first, second=second, field='total_expectancy', field_display='average life expectancy')
+    return compare_field(topic='Society', first=first, second=second, field='total_expectancy', field_display='average life expectancy')
 
 def compare_male_expectancy(first: str, second: str):
-    return compare_field(first=first, second=second, field='male_expectancy', field_display='average male\'s life expectancy')
+    return compare_field(topic='Society', first=first, second=second, field='male_expectancy', field_display='average male\'s life expectancy')
 
 def compare_female_expectancy(first: str, second: str):
-    return compare_field(first=first, second=second, field='female_expectancy', field_display='average female\'s life expectancy')
+    return compare_field(topic='Society', first=first, second=second, field='female_expectancy', field_display='average female\'s life expectancy')
 
 # compare_median_age, compare_male_median_age, compare_female_median_age
 # the method receives two countries denoted as first and second and
 # construct a fact which compare between the two countries in terms of median age.
 def compare_median_age(first: str, second: str):
-    return compare_field(first=first, second=second, field='total_median_age', field_display='median age')
+    return compare_field(topic='Society', first=first, second=second, field='total_median_age', field_display='median age')
 
 def compare_male_median_age(first: str, second: str):
-    return compare_field(first=first, second=second, field='male_median_age', field_display='male\'s median age',)
+    return compare_field(topic='Society', first=first, second=second, field='male_median_age', field_display='male\'s median age',)
 
 def compare_female_median_age(first: str, second: str):
-    return compare_field(first=first, second=second, field='female_median_age', field_display='female\'s median age',)
+    return compare_field(topic='Society', first=first, second=second, field='female_median_age', field_display='female\'s median age',)
 
 # compare_birth_rate, compare_death_rate
 # the method receives two countries denoted as first and second and
 # construct a fact which compare between the two countries in terms of birth/death rate.
 def compare_birth_rate(first: str, second: str):
-    return compare_field(first=first, second=second, field='birth_rate', field_display='birth rate')
+    return compare_field(topic='Society', first=first, second=second, field='birth_rate', field_display='birth rate')
 
 def compare_death_rate(first: str, second: str):
-    return compare_field(first=first, second=second, field='death_rate', field_display='death rate')
+    return compare_field(topic='Society', first=first, second=second, field='death_rate', field_display='death rate')
 
 
 ############## facts: compare fields ####################
@@ -369,50 +360,34 @@ def age_range_compare(country: str, real_or_fake: bool):
 
 ############## facts: ranks ##########################
 
-# rank_field
-# the method receives a name of country, boolean variable indicate whether to build a true fact of fake and a field name
-# and construct a fact claiming the country is ranked in top X in the entire world in terms of this field.
-# the player should determine whether it is true or false
-def rank_field(country: str, field: str, field_display: str, real_or_fake: bool):
-    countries_data = CountriesData()
-    position = countries_data.rank_field(country, field)
-    country_object = countries_data.country_data(country)
-    if position == 1 or (not real_or_fake and position < 4):
-        best_country = countries_data.most_field(field, 1)[0]
-        fact = 'The country that has the highest ' + field_display + ' in the world is ' + country
-        detail = 'The country that has the highest ' + field_display + ' in the world is ' + best_country['name'] + \
-                 ' with value of ' + str(best_country['field_value'])
-        real_or_fake = position == 1
-    else:
-        top_position = rank_top_fact(position, real_or_fake)
-
-        fact = 'The country ' + country + ' is in the top ' + str(top_position) + ' in terms of ' + field_display + ' in the entire world'
-        detail = 'The country ' + country + ' is ranked ' + str(position) + ' in ' + field_display + ' of the entire world'
-    return {
-        'topic': 'Geography',
-        'fact': fact,
-        'hint':  'The country ' + country + ' has an ' + field_display + ' of ' + str(getattr(country_object, field)),
-        'answer': real_or_fake,
-        'detail': detail
-    }
-
+# ranks among the countries in the entire world
 def rank_population(country: str, real_or_fake:bool):
-    return rank_field(country=country, field='population', field_display='population size', real_or_fake=real_or_fake)
-
-def rank_area(country: str, real_or_fake: bool):
-    return rank_field(country=country, field='area', field_display='area size', real_or_fake=real_or_fake)
+    return rank_field(topic='Society', country=country, field='population', field_display='population size', real_or_fake=real_or_fake)
 
 def rank_unemployment_rate(country: str, real_or_fake: bool):
-    return rank_field(country=country, field='unemployment_rate', field_display='unemployment rate', real_or_fake=real_or_fake)
+    return rank_field(topic='Society', country=country, field='unemployment_rate', field_display='unemployment rate', real_or_fake=real_or_fake)
 
 def rank_median_age(country: str, real_or_fake:bool):
-    return rank_field(country=country, field='total_median_age', field_display='median age', real_or_fake=real_or_fake)
+    return rank_field(topic='Society', country=country, field='total_median_age', field_display='median age', real_or_fake=real_or_fake)
 
 def rank_expectancy_age(country: str, real_or_fake: bool):
-    return rank_field(country=country, field='total_expectancy', field_display='life expectancy', real_or_fake=real_or_fake)
+    return rank_field(topic='Society', country=country, field='total_expectancy', field_display='life expectancy', real_or_fake=real_or_fake)
 
 def rank_birth_rate(country: str, real_or_fake:bool):
-    return rank_field(country=country, field='birth_rate', field_display='birth rate', real_or_fake=real_or_fake)
+    return rank_field(topic='Society', country=country, field='birth_rate', field_display='birth rate', real_or_fake=real_or_fake)
 
 def rank_death_rate(country: str, real_or_fake:bool):
-    return rank_field(country=country, field='death_rate', field_display='death rate', real_or_fake=real_or_fake)
+    return rank_field(topic='Society', country=country, field='death_rate', field_display='death rate', real_or_fake=real_or_fake)
+
+def rank_internet_users(country: str, real_or_fake:bool):
+    return rank_field(topic='Society', country=country, field='internet_users', field_display='internet users', real_or_fake=real_or_fake)
+
+# ranks among the countries in the same continent
+def rank_population_continent(country: str, real_or_fake:bool):
+    return rank_field_continent(topic='Society', country=country, field='population', field_display='population size', real_or_fake=real_or_fake)
+
+def rank_unemployment_rate_continent(country: str, real_or_fake: bool):
+    return rank_field_continent(topic='Society', country=country, field='unemployment_rate', field_display='unemployment rate', real_or_fake=real_or_fake)
+
+def rank_expectancy_age_continent(country: str, real_or_fake: bool):
+    return rank_field_continent(topic='Society', country=country, field='total_expectancy', field_display='life expectancy', real_or_fake=real_or_fake)

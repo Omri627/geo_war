@@ -21,17 +21,18 @@ import { MapComponent } from './game/map/map.component';
 import { IntroComponent } from './game/intro/intro.component';
 import { BannerComponent } from './game/banner/banner.component';
 import { BottomComponent } from './game/bottom/bottom.component';
-import { GameStatusService } from './game/status.service';
+import { GameStatusService } from './services/game_status/status.service';
 import { PickComponent } from './game/pick/pick.component';
 import { FactComponent } from './game/fact/fact.component';
-import { SelectService } from './game/pick/select.service';
+import { SelectService } from './services/select/select.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { UserService } from './user.service';
+import { UserService } from './services/users/user.service';
 import { UserComponent } from './game/user/user.component';
 import { ScoresComponent } from './game/scores/scores.component';
 import { EndgameComponent } from './game/endgame/endgame.component';
 import { InfoComponent } from './game/info/info.component';
+import {BattleService} from "./services/battle/battle.service";
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { InfoComponent } from './game/info/info.component';
     UserService,
     GameStatusService,
     SelectService,
+    BattleService
   ],
   bootstrap: [AppComponent]
 })

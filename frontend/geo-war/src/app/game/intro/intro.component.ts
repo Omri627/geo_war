@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/user.service';
-import { GameStatusService } from '../status.service';
+import { UserService } from 'src/app/services/users/user.service';
+import { GameStatusService } from '../../services/game_status/status.service';
 
 @Component({
   selector: 'intro',
@@ -13,7 +13,7 @@ export class IntroComponent implements OnInit {
   username: string;
   constructor(private status : GameStatusService, private userService: UserService) {
     this.isCountryPicked = false;
-    this.isStarted = false; 
+    this.isStarted = false;
   }
 
   ngOnInit(): void {

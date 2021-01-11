@@ -1,6 +1,6 @@
 import { HostListener, Component, OnInit } from '@angular/core';
-import {UserService} from "../../user.service";
-import {GameStatusService} from "../status.service";
+import {UserService} from "../../services/users/user.service";
+import {GameStatusService} from "../../services/game_status/status.service";
 
 @Component({
   selector: 'navbar',
@@ -29,7 +29,11 @@ export class NavbarComponent implements OnInit {
   }
 
   startGame() {
-    this.status.startGame();
+    var user_decision = true;
+    if (this.isStarted)
+      user_decision = confirm('Are you sure you want to start new game ?');
+    if (user_decision)
+      this.status.startGame();
   }
 
   instructions() {

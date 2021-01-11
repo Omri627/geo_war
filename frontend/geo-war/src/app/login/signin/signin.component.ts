@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/user.service';
+import { UserService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'signin',
@@ -10,7 +10,7 @@ export class SigninComponent implements OnInit {
   username: string;
   password: string;
   error_message: string;
-  constructor(private state : UserService) { 
+  constructor(private state : UserService) {
       this.error_message = "";
       this.username = this.password = '';
   }
@@ -30,8 +30,10 @@ export class SigninComponent implements OnInit {
         if (islogged) {
           window.scroll(0,0);
           this.state.notify_login(this.username);
-        } else 
-          this.error_message = "The username or password you have entered is incorrect"
+        } else {
+          this.error_message = "The username or password you have entered is incorrect";
+          this.password = '';
+        }
     })
   }
 

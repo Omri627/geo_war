@@ -4,7 +4,7 @@ import { CountryGame } from 'src/app/models/country_game';
 import { Fact } from 'src/app/models/fact';
 import { BattleService } from 'src/app/services/battle/battle.service';
 import { FACTS_QUANTITY, SHOW_ANSWER_WAIT_TIME, SHOW_BATTLE_SUMMARY_WAIT_TIME } from 'src/app/services/rules';
-import { GameStatusService } from '../status.service';
+import { GameStatusService } from '../../services/game_status/status.service';
 
 @Component({
   selector: 'game-fact',

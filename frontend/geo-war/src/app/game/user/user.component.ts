@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameSummary } from 'src/app/models/game_summary';
-import { UserService } from 'src/app/user.service';
+import { UserService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'user-credentials',

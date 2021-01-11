@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CountriesSummary } from 'src/app/models/countries_summary';
 import { GameSummary } from 'src/app/models/game_summary';
-import { UserService } from 'src/app/user.service';
+import { UserService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'user-scores',

@@ -20,6 +20,7 @@ class LanguageData():
         for record in result:
             languages.append(Language(record=record, country=country))
         return languages
+
     '''
     # given two countries denoted as first and second,
     # the method returns all common languages of two given countries

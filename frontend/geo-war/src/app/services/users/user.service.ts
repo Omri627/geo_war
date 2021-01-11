@@ -2,12 +2,13 @@ import { ComponentFactoryResolver, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActionStatus } from './models/action_status';
-import { UserInfo } from './models/user_info';
-import { UserStatics } from './models/user_statics';
-import { GameSummary } from './models/game_summary';
-import { CountriesSummary } from './models/countries_summary';
-import {UserRank} from "./models/user_rank";
+import { ActionStatus } from '../../models/action_status';
+import { UserInfo } from '../../models/user_info';
+import { UserStatics } from '../../models/user_statics';
+import { GameSummary } from '../../models/game_summary';
+import { CountriesSummary } from '../../models/countries_summary';
+import {UserRank} from "../../models/user_rank";
+import {TOP_USERS_RANKS} from "../rules";
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,7 @@ export class UserService {
 
   reload_user_data() {
       this.notify_login(this.username.getValue());
+      this.top_users_rank(TOP_USERS_RANKS);
   }
 
   notify_logout() {
@@ -120,8 +122,8 @@ export class UserService {
   }
 
   user_latest(username: string) {
-      let statics = this.http.get<GameSummary>(this.ROOT_URL + '/user/latest/' + username);
-      statics.subscribe(data => this.latest.next(data));
+      let response = this.http.get<GameSummary>(this.ROOT_URL + '/user/latest/' + username);
+      response.subscribe(data => this.latest.next(data));
   }
 
   user_scores(username: string) {
@@ -149,12 +151,6 @@ export class UserService {
         if (!response.valid)
             alert(response.error_message);
     });
-
-    /* re-load user data */
-    this.user_scores(this.username.getValue());
-    this.user_latest(this.username.getValue());
-    this.user_statics(this.username.getValue());
-    this.user_countries_summary(this.username.getValue());
   }
 
   delete_game_score(game_id) {

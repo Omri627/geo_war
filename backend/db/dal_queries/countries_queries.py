@@ -43,6 +43,15 @@ class CountriesQueries(TableQueries):
         LIMIT %d
     '''
 
+    # format: [1] continent name [0, 2] field name  [3] number of countries in the list
+    MOST_FIELD_CONTINENT = '''
+        SELECT countries.name, countries.%s
+        FROM countries
+        WHERE countries.continent = '%s'
+        ORDER BY %s DESC
+        LIMIT %d
+    '''
+
     # Query: Get the names of the countries which gains the smallest values of given field
     # format: [0] field name  [1] number of countries in the list
     LEAST_FIELD = '''
@@ -81,6 +90,14 @@ class CountriesQueries(TableQueries):
         WHERE countries.%s > (SELECT countries.%s FROM geo_data.countries WHERE countries.name = '%s')
     '''
 
+    # Query: Get the rank of given country in terms of given field.
+    # format: [0, 1] field name [2] name of the country
+    RANK_COUNTRY_BY_POPULATION_DENSITY = '''
+        SELECT COUNT(*) + 1 quantity
+        FROM countries
+        WHERE countries.population > 5000000 AND countries.area / countries.population > (SELECT countries.area / countries.population FROM geo_data.countries WHERE countries.name = '%s')
+    '''
+
     # Query: Get fifteen random countries to compete in the game
     COUNTRIES_GAME = '''
         SELECT countries.name
@@ -96,18 +113,19 @@ class CountriesQueries(TableQueries):
         WHERE code='%s'
     '''
 
-    # Query: Get population density of given country
-    # format: [0] name of the country
-    POPULATION_DENSITY  = '''
-        SELECT countries.population / countries.area as population_density  
-        FROM geo_data.countries
-        WHERE countries.name = 'Israel'
+    # Query: Get the rank of given country in terms of given field among the continents
+    # format: [0] country name [1, 2] field name [3] country name
+    RANK_COUNTRY_BY_FIELD_CONTINENT = '''
+        SELECT COUNT(*) + 1 as quantity
+        FROM countries
+        WHERE countries.continent =  (SELECT countries.continent FROM geo_data.countries WHERE countries.name = '%s') AND countries.%s > (SELECT countries.%s FROM geo_data.countries WHERE countries.name = '%s')
     '''
 
-    # Query: Get the rank of given country in terms of given field.
-    # format: [0, 1] field name [2] name of the country
-    RANK_COUNTRY_BY_FIELD = '''
-        SELECT COUNT(*) + 1 quantity
+    # Query: number of countries in the continent of given country
+    # format: [0] country name
+    COUNTRIES_QUANTITY_CONTINENT = '''
+        SELECT COUNT(*) as quantity
         FROM countries
-        WHERE countries.%s > (SELECT countries.%s FROM geo_data.countries WHERE countries.name = '%s')
+        WHERE countries.continent = (SELECT countries.continent FROM countries WHERE countries.name = '%s')
     '''
+

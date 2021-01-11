@@ -5,6 +5,12 @@
     height: 150px;
     width: 80%;
 }
+.answer-buttons {
+  position: fixed;
+  top: 125px;
+  margin: 15% auto;
+  left: 10%;
+}
 #sub-section {
     background-color: #14c8ff;
     position: fixed;
@@ -29,12 +35,12 @@
     background: #2193b0;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    position: absolute;
-    top: 320px;
-    left: 52%;
     animation-name: pop-up;
     animation-duration: 1.5s;
+    position: relative;
+    left: 4%;
 }
+
 .btn-true:hover {
     background: #00c6ff;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #00c6ff,  #0072ff);  /* Chrome 10-25, Safari 5.1-6 */
@@ -44,9 +50,6 @@
     background: #FF416C;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #FF4B2B, #FF416C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    position: absolute;
-    top: 320px;
-    left: 11%;
     animation-name: pop-up;
     animation-duration: 2s;
 }

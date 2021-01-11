@@ -1,23 +1,33 @@
+import random
 def rank_top_fact(position: int, real_or_fake: bool):
-    if position % 10 == 0:
-        if real_or_fake:
-            return position + 10
-        else:
-            return position - 10
-    if position < 10:
-        if real_or_fake:
-            top_position = 10 if position > 5 else 5
-        else:
-            top_position = 5 if position > 5 else position - 1
-    elif real_or_fake:
-        top_position = position - (position % 10) + 10
+    ranks = [5, 10, 25, 50, 75, 100, 125, 150, 200, 250, 300, 400, 500]
+    if position > 500:
+        return position + 100 if real_or_fake else 400
+    index = len(ranks)
+    for i, rank in enumerate(ranks):
+        if rank > position:
+            index = i
+            break
+    if real_or_fake:
+        selected_index = random.randint(index, min(index + 3, len(ranks)))
     else:
-        top_position = position - (position % 10)
-    return top_position
+        selected_index = random.randint(max(0, index - 3), index)
+    return ranks[selected_index]
 
 def display_field(field: str):
     return field.replace('_', ' ').strip()
 
 def float_display(value):
     str_value = str(value)
-    return str_value[:min(4, len(str_value))]
+    end = min(str_value.index('.') + 2, len(str_value))
+    return str_value[:end]
+
+def convert_to_float(variable):
+    if variable is None:
+        return -1
+    return float(variable)
+
+def convert_to_int(variable):
+    if variable is None:
+        return -1
+    return int(variable)

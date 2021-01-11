@@ -10,13 +10,23 @@
             {{ facts[fact_number].fact }}
         </h4>
     </div>
-    <button id="btntrue" type="button" class="btn btn-outline-primary modal-button btn-true" (click)="assignAnswer(true)" #TrueButton >
-        True
-    </button>
-    <button id="btnfalse" type="button" class="btn btn-outline-primary modal-button btn-false" (click)="assignAnswer(false)" #FalseButton >
-        False
-    </button>
-    <button id="factChange" type="button" class="btn btn-outline-primary modal-button btn-imply" [ngClass]="(changeFactEnable)?'':'text-hidden'" (click)="changeFactAction()" >
+  <div class="answer-buttons">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <button id="btnfalse" type="button" class="btn btn-outline-primary modal-button btn-false" (click)="assignAnswer(false)" #FalseButton >
+            False
+          </button>
+        </div>
+        <div class="col-6">
+              <button id="btntrue" type="button" class="btn btn-outline-primary modal-button btn-true" (click)="assignAnswer(true)" #TrueButton >
+                True
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="factChange" type="button" class="btn btn-outline-primary modal-button btn-imply" [ngClass]="(changeFactEnable)?'':'text-hidden'" (click)="changeFactAction()" >
         Change Fact
     </button>
     <button id="revealAnswer" type="button" class="btn btn-outline-primary modal-button btn-imply" [ngClass]="(revealAnswerEnable)?'':'text-hidden'" (click)="revealAnswerAction()" >
