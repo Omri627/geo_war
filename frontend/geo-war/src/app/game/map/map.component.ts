@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CountryGame } from 'src/app/models/country_game';
 import { BattleService } from 'src/app/services/battle/battle.service';
-import { GameStatusService } from '../status.service';
-import {UserService} from "../../user.service";
+import { GameStatusService } from '../../services/game_status/status.service';
+import {UserService} from "../../services/users/user.service";
 
 @Component({
   selector: 'game-map',
@@ -30,19 +30,22 @@ export class MapComponent implements OnInit {
       this.status.select_rival_countries();
       this.status.countries.subscribe(countries_list => this.countries = countries_list);
       setTimeout(() => {
+        window.location.href = '#start-area';
+      }, 100);
+      setTimeout(() => {
         this.element_intro.nativeElement.classList.add('game-introductory');
       }, 5000);
       setTimeout(() => {
         this.element_intro.nativeElement.classList.add('intro-hide');
+        window.location.href = '#canvas';
       }, 15000);
       setTimeout(() => {
         this.is_loaded = true;
-      }, 30000);
+      }, 27000);
 
   }
 
   battleCountry(rival_country: CountryGame) {
-      console.log()
       if (!this.is_loaded)
         return;
       this.status.battleState();
@@ -80,7 +83,7 @@ export class MapComponent implements OnInit {
   notify_hover(i) {
       this.hover_id = i;
       console.log(this.username)
-      if (this.username != 'admin')
+      if (this.username.toLowerCase() != 'admin')
         return;
       window.onkeyup = function(hover_id: number, countries: any, status: GameStatusService) {
         var event_handler = function(e) {

@@ -13,6 +13,8 @@ def more_common_religion(country: str, real_or_fake: bool):
     religions = religions_data.get_country_religions(country)
     if religions is None or len(religions) < 2:
         return None
+    if country == 'Germany':
+        return None
 
     second_religion = randint(1, len(religions) - 1)
     first_religion = randint(0, second_religion - 1)
@@ -44,6 +46,8 @@ def religion_above_percentage(country: str, real_or_fake: bool):
     religions_data = ReligionsData()
     religions = religions_data.get_country_religions(country)
     if religions is None or len(religions) == 0:
+        return None
+    if country == 'Germany':
         return None
 
     religion_position = randint(0, len(religions) - 1)
@@ -79,6 +83,8 @@ def is_common_religion(country: str, real_or_fake:bool):
     religions_data = ReligionsData()
     religions = religions_data.get_country_religions(country)
     if religions is None or len(religions) < 2:
+        return None
+    if country == 'Germany':
         return None
 
     # select randomly specific religion
@@ -118,6 +124,8 @@ def compare_common_religion(first: str, second: str):
     if religion_data.is_invalid_religion(selected_religion['first'].religion) or \
             religion_data.is_invalid_religion(selected_religion['second'].religion):
         return None
+    if first == 'Germany' or second == 'Germany':
+        return None
 
     return {
         'topic': 'Society',
@@ -141,6 +149,8 @@ def compare_main_religions(first: str, second: str):
     second_main_religion = religion_data.main_religion(country=second)
     if first_main_religion is None or second_main_religion is None or \
             religion_data.is_invalid_religion(first_main_religion.religion) or religion_data.is_invalid_religion(second_main_religion.religion):
+        return None
+    if first == 'Germany' or second == 'Germany':
         return None
     answer = first_main_religion.percentage > second_main_religion.percentage
     return {

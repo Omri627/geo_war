@@ -3,7 +3,7 @@
 <div id="canvas" class="game-map" #canvas>
     <div *ngIf="is_loaded && hover_id != -1" class="battle-text">
         Click to battle against {{ countries[hover_id].name }} <br/>
-        <div *ngIf="username == 'admin'" id="cheats-text">
+        <div *ngIf="username.toLowerCase() == 'admin'" id="cheats-text">
             Press 'W' to automatically for automatic win<br/>
             Press 'L' to automatically for automatic lose
         </div>

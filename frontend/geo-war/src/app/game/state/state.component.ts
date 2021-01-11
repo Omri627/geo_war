@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LIVES_QUANTITY } from 'src/app/services/rules';
-import { UserService } from 'src/app/user.service';
-import { GameStatusService } from '../status.service';
+import { UserService } from 'src/app/services/users/user.service';
+import { GameStatusService } from '../../services/game_status/status.service';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class StateComponent implements OnInit {
   username: string;
   isStarted: boolean;
   lives: number;
-  
+
   /* helpers */
   changeFact: boolean;
   revealAnswer: boolean;

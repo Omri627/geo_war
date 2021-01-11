@@ -1,4 +1,4 @@
-from db.models.task import Task
+from activator.task import Task
 import queue
 import threading
 

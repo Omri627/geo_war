@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameStatusService } from '../status.service';
+import { GameStatusService } from '../../services/game_status/status.service';
 
 @Component({
   selector: 'endgame',
@@ -11,7 +11,7 @@ export class EndgameComponent implements OnInit {
   points: number;
   country: string;
   max_conquered: number;
-  
+
   constructor(private status: GameStatusService) { }
 
   ngOnInit(): void {
@@ -24,6 +24,7 @@ export class EndgameComponent implements OnInit {
   main_menu_click() {
       this.status.startGame();
       this.status.isStarted.next(false);
+      window.location.href = './';
   }
 
   new_game() {

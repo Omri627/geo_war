@@ -1,14 +1,13 @@
 from fastapi import FastAPI, status
 from db.models.user import User
-from db.business_logic.user import UserApi
 from db.business_logic.countries import CountriesData
 from db.business_logic.user import UserApi
 from starlette.middleware.cors import CORSMiddleware
 from apis.models import *
 from facts.generator import FactsGenerator
-from facts.geography import compare_cities_quantity, has_more_cities_then
-from apis.activator import Activator
-import random
+from facts.geography import continent_quantity, rank_populated_city, has_more_cities_then
+from facts.society import rank_population_continent, compare_population
+from activator.activator import Activator
 
 app = FastAPI()
 activator = Activator()
@@ -30,25 +29,28 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return activator.activate(method=has_more_cities_then, arguments=('Israel', True))
+    return activator.activate(method=compare_population, arguments=('Israel', 'Spain'))
 
-
+# return list of countries the user can select to play with
 @app.get("/countries/select")
 def countries_select():
     countries_data = CountriesData()
-    limit = 99
-    select_method = countries_data.top_populated_countries
+    limit = 40
+    select_method = countries_data.pick_options_countries
     arguments = (limit,)
     return activator.activate(method=select_method, arguments=arguments)
 
 
-@app.get("/countries/game")
-def countries_game():
+# returns list of countries competed in the game
+@app.get("/countries/game/{selected_country}")
+def countries_game(selected_country: str):
     countries_data = CountriesData()
     game_countries = countries_data.game_countries
-    return activator.activate(method=game_countries, arguments=None)
+    arguments = (selected_country,)
+    return activator.activate(method=game_countries, arguments=arguments)
 
 
+# create new user
 @app.post("/users", status_code=status.HTTP_200_OK)
 def create_user(user: User):
     user_api = UserApi()
@@ -61,6 +63,7 @@ def create_user(user: User):
     }
 
 
+# check whether the username is already exist
 @app.get("/users/exist/{username}")
 def is_exist(username: str):
     user_api = UserApi()
@@ -69,6 +72,7 @@ def is_exist(username: str):
     return activator.activate(method=is_user_exist, arguments=arguments)
 
 
+# check wether the username and password applied is valid
 @app.post("/users/login", status_code=status.HTTP_200_OK)
 def login(user: UserInput):
     user_api = UserApi()
@@ -77,6 +81,7 @@ def login(user: UserInput):
     return activator.activate(method=login_method, arguments=arguments)
 
 
+# return statics data of the user such as number of wins, total number of points and more.
 @app.get("/user/statics/{username}")
 def user_statics(username: str):
     user_api = UserApi()
@@ -85,6 +90,7 @@ def user_statics(username: str):
     return activator.activate(method=user_statics_method, arguments=arguments)
 
 
+# returns the countries the user played with along with number of times he play with it in game
 @app.get("/user/countries/{username}")
 def user_countries(username: str):
     user_api = UserApi()
@@ -93,6 +99,7 @@ def user_countries(username: str):
     return activator.activate(method=user_countries_method, arguments=arguments)
 
 
+# returns the user scores in the game.
 @app.get("/user/scores/{username}")
 def user_scores(username: str):
     user_api = UserApi()
@@ -101,6 +108,7 @@ def user_scores(username: str):
     return activator.activate(method=user_scores_summary, arguments=arguments)
 
 
+# returns the user credentials/basic information
 @app.get("/user/credentials/{username}", response_model=User, response_model_exclude={ 'password' })
 def user_credentials(username: str):
     user_api = UserApi()
@@ -109,6 +117,7 @@ def user_credentials(username: str):
     return activator.activate(method=user_credentials_method, arguments=arguments)
 
 
+# returns the score of user latest game.
 @app.get("/user/latest/{username}")
 def user_latest_game(username: str):
     user_api = UserApi()
@@ -117,6 +126,7 @@ def user_latest_game(username: str):
     return activator.activate(method=user_latest_game_method, arguments=arguments)
 
 
+# generate a list of facts for the battle
 @app.get("/facts/{my_country}/vs/{rival_country}")
 def battle_facts(my_country: str, rival_country:str):
     generator = FactsGenerator(user_country=my_country, rival_country=rival_country)
@@ -124,6 +134,7 @@ def battle_facts(my_country: str, rival_country:str):
     return activator.activate(method=get_facts, arguments=None)
 
 
+# save a new game score
 @app.post("/score/save", status_code=status.HTTP_201_CREATED)
 def insert_score(score: ScoreInput):
     user_api = UserApi()
@@ -132,6 +143,7 @@ def insert_score(score: ScoreInput):
     return activator.activate(method=insert_score_method, arguments=arguments)
 
 
+# returns the players which gain the most total number of points
 @app.get("/top/users/{limit}")
 def top_users(limit: int):
     user_api = UserApi()
@@ -139,7 +151,7 @@ def top_users(limit: int):
     arguments = (limit,)
     return activator.activate(method=top_ranking, arguments=arguments)
 
-
+# delete a game score
 @app.delete("/delete/game/{id}")
 def delete_game_score(id: int):
     user_api = UserApi()

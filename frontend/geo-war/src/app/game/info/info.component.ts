@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../user.service";
+import {UserService} from "../../services/users/user.service";
 import {UserRank} from "../../models/user_rank";
+import {TOP_USERS_RANKS} from "../../services/rules";
 
 @Component({
   selector: 'game-info',
@@ -10,17 +11,14 @@ import {UserRank} from "../../models/user_rank";
 export class InfoComponent implements OnInit {
   instructions_section: boolean;
   user_ranks_section: boolean;
-  top_quantity: number;
   users_ranks: UserRank[];
 
-  constructor(private user_service: UserService) {
-      this.top_quantity = 10;
-  }
+  constructor(private user_service: UserService) {}
 
   ngOnInit(): void {
       this.user_service.instructionsModified.subscribe(instructions_section => this.instructions_section = instructions_section);
       this.user_service.userRanksModified.subscribe(user_ranks_section => this.user_ranks_section = user_ranks_section);
-      this.user_service.top_users_rank(this.top_quantity);
+      this.user_service.top_users_rank(TOP_USERS_RANKS);
       this.user_service.topUsersRanksModified.subscribe(users_ranks => this.users_ranks = users_ranks);
   }
 

@@ -18,6 +18,7 @@ class FactsGenerator:
             ComparisonFactCreator(creator=cities_larger_country, user_country=user_country, rival_country=rival_country),
             CountryFactCreator(creator=rank_population, country=rival_country, real_or_fake=random.choice([True, False])),
             CountryFactCreator(creator=rank_area, country=rival_country, real_or_fake=random.choice([True, False])),
+            ComparisonFactCreator(creator=compare_common_religion, user_country=user_country, rival_country=rival_country),
         ]
 
         # geography facts
@@ -31,6 +32,10 @@ class FactsGenerator:
             CountryFactCreator(creator=rank_area, country=rival_country, real_or_fake=random.choice([True, False])),
             CountryFactCreator(creator=has_more_cities_then, country=rival_country, real_or_fake=random.choice([True, False])),
             ComparisonFactCreator(creator=compare_cities_quantity, user_country=user_country, rival_country=rival_country),
+            CountryFactCreator(creator=continent_quantity, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=rank_area_continent, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=rank_populated_city_continent, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=evaluate_population, country=rival_country, real_or_fake=random.choice([True, False]))
         ]
 
         # religions facts
@@ -63,6 +68,8 @@ class FactsGenerator:
             ComparisonFactCreator(creator=compare_female_median_age, user_country=user_country, rival_country=rival_country),
             ComparisonFactCreator(creator=compare_birth_rate, user_country=user_country, rival_country=rival_country),
             ComparisonFactCreator(creator=compare_death_rate, user_country=user_country, rival_country=rival_country),
+            ComparisonFactCreator(creator=compare_internet_users, user_country=user_country, rival_country=rival_country),
+            ComparisonFactCreator(creator=compare_cellular_subscriptions, user_country=user_country, rival_country=rival_country),
             CountryFactCreator(creator=compare_birth_death_rate, country=rival_country, real_or_fake=random.choice([True, False])),
             CountryFactCreator(creator=compare_male_female_expectancy, country=rival_country, real_or_fake=random.choice([True, False])),
             CountryFactCreator(creator=compare_male_female_median, country=rival_country, real_or_fake=random.choice([True, False])),
@@ -73,6 +80,10 @@ class FactsGenerator:
             CountryFactCreator(creator=rank_expectancy_age, country=rival_country, real_or_fake=random.choice([True, False])),
             CountryFactCreator(creator=rank_birth_rate, country=rival_country, real_or_fake=random.choice([True, False])),
             CountryFactCreator(creator=rank_death_rate, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=rank_internet_users, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=rank_population_continent, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=rank_expectancy_age_continent, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=rank_unemployment_rate_continent, country=rival_country, real_or_fake=random.choice([True, False])),
         ]
 
         # sport facts
@@ -89,6 +100,10 @@ class FactsGenerator:
             ComparisonFactCreator(creator=compare_expenditures, user_country=user_country, rival_country=rival_country),
             ComparisonFactCreator(creator=compare_imports, user_country=user_country, rival_country=rival_country),
             ComparisonFactCreator(creator=compare_exports, user_country=user_country, rival_country=rival_country),
+            CountryFactCreator(creator=rank_revenues, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=rank_expenditures, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=rank_imports, country=rival_country, real_or_fake=random.choice([True, False])),
+            CountryFactCreator(creator=rank_exports, country=rival_country, real_or_fake=random.choice([True, False])),
         ]
 
         # facts groups
@@ -100,14 +115,29 @@ class FactsGenerator:
     def select_fact(self):
         fact_groups_selected = random.choice(self.facts_groups)
         fact_creator = random.choice(fact_groups_selected)
-        return fact_creator.create()
+        return fact_creator
 
     def battle_facts(self):
         facts = []
+        facts_types = set()
         facts_quantity = 0
         while facts_quantity < self.facts_limit:
+            # select a new fact type
             current_fact = self.select_fact()
+
+            # prevent duplicate facts
+            if current_fact in facts_types:
+                continue
+            else:
+                facts_types.add(current_fact)
+
+            # build current fact
+            current_fact = current_fact.create()
+
+            # add into facts set of the battle
             if current_fact is not None:
                 facts.append(current_fact)
                 facts_quantity += 1
+
+        # returns set of facts for the battle
         return facts

@@ -1,3 +1,5 @@
+from db.business_logic.utils import convert_to_float
+
 class EthnicGroup:
     country: str
     name: str
@@ -7,4 +9,4 @@ class EthnicGroup:
         # initialize ethnic group data
         self.country = record[0]
         self.name = record[1]
-        self.percentage = float(record[2])
+        self.percentage = convert_to_float(record[2])

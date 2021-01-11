@@ -6,7 +6,8 @@
     height: 550px;
     width: 1150px;
     position: relative;
-    left: 70px;
+    margin-right: auto;
+    margin-left: auto;
     box-shadow: inset 0px 0px 2px 2px black;
     animation-name: pop-up;
     animation-duration: 15.1s;
@@ -17,11 +18,13 @@
     background-position: center;
     background-size: cover;
     height: 600px;
-    width: 100%;
+    width: 1150px;
     position: relative;
     left: 0px;
     top: 0px;
     box-shadow: inset 0px 0px 1px 1px blue;
+    margin-right: auto;
+    margin-left: auto;
     animation-name: display-limited;
     animation-duration: 15.0s;
     transition: 1s background-image;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameStatusService } from '../status.service';
-import {UserService} from "../../user.service";
+import { GameStatusService } from '../../services/game_status/status.service';
+import {UserService} from "../../services/users/user.service";
 
 @Component({
   selector: 'options',
@@ -8,15 +8,21 @@ import {UserService} from "../../user.service";
   styleUrls: ['./options.component.css']
 })
 export class OptionsComponent implements OnInit {
-
+  isStarted: boolean;
   constructor(private status: GameStatusService, private user_service: UserService) {
   }
 
   ngOnInit(): void {
+    this.status.startedModified.subscribe(isStarted => this.isStarted = isStarted);
   }
 
+
   startGame() {
-    this.status.startGame();
+    var user_decision = true;
+    if (this.isStarted)
+      user_decision = confirm('Are you sure you want to start new game ?');
+    if (user_decision)
+      this.status.startGame();
   }
 
   instructions() {

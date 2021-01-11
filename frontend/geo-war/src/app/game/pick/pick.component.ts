@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameStatusService } from '../status.service';
-import { SelectService } from './select.service';
+import { GameStatusService } from '../../services/game_status/status.service';
+import { SelectService } from '../../services/select/select.service';
 
 @Component({
   selector: 'country-pick',
@@ -11,7 +11,7 @@ export class PickComponent implements OnInit {
   countries: any;
   color: any;
 
-  constructor(private service: GameStatusService, private select: SelectService) { 
+  constructor(private service: GameStatusService, private select: SelectService) {
       this.color = [
         'single-option-green', 'single-option-blue', 'single-option-red', 'single-option-yellow'
       ]

@@ -20,7 +20,7 @@ def most_players_country_league(league: str, real_or_fake: bool):
     if real_or_fake:
         index = 1
     else:
-        index = random.randint(2, len(countries_league))
+        index = random.randint(2, len(countries_league) - 1)
 
     return {
         'topic': 'Sport', 
@@ -55,8 +55,8 @@ def count_players_country_leagues(country: str, real_or_fake: bool):
 
     return {
         'topic': 'Sport', 
-        'fact': 'The league with the most number of players from the country ' + country + ' is ' +
-                countries[index]['country'] + ' (apart from local soccer league of country ' + country + ')',
+        'fact': 'The league with the most number of players from ' + country + ' is ' +
+                countries[index]['country'] + ' (apart from ' + country + ' local soccer league)',
         'hint': 'The League with most number of players from the country ' + country + ' has in total ' +
                 str(countries[most_country]['players_quantity']) + ' players from this country',
         'answer': real_or_fake,

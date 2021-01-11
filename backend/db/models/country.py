@@ -1,4 +1,5 @@
 from db.dal_queries.countries_queries import CountriesQueries
+from db.business_logic.utils import convert_to_int, convert_to_float
 
 class Country():
     code: str
@@ -32,27 +33,27 @@ class Country():
         # initialize country data
         self.code = record[0]
         self.name = record[1]
-        self.area = int(record[2])
-        self.population = int(record[3])
+        self.area = convert_to_int(record[2])
+        self.population = convert_to_int(record[3])
         self.nationality = record[4]
-        self.birth_rate = record[5]
-        self.death_rate = record[6]
-        self.cellular_subscriptions = int(record[7])
-        self.internet_users = int(record[8])
-        self._0_14_years = record[12]
-        self._15_24_years = record[13]
-        self._25_54_years = record[14]
-        self._55_64_years = record[15]
-        self._65_over = record[16]
-        self.total_median_age = record[17]
-        self.female_median_age = record[18]
-        self.male_median_age = record[19]
-        self.male_expectancy = record[20]
-        self.female_expectancy = float(record[21])
-        self.total_expectancy = float(record[22])
-        self.unemployment_rate = float(record[24])
-        self.revenues = record[25]
-        self.expenditures = record[26]
-        self.imports = record[27]
-        self.exports = record[28]
+        self.birth_rate = convert_to_float(record[5])
+        self.death_rate = convert_to_float(record[6])
+        self.cellular_subscriptions = convert_to_int(record[7])
+        self.internet_users = convert_to_int(record[8])
+        self._0_14_years = convert_to_float(record[12])
+        self._15_24_years = convert_to_float(record[13])
+        self._25_54_years = convert_to_float(record[14])
+        self._55_64_years = convert_to_float(record[15])
+        self._65_over = convert_to_float(record[16])
+        self.total_median_age = convert_to_float(record[17])
+        self.female_median_age = convert_to_float(record[18])
+        self.male_median_age = convert_to_float(record[19])
+        self.male_expectancy = convert_to_float(record[20])
+        self.female_expectancy = convert_to_float(record[21])
+        self.total_expectancy = convert_to_float(record[22])
+        self.unemployment_rate = convert_to_float(record[24])
+        self.revenues = convert_to_int(record[25])
+        self.expenditures = convert_to_int(record[26])
+        self.imports = convert_to_int(record[27])
+        self.exports = convert_to_int(record[28])
         self.continent = record[30]
