@@ -24,7 +24,6 @@ export class EndgameComponent implements OnInit {
   main_menu_click() {
       this.status.startGame();
       this.status.isStarted.next(false);
-      window.location.href = './';
   }
 
   new_game() {

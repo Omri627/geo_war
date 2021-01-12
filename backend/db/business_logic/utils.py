@@ -3,15 +3,19 @@ def rank_top_fact(position: int, real_or_fake: bool):
     ranks = [5, 10, 25, 50, 75, 100, 125, 150, 200, 250, 300, 400, 500]
     if position > 500:
         return position + 100 if real_or_fake else 400
+    if position <= 5:
+        return position + 1 if real_or_fake else position - 1
     index = len(ranks)
     for i, rank in enumerate(ranks):
-        if rank > position:
+        if rank >= position:
             index = i
             break
     if real_or_fake:
-        selected_index = random.randint(index, min(index + 3, len(ranks)))
+        if ranks[index] == position:
+            index += 1
+        selected_index = random.randint(index, min(index + 3, len(ranks) - 1))
     else:
-        selected_index = random.randint(max(0, index - 3), index)
+        selected_index = random.randint(max(0, index - 3), index - 1)
     return ranks[selected_index]
 
 def display_field(field: str):

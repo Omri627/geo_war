@@ -33,6 +33,10 @@ export class OptionsComponent implements OnInit {
       this.user_service.display_user_ranks();
   }
 
+  update_section() {
+      this.user_service.display_update_section();
+  }
+
   exit() {
       this.user_service.notify_logout();
       window.scroll(0,0);

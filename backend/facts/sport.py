@@ -45,13 +45,14 @@ def count_players_country_leagues(country: str, real_or_fake: bool):
     if countries is None or len(countries) < 2:
         return None
 
-    if country in ['Italy', 'Spain', 'Germany', 'France', 'England', 'United Kingdom']:
+    if country.lower() in ['italy', 'spain', 'germany', 'france', 'england', 'united kingdom', 'belgium', 'netherlands',
+                   'china', 'argentina', 'brazil', 'mexico', 'portugal', 'united states']:
         most_country = 1
         index = 1 if real_or_fake else random.randint(2, len(countries) - 1)
     else:
         most_country = 0
         index = 0 if real_or_fake else random.randint(1, len(countries) - 1)
-    print(most_country)
+    print(country, most_country)
 
     return {
         'topic': 'Sport', 

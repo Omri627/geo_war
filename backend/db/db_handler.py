@@ -157,6 +157,11 @@ class DbHandler:
             print(e)
             raise HTTPException(status_code=404, detail={ 'error' : str(e) })
 
+    def update_records(self, query, arguments):
+        cursor = self.helper.db.cursor()
+        cursor.execute(query % arguments)
+        self.helper.db.commit()
+
     def get_count(self, query: str, values: tuple) -> int:
         cursor = self.helper.db.cursor()
         cursor.execute(query % values)

@@ -1,9 +1,9 @@
 <div class="form-login">
     <h1 id="login-title">Login</h1>
     <p class="intro-login">
-        log-in and experience a community of programmers connect, share content
-        and collaborate together to help each other reach their goals.
+        log-in and play the enjoyable and challenging game of 'Geo War' <br/>
     </p>
+    <p></p>
     <p>
         <label id="username-text">Username:</label>
         <input type="text" class="form-textbox form-login-normal" [(ngModel)]="username" />
@@ -15,6 +15,6 @@
     <button id='login_button' type="button" class="btn btn-primary send-button"
         (click)="login()">Send</button>
     <div class="error-message">
-        {{ error_message }} 
+        {{ error_message }}
     </div>
 </div>

@@ -89,7 +89,7 @@ class CountriesData:
     # returns the number of countries in the continent of the given country
     def country_continent_quantity(self, country: str):
         record = self.db_handler.receive_data(CountriesQueries.COUNTRIES_QUANTITY_CONTINENT, (country,))
-        return int(record[0][0]) + 1
+        return int(record[0][0])
 
     # returns the population density of a given country
     def country_population_density(self, country: str):
