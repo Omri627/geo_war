@@ -127,7 +127,7 @@ class UserApi():
             top.append({
                 'username': record[0],
                 'total_points': int(record[1]),
-                'wins': record[2]
+                'wins': int(record[2])
             })
         return top
 

@@ -20,7 +20,9 @@ export class InfoComponent implements OnInit {
   email: string;
   password_validation: string;
 
-  constructor(private user_service: UserService) {}
+  constructor(private user_service: UserService) {
+    this.password = this.email = this.password_validation = '';
+  }
 
   ngOnInit(): void {
       this.user_service.usernameModified.subscribe(username => this.username = username);
