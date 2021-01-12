@@ -1,4 +1,4 @@
-<div *ngIf="instructions_section || user_ranks_section" id="game-info" class="modal">
+<div *ngIf="instructions_section || user_ranks_section || update_section" id="game-info" class="modal">
     <div *ngIf="user_ranks_section" id="user-ranks-section">
       <div class="title-section">
           <h1>Top Users Ranks</h1>
@@ -51,4 +51,26 @@
           </h4>
       </div>
     </div>
+  <div *ngIf="update_section" id="update-section">
+      <div class="title-section">
+          <h1>Update Details</h1>
+      </div>
+      <button class="close-button" (click)="close_section()">X</button>
+      <div id="update-content" class="modal-section">
+        <h4>Fill in your up-to-date credentials</h4>
+        <p>
+            <label id="email-text">Email:</label>
+            <input #InputEmail id="email-input" type="text" class="form-textbox form-login-normal"
+                placeholder="Enter a valid email" [(ngModel)]="email" />
+        </p>
+        <p>
+            <label id="password-text">Password:</label>
+            <input #InputPassword type="password" class="form-textbox form-login-normal" placeholder="Password" [(ngModel)]="password" />
+            <input #InputVerification id="verification" type="password" class="form-textbox form-login-normal" placeholder="Verification" [(ngModel)]="password_validation"/>
+        </p>
+        <p>
+          <button id='update_button' type="button" class="btn btn-primary send-button" (click)="update_info()">Send</button>
+        </p>
+
+      </div>
 </div>

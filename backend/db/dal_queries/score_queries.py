@@ -78,7 +78,7 @@ class ScoreQueries(TableQueries):
     # Query: top X users with largest number of points.
     # format [0] number of users (X)
     TOP_USERS = '''
-        SELECT g1.user_name, SUM(g1.points) as total_points, (SELECT COUNT(g2.conquered) as wins FROM games as g2 WHERE g2.conquered = 15 AND g1.user_name = g2.user_name) as wins
+        SELECT g1.user_name, SUM(g1.points) as total_points, (SELECT COUNT(g2.conquered) as wins FROM games as g2 WHERE g2.conquered > 14 AND g1.user_name = g2.user_name) as wins
         FROM games as g1 
         GROUP BY g1.user_name
         ORDER BY total_points DESC
@@ -90,7 +90,7 @@ class ScoreQueries(TableQueries):
     WINS_QUANTITY = '''
         SELECT COUNT(games.conquered) 
         FROM games 
-        WHERE games.conquered = 15 AND games.user_name = '%s'
+        WHERE games.conquered > 14 AND games.user_name = '%s'
     '''
 
     # Query: delete score record

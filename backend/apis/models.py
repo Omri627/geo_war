@@ -1,9 +1,11 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class UserInput(BaseModel):
     username: str
     password: str
+    email: Optional[str] = ''
 
 
 class ScoreInput(BaseModel):

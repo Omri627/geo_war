@@ -40,11 +40,11 @@ class FactsGenerator:
 
         # religions facts
         self.religion = [
-            CountryFactCreator(creator=more_common_religion, country=rival_country, real_or_fake=random.choice([True, False])),
             CountryFactCreator(creator=religion_above_percentage, country=rival_country, real_or_fake=random.choice([True, False])),
             CountryFactCreator(creator=is_common_religion, country=rival_country, real_or_fake=random.choice([True, False])),
             ComparisonFactCreator(creator=compare_common_religion, user_country=user_country, rival_country=rival_country),
             ComparisonFactCreator(creator=compare_main_religions, user_country=user_country, rival_country=rival_country),
+            CountryFactCreator(creator=more_common_religion, country=rival_country, real_or_fake=random.choice([True, False])),
         ]
 
         # ethnic groups facts

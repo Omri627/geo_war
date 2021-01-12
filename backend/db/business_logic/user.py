@@ -127,13 +127,21 @@ class UserApi():
             top.append({
                 'username': record[0],
                 'total_points': int(record[1]),
-                'wins': record[2]
+                'wins': int(record[2])
             })
         return top
+
+    def update_user_credentials(self, username: str, email: str, password: str):
+        try:
+            self.db_handler.update_records(UserQueries.UPDATE_USER_CREDENTIALS, (email, password, username))
+            return {'valid': True, 'error_message': 'User credentials has successfully updated'}
+        except Exception as e:
+            return {'valid': False, 'error_message': str(e)}
 
     def delete_score_game(self, game_id):
         try:
             self.db_handler.delete_records(ScoreQueries.DELETE_GAME_SCORE, (game_id,))
             return {'valid': True, 'error_message': ''}
         except Exception as e:
-            return {'valid': False, 'error_message': str(e)}
+            return \
+                {'valid': False, 'error_message': str(e)}

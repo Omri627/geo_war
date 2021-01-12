@@ -5,8 +5,9 @@ from db.business_logic.user import UserApi
 from starlette.middleware.cors import CORSMiddleware
 from apis.models import *
 from facts.generator import FactsGenerator
+from facts.religion import religion_above_percentage
 from facts.geography import continent_quantity, rank_populated_city, has_more_cities_then
-from facts.society import rank_population_continent, compare_population
+from facts.society import rank_population_continent, rank_population, compare_ethnics_proportion, ethnic_above_percentage
 from activator.activator import Activator
 
 app = FastAPI()
@@ -29,7 +30,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return activator.activate(method=compare_population, arguments=('Israel', 'Spain'))
+    return activator.activate(method=ethnic_above_percentage, arguments=('Israel', True))
 
 # return list of countries the user can select to play with
 @app.get("/countries/select")
@@ -159,4 +160,14 @@ def delete_game_score(id: int):
     arguments = (id,)
     return activator.activate(method=delete_game_score_method, arguments=arguments)
 
+
+# update user credentials
+@app.post("/update/user/")
+def update_user(user: UserInput):
+    if user.email is None or user.email == '':
+        return {'valid': False, 'error_message': 'The email address you have applied is invalid'}
+    user_api = UserApi()
+    delete_game_score_method = user_api.update_user_credentials
+    arguments = (user.username, user.email, user.password)
+    return activator.activate(method=delete_game_score_method, arguments=arguments)
 

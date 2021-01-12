@@ -63,6 +63,9 @@ def religion_above_percentage(country: str, real_or_fake: bool):
             fact_percentage += 10
     else:
         fact_percentage = 10 if fact_percentage >= 5 else 5
+    answer = religion.percentage > fact_percentage
+    if fact_percentage == 100 or answer != real_or_fake:
+        return None
     return {
         'topic': 'Religion',
         'fact': 'The chance to run into a person of ' + religion.religion + ' religion in the country ' + country +
@@ -70,7 +73,7 @@ def religion_above_percentage(country: str, real_or_fake: bool):
         'hint': 'The religion ' + religion.religion + ' is the ' + str(religion_position + 1)
                 + 'th common religion in the country ' + country,
         'answer': real_or_fake,
-        'details': 'The estimated percentage of people practising the religion ' + religion.religion +
+        'detail': 'The estimated percentage of people pursuing the religion ' + religion.religion +
                 ' in the country ' + country + ' is ' + str(religion.percentage) + '%',
     }
 
@@ -106,7 +109,7 @@ def is_common_religion(country: str, real_or_fake:bool):
          '. (common means there is non-zero proportion of the population which pursue this religion in the country)',
         'hint': 'The religions that are common in the country ' + country + ' is ' + other_religions,
         'answer': True,
-        'details': 'The estimated percentage of religion ' + selected_religion.religion + ' in the country ' + country +
+        'detail': 'The estimated percentage of religion ' + selected_religion.religion + ' in the country ' + country +
                    ' is ' + str(selected_religion.percentage),
     }
 
