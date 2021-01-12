@@ -308,8 +308,7 @@ def continent_quantity(country: str, real_or_fake: bool):
     hint = min(continent_amount - (continent_amount % 10) - 10, fact_quantity - 10)
     return {
         'topic': 'Geography',
-        'fact': 'The number of countries in ' + country_object.continent + ' is above ' + str(
-            fact_quantity) + ' (the continent of the country ' + country + ')',
+        'fact': 'The number of countries in ' + country_object.continent + ' is above ' + str(fact_quantity) + ' (the continent of the country ' + country + ')',
         'hint': 'The number of countries in ' + country_object.continent + ' is greater then ' + str(hint),
         'answer': continent_amount > fact_quantity,
         'detail': 'The number of countries in ' + country_object.continent + ' is ' + str(continent_amount),

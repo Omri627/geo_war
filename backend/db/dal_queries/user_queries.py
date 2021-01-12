@@ -17,3 +17,11 @@ class UserQueries(TableQueries):
         SELECT * FROM users
         WHERE users.username = '%s'
     '''
+
+    # Query: Update credentials of specific user
+    # format: [0] new email address [1] new password [2] username
+    UPDATE_USER_CREDENTIALS = '''
+        UPDATE users
+        SET users.email = '%s', users.password = '%s'
+        WHERE users.username = '%s';
+    '''

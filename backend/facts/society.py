@@ -150,6 +150,9 @@ def ethnic_above_percentage(country: str, real_or_fake: bool):
             statement_percentage += 10
     else:
         statement_percentage = 10 if statement_percentage >= 5 else 5
+    answer = selected_group.percentage > statement_percentage
+    if statement_percentage == 100 or answer != real_or_fake:
+        return None
     return {
         'topic': 'Society',
         'fact': 'The chance to run into a person of the ethnic group ' + selected_group.name +

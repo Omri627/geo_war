@@ -14,7 +14,7 @@
     font-family: "sloganFont", Arial, sans-serif;
     text-decoration: underline;
 }
-#instructions-content, #top-ranks-content {
+#instructions-content, #top-ranks-content, #update-content {
     position: fixed;
     top: -40px;
     left: 10%;
@@ -54,4 +54,11 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #065f86;
+}
+#verification {
+  margin: 4px;
+}
+
+#update_button {
+  float: left;
 }

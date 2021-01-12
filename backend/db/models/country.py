@@ -51,9 +51,9 @@ class Country():
         self.male_expectancy = convert_to_float(record[17])
         self.female_expectancy = convert_to_float(record[18])
         self.total_expectancy = convert_to_float(record[19])
-        self.unemployment_rate = convert_to_float(record[20])
-        self.revenues = convert_to_int(record[21])
-        self.expenditures = convert_to_int(record[22])
-        self.imports = convert_to_int(record[23])
-        self.exports = convert_to_int(record[24])
-        self.continent = record[25]
+        self.unemployment_rate = convert_to_float(record[21])
+        self.revenues = convert_to_int(record[22])
+        self.expenditures = convert_to_int(record[23])
+        self.imports = convert_to_int(record[24])
+        self.exports = convert_to_int(record[25])
+        self.continent = record[26]

@@ -90,7 +90,7 @@ class ScoreQueries(TableQueries):
     WINS_QUANTITY = '''
         SELECT COUNT(games.conquered) 
         FROM games 
-        WHERE games.conquered = 15 AND games.user_name = '%s'
+        WHERE games.conquered > 14 AND games.user_name = '%s'
     '''
 
     # Query: delete score record

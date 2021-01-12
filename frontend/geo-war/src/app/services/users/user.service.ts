@@ -26,6 +26,7 @@ export class UserService {
   countries_summary = new BehaviorSubject<CountriesSummary[]>(null);
   instructions_section = new BehaviorSubject<boolean>(false);
   user_ranks_section = new BehaviorSubject<boolean>(false);
+  update_section = new BehaviorSubject<boolean>(false);
 
 
   loggedModified = this.isLogged.asObservable();
@@ -37,6 +38,7 @@ export class UserService {
   countriesSummaryModified = this.countries_summary.asObservable();
   topUsersRanksModified = this.users_rank.asObservable();
 
+  updateSectionModified = this.update_section.asObservable();
   instructionsModified = this.instructions_section.asObservable();
   userRanksModified = this.user_ranks_section.asObservable();
 
@@ -55,17 +57,17 @@ export class UserService {
     let user_credentials = this.http.get<UserInfo>(this.ROOT_URL + '/user/credentials/' + username);
     user_credentials.subscribe(user_credentials => {
         this.email.next(user_credentials.email);
-    })
-    this.isLogged.next(true);
-    this.user_statics(username);
-    this.user_latest(username);
-    this.user_countries_summary(username);
-    this.user_scores(username);
+            this.isLogged.next(true);
+            this.user_statics(username);
+            this.user_latest(username);
+            this.user_countries_summary(username);
+            this.user_scores(username);
+            this.top_users_rank(TOP_USERS_RANKS);
+    });
   }
 
   reload_user_data() {
       this.notify_login(this.username.getValue());
-      this.top_users_rank(TOP_USERS_RANKS);
   }
 
   notify_logout() {
@@ -86,16 +88,25 @@ export class UserService {
   display_instructions() {
       this.instructions_section.next(true);
       this.user_ranks_section.next(false);
+      this.update_section.next(false);
   }
 
   display_user_ranks() {
       this.instructions_section.next(false);
       this.user_ranks_section.next(true);
+      this.update_section.next(false);
+  }
+
+  display_update_section() {
+    this.instructions_section.next(false);
+    this.user_ranks_section.next(false);
+    this.update_section.next(true);
   }
 
   close_sections() {
       this.instructions_section.next(false);
       this.user_ranks_section.next(false);
+      this.update_section.next(false);
   }
 
   login(username: string, password: string) {
@@ -159,8 +170,23 @@ export class UserService {
         if (response.valid) {
           alert('Selected game score have deleted successfully');
           this.reload_user_data();
-        } else
+        } else {
           alert('Error: ' + response.error_message);
+        }
+    });
+  }
+
+  update_credentials(email: string, password: string) {
+    const http_input = {'username': this.username.getValue(), 'email':email, 'password': password};
+    console.log(http_input);
+    let update_response = this.http.post<ActionStatus>(this.ROOT_URL + '/update/user/', http_input);
+    update_response.subscribe(response => {
+        if (response.valid) {
+          alert(response.error_message);
+          this.email.next(email);
+        } else {
+          alert('Error: ' + response.error_message);
+        }
     });
   }
 }
