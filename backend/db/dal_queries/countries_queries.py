@@ -30,7 +30,7 @@ class CountriesQueries(TableQueries):
     # format: [0] name of the country
     POPULATION_DENSITY  = '''
         SELECT countries.population / countries.area as population_density  
-        FROM geo_data.countries
+        FROM countries
         WHERE countries.name = '%s'
     '''
 
@@ -87,7 +87,7 @@ class CountriesQueries(TableQueries):
     RANK_COUNTRY_BY_FIELD = '''
         SELECT COUNT(*) + 1 quantity
         FROM countries
-        WHERE countries.%s > (SELECT countries.%s FROM geo_data.countries WHERE countries.name = '%s')
+        WHERE countries.%s > (SELECT countries.%s FROM countries WHERE countries.name = '%s')
     '''
 
     # Query: Get the rank of given country in terms of given field.
@@ -95,7 +95,7 @@ class CountriesQueries(TableQueries):
     RANK_COUNTRY_BY_POPULATION_DENSITY = '''
         SELECT COUNT(*) + 1 quantity
         FROM countries
-        WHERE countries.population > 5000000 AND countries.area / countries.population > (SELECT countries.area / countries.population FROM geo_data.countries WHERE countries.name = '%s')
+        WHERE countries.population > 5000000 AND countries.area / countries.population > (SELECT countries.area / countries.population FROM countries WHERE countries.name = '%s')
     '''
 
     # Query: Get fifteen random countries to compete in the game
@@ -118,7 +118,7 @@ class CountriesQueries(TableQueries):
     RANK_COUNTRY_BY_FIELD_CONTINENT = '''
         SELECT COUNT(*) + 1 as quantity
         FROM countries
-        WHERE countries.continent =  (SELECT countries.continent FROM geo_data.countries WHERE countries.name = '%s') AND countries.%s > (SELECT countries.%s FROM geo_data.countries WHERE countries.name = '%s')
+        WHERE countries.continent =  (SELECT countries.continent FROM countries WHERE countries.name = '%s') AND countries.%s > (SELECT countries.%s FROM countries WHERE countries.name = '%s')
     '''
 
     # Query: number of countries in the continent of given country

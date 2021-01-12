@@ -26,7 +26,7 @@ class LanguagesQueries(TableQueries):
     # format: [0] name of country
     LANGUAGES_COUNTRY = '''
         SELECT countries.name, languages.language, languages.percentage
-        FROM geo_data.languages, geo_data.countries
+        FROM languages, countries
         WHERE languages.country_code = countries.code AND countries.name = '%s'
     '''
 

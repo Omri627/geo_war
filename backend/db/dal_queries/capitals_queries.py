@@ -15,7 +15,7 @@ class CapitalQueries(TableQueries):
     # format: [0] name of the country
     CAPITAL_OF_COUNTRY = '''
         SELECT capital.capital
-        FROM geo_data.countries, geo_data.capital
+        FROM countries, capital
         WHERE countries.code = capital.country_code AND countries.name = '%s' 
     '''
 

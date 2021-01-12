@@ -64,9 +64,9 @@ class CitiesQueries(TableQueries):
     # format: [0] size of the list
     POPULATION_PER_CITY: str = '''
         SELECT c1.population / (SELECT COUNT(*) As quantity
-                        FROM geo_data.city, geo_data.countries as c2
+                        FROM city, countries as c2
                         WHERE city.country_code = c2.code and c1.name = c2.name) as population_per_city
-        FROM geo_data.countries as c1
+        FROM countries as c1
         WHERE c1.name = '%s'
     '''
 
@@ -74,9 +74,9 @@ class CitiesQueries(TableQueries):
     # format: [0] size of the list
     TOP_POPULATION_PER_CITY = '''
         SELECT c1.name, c1.population / (SELECT COUNT(*) As quantity
-                        FROM geo_data.city, geo_data.countries as c2
+                        FROM city, countries as c2
                         WHERE city.country_code = c2.code and c1.name = c2.name) as population_per_city
-        FROM geo_data.countries as c1
+        FROM countries as c1
         ORDER BY population_per_city DESC
         TOP %d
     '''

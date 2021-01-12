@@ -69,7 +69,7 @@ class ScoreQueries(TableQueries):
     # format: [0] username
     LATEST_GAME = '''
         SELECT games.id, games.user_name, games.date, countries.name, games.points, games.conquered
-        FROM geo_data.games, geo_data.countries
+        FROM games, countries
         WHERE games.country_code = countries.code and games.user_name = '%s'
         ORDER BY date DESC
         LIMIT 1
